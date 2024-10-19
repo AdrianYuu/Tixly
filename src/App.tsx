@@ -1,9 +1,18 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import routes from "./configs/Route"
+
 const App = () => {
   return (
-    <>
-      <div className="text-red-500">App</div>
-      <h1 className="text-blue-500">Speak your mind</h1>
-    </>
+    <Router>
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          {routes.map((route, idx) => (
+            <Route key={idx} path={route.path} element={<route.component />} />
+          ))}
+        </Routes>
+      </React.Suspense>
+    </Router>
   );
 };
 
