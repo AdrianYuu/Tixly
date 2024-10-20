@@ -1,5 +1,11 @@
-const Login = () => {
-  return <div className="text-orange-500 text-2xl">Login</div>;
-};
+function Login() {
+  async function handleClick() {}
+
+  return (
+    <>
+      <button onClick={handleClick}>Button</button>
+    </>
+  );
+}
 
 export default Login;

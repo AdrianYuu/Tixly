@@ -1,18 +1,25 @@
 import React from 'react';
+import { UserProvider } from './contexts/UserContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import routes from "./configs/Route"
+import ROUTES from './configs/RouteConfig';
 
 const App = () => {
   return (
-    <Router>
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          {routes.map((route, idx) => (
-            <Route key={idx} path={route.path} element={<route.component />} />
-          ))}
-        </Routes>
-      </React.Suspense>
-    </Router>
+    <UserProvider>
+      <Router>
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            {ROUTES.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                element={<route.component />}
+              />
+            ))}
+          </Routes>
+        </React.Suspense>
+      </Router>
+    </UserProvider>
   );
 };
 
