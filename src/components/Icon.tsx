@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Image from '../assets/images/tixly_logo.png';
+import LogoImage from '../assets/images/tixly_logo.png';
 
 interface IProps {
   className?: string;
@@ -8,7 +8,7 @@ interface IProps {
 function Icon({ className }: IProps) {
   return (
     <Link to="/">
-      <img src={Image} alt="" className={`${className}`} />
+      <img src={LogoImage} alt="" className={`${className}`} />
     </Link>
   );
 }
