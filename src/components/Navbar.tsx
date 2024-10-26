@@ -5,7 +5,7 @@ import Button from './Button';
 
 function Navbar() {
   return (
-    <nav className="py-6 flex justify-around items-center w-full sticky top-0">
+    <nav className="py-6 flex justify-around items-center w-full sticky top-0 bg-customBlack z-50">
       <Icon className="w-26 h-12" />
       <div className="flex justify-center gap-20">
         {ROUTES.map((route, index) => (

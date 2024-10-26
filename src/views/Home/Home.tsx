@@ -1,9 +1,12 @@
 import { Helmet } from 'react-helmet-async';
 import TicketImage from '../../assets/images/ticket.png';
-import SearchBar from '../../components/SearchBar';
+import DummyBannerImage from '../../assets/images/dummy-banner.avif';
+import SearchBar from '../../components/InputBar';
+import { BENEFIT_LIST } from '../../configs/BenefitConfig';
+import BenefitCard from '../../components/BenefitCard';
 
 function Home() {
-  function onSearch(query: string) {
+  function onSubmit(query: string) {
     // Handle when search button clicked.
   }
 
@@ -32,13 +35,30 @@ function Home() {
           <SearchBar
             placeholder="where do you want to go?"
             buttonText="Search"
-            onSearch={onSearch}
+            onSubmit={onSubmit}
           />
         </div>
         <img src={TicketImage} alt="" />
       </section>
 
       {/* Section 2 */}
+      <section className="flex w-full text-customWhite">
+        {BENEFIT_LIST.map((benefit, index) => (
+          <BenefitCard key={index} benefit={benefit} pos={index} />
+        ))}
+      </section>
+
+      {/* Section 3 */}
+      <section className="flex w-full justify-center items-center mt-32">
+        <img
+          src={DummyBannerImage}
+          alt=""
+          className="rounded-2xl w-4/5 max-h-80"
+        />
+      </section>
+
+      {/* Section 4 */}
+      <section className="mt-32"></section>
     </>
   );
 }
