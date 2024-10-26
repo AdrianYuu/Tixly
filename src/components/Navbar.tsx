@@ -5,7 +5,7 @@ import Button from './Button';
 
 function Navbar() {
   return (
-    <nav className="py-6 flex justify-around items-center w-full sticky top-0 bg-customBlack z-50">
+    <nav className="py-6 flex justify-around items-center w-full sticky top-0 bg-customBlack z-50 opacity-90">
       <Icon className="w-26 h-12" />
       <div className="flex justify-center gap-20">
         {ROUTES.map((route, index) => (
@@ -22,7 +22,7 @@ function Navbar() {
           </NavLink>
         ))}
       </div>
-      <Button text="Login with Internet Identity" />
+      <Button text="Login with Internet Identity" className="px-5 py-4" />
     </nav>
   );
 }

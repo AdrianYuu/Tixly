@@ -9,7 +9,7 @@ function Footer() {
   }
 
   return (
-    <div className="flex justify-center items-center flex-col text-customWhite w-full">
+    <div className="flex justify-center items-center flex-col text-customWhite w-full mt-24">
       <Icon className="w-28 mb-4" />
       <p className="text-xl font-semibold">
         Where Every Event Ticket is Secure,
