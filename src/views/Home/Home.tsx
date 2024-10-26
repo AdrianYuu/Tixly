@@ -1,9 +1,10 @@
 import { Helmet } from 'react-helmet-async';
 import TicketImage from '../../assets/images/ticket.png';
 import DummyBannerImage from '../../assets/images/dummy-banner.avif';
-import SearchBar from '../../components/InputBar';
+import InputBar from '../../components/InputBar';
 import { BENEFIT_LIST } from '../../configs/BenefitConfig';
 import BenefitCard from '../../components/BenefitCard';
+import FeatureSection from '../../components/FeatureSection';
 
 function Home() {
   function onSubmit(query: string) {
@@ -32,7 +33,7 @@ function Home() {
             exclusive perks, we make sure your event journey is simple and
             enjoyable
           </p>
-          <SearchBar
+          <InputBar
             placeholder="where do you want to go?"
             buttonText="Search"
             onSubmit={onSubmit}
@@ -42,7 +43,7 @@ function Home() {
       </section>
 
       {/* Section 2 */}
-      <section className="flex w-full text-customWhite">
+      <section className="flex w-full text-customWhite mt-16">
         {BENEFIT_LIST.map((benefit, index) => (
           <BenefitCard key={index} benefit={benefit} pos={index} />
         ))}
@@ -58,7 +59,25 @@ function Home() {
       </section>
 
       {/* Section 4 */}
-      <section className="mt-32"></section>
+      <FeatureSection
+        title="Our Popular Events"
+        description="Join the Buzz! Discover Our Most-Loved Events and Book Your Spot
+          Today!"
+      />
+
+      {/* Section 5 */}
+      <FeatureSection
+        title="Cinema Magic Awaits You"
+        description="Don’t miss out on the movies everyone’s raving about! From
+          heart-pounding action to heartwarming tales, grab your tickets now!"
+      />
+
+      {/* Section 6 */}
+      <FeatureSection
+        title="Hidden Healing Gems"
+        description="Dive into our curated selection of healing attractions that will help
+          you relax, reflect, and rejuvenate in stunning settings!"
+      />
     </>
   );
 }

@@ -56,7 +56,7 @@ function InputBar({
       )}
       <Button
         text={buttonText}
-        className="px-14 absolute right-0"
+        className="px-10 py-4 absolute right-0"
         onClick={handleButtonClick}
       />
     </div>
