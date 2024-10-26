@@ -6,15 +6,13 @@ import routerEvent from '../views/Event/Event.router';
 import routerFavorite from '../views/Favorite/Favorite.router';
 import routerMyTicket from '../views/MyTicket/MyTicket.router';
 import routerNotification from '../views/Notification/Notification.router';
-import routerMyTicketDetail from '../views/MyTicketDetail/MyTicketDetail.router';
 
-const ROUTES: IDefaultRouter[] = [
-  ...routerHome,
-  ...routerEvent,
-  ...routerMyTicket,
-  ...routerFavorite,
-  ...routerNotification,
-  ...routerMyTicketDetail,
+const NAVBAR_ROUTES: IDefaultRouter[] = [
+    ...routerHome,
+    ...routerEvent,
+    ...routerMyTicket,
+    ...routerFavorite,
+    ...routerNotification,
 ];
 
-export default ROUTES;
+export default NAVBAR_ROUTES;

@@ -1,14 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import Icon from './Icon';
-import ROUTES from '../configs/RouteConfig';
 import Button from './Button';
+import NAVBAR_ROUTES from '../configs/NavbarRouteConfig';
 
 function Navbar() {
   return (
     <nav className="py-6 flex justify-around items-center w-full sticky top-0 bg-customBlack z-50 opacity-90">
       <Icon className="w-26 h-12" />
       <div className="flex justify-center gap-20">
-        {ROUTES.map((route, index) => (
+        {NAVBAR_ROUTES.map((route, index) => (
           <NavLink
             key={index}
             to={route.path}

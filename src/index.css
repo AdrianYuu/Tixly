@@ -14,3 +14,7 @@ body {
 body {
   -ms-overflow-style: none;
 }
+
+li::marker {
+  color: #F0EC8B;
+}
