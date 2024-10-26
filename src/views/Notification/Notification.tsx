@@ -6,8 +6,6 @@ function Notification() {
       <Helmet>
         <title>Tixly | Notification</title>
       </Helmet>
-
-      
     </>
   );
 }

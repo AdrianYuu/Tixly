@@ -11,10 +11,10 @@ function Footer() {
   return (
     <div className="flex justify-center items-center flex-col text-customWhite w-full">
       <Icon className="w-28 mb-4" />
-      <p className="text-2xl font-semibold">
+      <p className="text-xl font-semibold">
         Where Every Event Ticket is Secure,
       </p>
-      <p className="text-2xl font-semibold mb-8">
+      <p className="text-xl font-semibold mb-8">
         Accessible, and Designed for the Future.
       </p>
       <div className="w-[48rem] mb-8">
