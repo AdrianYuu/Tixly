@@ -7,7 +7,9 @@ import IUser from '../interfaces/IUser';
 interface IUserContext {
   login: () => Promise<void>;
   register: (username: string) => Promise<void>;
+  logout: () => Promise<void>;
   user: IUser | null;
+  principal: string | null;
 }
 
 export function UserProvider({ children }: IChildren) {
@@ -24,6 +26,7 @@ export function UserProvider({ children }: IChildren) {
       const identity = (await authClient).getIdentity();
       const principal = identity.getPrincipal().toString();
 
+      console.log('Principal: ', principal);
       setPrincipal(principal);
     } catch (error) {
       console.error(error);
@@ -37,7 +40,11 @@ export function UserProvider({ children }: IChildren) {
     }
   }
 
-  const data = { login, register, user };
+  async function logout() {
+    setPrincipal('');
+  }
+
+  const data = { login, register, user, logout, principal };
 
   return <UserContext.Provider value={data}>{children}</UserContext.Provider>;
 }
