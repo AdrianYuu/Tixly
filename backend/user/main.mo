@@ -1,10 +1,14 @@
+import _Types "./types";
 import Text "mo:base/Text";
-import Types "./types"
 
 actor UserMain {
 
   public func ping() : async Text {
     return "Pong";
+  };
+
+  public func pong() : async Text {
+    return "Ping";
   };
 
 };

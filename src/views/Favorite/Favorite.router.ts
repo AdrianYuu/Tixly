@@ -3,9 +3,9 @@ import IDefaultRouter from '../../interfaces/IDefaultRouter';
 
 const routes: IDefaultRouter[] = [
   {
-    path: '/login',
-    name: 'Login',
-    component: React.lazy(() => import('./Login')),
+    path: '/favorite',
+    name: 'Favorite',
+    component: React.lazy(() => import('./Favorite')),
     exact: true,
   },
 ];
