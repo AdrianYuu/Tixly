@@ -8,10 +8,12 @@ export default {
       },
       colors: {
         customBlack: '#1A1A1A',
+        customLightBlack: "#1F1F1B",
         customWhite: '#FEF4F4',
         customLightPurple: '#8E43ED',
         customDarkPurple: '#512687',
         customLightYellow: '#F0EC8B',
+        customLightGrey: "#828282",
         customDarkGrey: '#323232',
         customLightBlack: '#262626',
         customLightBrown: '#322A33',
