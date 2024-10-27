@@ -15,14 +15,14 @@ function FeatureSection({ title, description }: IProps) {
         <p className="text-sm font-medium mt-8 text-center px-8">
           {description}
         </p>
-        <div className="flex justify-center gap-8 items-center mt-16 px-16 xl:flex-row flex-wrap">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-16 px-16">
           {[1, 2, 3, 4].map((_, index) => (
             <EventCard
               key={index}
               imageUrl="../../assets/images/dummy-image.png"
               title="WATERBOMB 2024 JAKARTA"
               address="Phantom Ground Park, PIK 2"
-              date="Saturday, 3nd November 2024"
+              date="Saturday, 3rd November 2024"
               price={1400000}
             />
           ))}

@@ -80,13 +80,13 @@ function NotificationCard({ name, date, status }: IProps) {
         isToday(date) ? 'bg-customLightBlack' : ''
       } text-xl justify-between rounded-xl p-5 items-center gap-8`}
     >
-      <div className="flex gap-4 items-center justify-center">
+      <div className="flex gap-4 lg:items-center justify-center items-start">
         <img
           src={NotificationImages[status]}
           className="w-20 rounded-full"
           alt="Notification Icon"
         />
-        <p className="text-xl text-customWhite font-normal">{message}</p>
+        <p className="text-xl text-customWhite font-normal pt-4 lg:pt-0">{message}</p>
       </div>
       <p className="text-customWhite text-xl font-medium opacity-50 min-w-36 text-right ">
         {getTimeDifference(date)}
