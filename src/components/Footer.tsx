@@ -11,13 +11,13 @@ function Footer() {
   return (
     <div className="flex justify-center items-center flex-col text-customWhite w-full mt-24">
       <Icon className="w-28 mb-4" />
-      <p className="text-xl font-semibold">
+      <p className="text-xl font-semibold text-center px-8">
         Where Every Event Ticket is Secure,
       </p>
-      <p className="text-xl font-semibold mb-8">
+      <p className="text-xl font-semibold mb-8 text-center px-8">
         Accessible, and Designed for the Future.
       </p>
-      <div className="w-[48rem] mb-8">
+      <div className="xl:w-[48rem] w-4/5 mb-8">
         <SearchBar
           placeholder="Give us your feedback"
           buttonText="Send"
