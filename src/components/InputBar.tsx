@@ -46,7 +46,7 @@ function InputBar({
           <div className="w-full flex relative">
             <input
               type="text"
-              className="outline-none bg-customDarkGrey ps-5 pe-36 py-4 w-full rounded-full"
+              className="outline-none bg-customDarkGrey ps-5 lg:pe-36 py-4 w-full rounded-full"
               placeholder={placeholder}
               value={input}
               onChange={handleInputChange}
@@ -56,7 +56,7 @@ function InputBar({
       )}
       <Button
         text={buttonText}
-        className="px-10 py-4 absolute right-0"
+        className="px-4 py-4 absolute right-0 md:px-10"
         onClick={handleButtonClick}
       />
     </div>

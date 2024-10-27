@@ -8,7 +8,7 @@ interface IProps {
 function BenefitCard({ benefit, pos }: IProps) {
   return (
     <div
-      className={`rounded-tr-[3rem] rounded-br-[3rem] ${benefit.color} w-full flex justify-center items-center flex-col px-16 py-36`}
+      className={`-me-[2.5rem] xl:rounded-tr-[3rem] xl:rounded-br-[3rem] ${benefit.color} xl:w-full min-w-screen flex justify-center items-center flex-col px-16 py-36`}
       style={{
         marginLeft: pos !== 0 ? '-2.5rem' : '0',
         zIndex: BENEFIT_LIST.length - pos,

@@ -7,8 +7,6 @@ function MyTicket() {
       <Helmet>
         <title>Tixly | My Ticket</title>
       </Helmet>
-
-      
     </>
   );
 }

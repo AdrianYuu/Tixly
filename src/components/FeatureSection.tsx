@@ -9,11 +9,13 @@ function FeatureSection({ title, description }: IProps) {
   return (
     <div>
       <section className="mt-24 text-customWhite flex justify-center items-center flex-col">
-        <span className="text-5xl font-bold bg-gradient-to-r from-customLightPurple to-customLightYellow bg-clip-text text-transparent">
+        <span className="text-5xl text-center font-bold bg-gradient-to-r from-customLightPurple to-customLightYellow bg-clip-text text-transparent">
           {title}
         </span>
-        <p className="text-sm font-medium mt-8">{description}</p>
-        <div className="flex justify-center gap-8 items-center mt-16 px-16">
+        <p className="text-sm font-medium mt-8 text-center px-8">
+          {description}
+        </p>
+        <div className="flex justify-center gap-8 items-center mt-16 px-16 xl:flex-row flex-wrap">
           {[1, 2, 3, 4].map((_, index) => (
             <EventCard
               key={index}
