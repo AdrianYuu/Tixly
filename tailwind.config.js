@@ -13,6 +13,7 @@ export default {
         customLightPurple: '#8E43ED',
         customDarkPurple: '#512687',
         customLightYellow: '#F0EC8B',
+        customDarkYellow: '#DED84D',
         customLightGrey: "#828282",
         customDarkGrey: '#323232',
         customLightBlack: '#262626',

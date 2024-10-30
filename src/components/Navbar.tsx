@@ -5,7 +5,7 @@ import NAVBAR_ROUTES from '../configs/NavbarRouteConfig';
 import { FiMenu } from 'react-icons/fi';
 import { useState } from 'react';
 import { BellIcon as OutlineBellIcon} from '@heroicons/react/24/outline';
-import { BellIcon  as SolidBellIcon} from '@heroicons/react/24/solid';
+import { BellIcon  as SolidBellIcon, UserIcon} from '@heroicons/react/24/solid';
 
 function Navbar() {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -46,7 +46,7 @@ function Navbar() {
       <div className="flex gap-6 items-center">
         {/* Condition when the user has logged in */}
         
-        {/* <NavLink to={'/notification'}>
+        <NavLink to={'/notification'}>
           {({ isActive }) =>
             isActive ? (
               <SolidBellIcon className="w-6 h-6 text-customLightPurple" />
@@ -54,18 +54,18 @@ function Navbar() {
               <OutlineBellIcon className="w-6 h-6 text-customLightGrey" />
             )
           }
-        </NavLink> */}
+        </NavLink>
 
-        {/* <div className="flex items-center justify-center w-10 h-10 bg-customDarkGrey rounded-full">
+        <div className="flex items-center justify-center w-10 h-10 bg-customDarkGrey rounded-full">
           <UserIcon className="w-6 h-6 text-customLightPurple" />
-        </div> */}
+        </div>
 
 
         {/* Condition when user has not logged in */}
-        <Button
+        {/* <Button
           text="Login with Internet Identity"
           className="truncate px-5 py-4"
-        />
+        /> */}
       </div>
 
       {/* Dropdown Navbar */}
