@@ -4,8 +4,8 @@ import Button from './Button';
 import NAVBAR_ROUTES from '../configs/NavbarRouteConfig';
 import { FiMenu } from 'react-icons/fi';
 import { useState } from 'react';
-import { BellIcon as OutlineBellIcon} from '@heroicons/react/24/outline';
-import { BellIcon  as SolidBellIcon, UserIcon} from '@heroicons/react/24/solid';
+import { BellIcon as OutlineBellIcon } from '@heroicons/react/24/outline';
+import { BellIcon as SolidBellIcon, UserIcon } from '@heroicons/react/24/solid';
 
 function Navbar() {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -43,7 +43,7 @@ function Navbar() {
 
       <div className="flex gap-6 items-center">
         {/* Condition when the user has logged in */}
-        
+
         <NavLink to={'/notification'}>
           {({ isActive }) =>
             isActive ? (
@@ -57,7 +57,6 @@ function Navbar() {
         <div className="flex items-center justify-center w-10 h-10 bg-customDarkGrey rounded-full">
           <UserIcon className="w-6 h-6 text-customLightPurple" />
         </div>
-
 
         {/* Condition when user has not logged in */}
         {/* <Button
