@@ -29,10 +29,8 @@ function Navbar() {
             key={index}
             to={route.path}
             className={({ isActive }) =>
-              `text-customWhite hover:underline underline-offset-8 ${
-                isActive
-                  ? 'text-customWhite font-semibold text-base'
-                  : 'text-customWhite opacity-50'
+              `text-customWhite text-base hover:underline underline-offset-8 ${
+                isActive ? 'font-semibold' : 'opacity-50'
               }`
             }
           >

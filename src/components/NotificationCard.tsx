@@ -86,7 +86,9 @@ function NotificationCard({ name, date, status }: IProps) {
           className="w-20 rounded-full"
           alt="Notification Icon"
         />
-        <p className="text-xl text-customWhite font-normal pt-4 lg:pt-0">{message}</p>
+        <p className="text-xl text-customWhite font-normal pt-4 lg:pt-0">
+          {message}
+        </p>
       </div>
       <p className="text-customWhite text-xl font-medium opacity-50 min-w-36 text-right ">
         {getTimeDifference(date)}
