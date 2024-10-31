@@ -18,3 +18,9 @@ body {
 li::marker {
   color: #F0EC8B;
 }
+
+@layer utilities {
+  .clip-hole {
+    clip-path: inset(0 0 0 0);
+  }
+}

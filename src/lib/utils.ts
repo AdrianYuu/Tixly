@@ -1,9 +1,15 @@
-export function formatToRupiah(number: number) {
+export function formatToRupiah(value: number | string | undefined) {
+  if (value === undefined) {
+    return '0';
+  }
+
+  const numberValue = typeof value === 'string' ? convertToNumber(value) : value;
+
   return new Intl.NumberFormat('id-ID', {
     style: 'currency',
     currency: 'IDR',
     minimumFractionDigits: 0,
-  }).format(number);
+  }).format(numberValue);
 }
 
 function parseStrDate(strDate: string): Date {
@@ -60,4 +66,9 @@ export function isToday(strDate: string): boolean {
     targetDate.getMonth() === now.getMonth() &&
     targetDate.getFullYear() === now.getFullYear()
   );
+}
+
+function convertToNumber(x: string): number {
+  const retVal = parseInt(x);
+  return retVal
 }
