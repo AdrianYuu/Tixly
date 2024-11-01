@@ -7,7 +7,7 @@ import routerFavorite from '../views/Favorite/Favorite.router';
 import routerMyTicket from '../views/MyTicket/MyTicket.router';
 import routerNotification from '../views/Notification/Notification.router';
 import routerMyTicketDetail from '../views/MyTicketDetail/MyTicketDetail.router';
-import routerTicketDetail from '../views/TicketDetail/TicketDetail.router'
+import routerTicketDetail from '../views/TicketDetail/TicketDetail.router';
 
 const ROUTES: IDefaultRouter[] = [
   ...routerHome,

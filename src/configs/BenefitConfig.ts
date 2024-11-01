@@ -3,6 +3,7 @@ export interface IBenefit {
   title: string;
   description: string;
   color: string;
+  glowingColor: string;
 }
 
 export const BENEFIT_LIST: IBenefit[] = [
@@ -12,6 +13,7 @@ export const BENEFIT_LIST: IBenefit[] = [
     description:
       'With Tixly, your ticket is uniquely yours, so you’re all set for the event without any hassles or mix-ups. Just one ticket, one amazing experience!',
     color: 'bg-customLightBlack',
+    glowingColor: 'bg-customGlowingOne',
   },
   {
     imageUrl: '../assets/images/benefit-2.png',
@@ -19,6 +21,7 @@ export const BENEFIT_LIST: IBenefit[] = [
     description:
       'Unlock unique perks and rewards with every event, and keep your memories alive with special collectibles just for attending',
     color: 'bg-customLightBrown',
+    glowingColor: 'bg-customGlowingTwo',
   },
   {
     imageUrl: '../assets/images/benefit-3.png',
@@ -26,5 +29,6 @@ export const BENEFIT_LIST: IBenefit[] = [
     description:
       'Say goodbye to lines and confusion. With a simple scan, Tixly ensures quick and secure entry so you can dive right into the fun!',
     color: 'bg-customMidPurple',
+    glowingColor: 'bg-customGlowingThree',
   },
 ];

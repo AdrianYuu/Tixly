@@ -6,6 +6,8 @@ import { BENEFIT_LIST } from '../../configs/BenefitConfig';
 import BenefitCard from '../../components/BenefitCard';
 import FeatureSection from '../../components/FeatureSection';
 import { motion } from 'framer-motion';
+import Carousel from '../../components/Carousel';
+import TicketEnum from '../../enums/TicketEnum';
 
 function Home() {
   function onSubmit(query: string) {
@@ -62,29 +64,28 @@ function Home() {
 
       {/* Section 3 */}
       <section className="flex w-full justify-center items-center mt-32">
-        <img
-          src={DummyBannerImage}
-          alt=""
-          className="rounded-2xl w-4/5 max-h-80"
-        />
+        <Carousel />
       </section>
 
       {/* Section 4 */}
       <FeatureSection
-        title="Our Popular Events"
-        description="Join the Buzz! Discover Our Most-Loved Events and Book Your Spot Today!"
+        title="Unforgettable Concert Experiences Await!"
+        description="Dive into the electrifying world of our most adored concerts today!"
+        ticketType={TicketEnum.CONCERT}
       />
 
       {/* Section 5 */}
       <FeatureSection
         title="Cinema Magic Awaits You"
         description="Don’t miss out on the movies everyone’s raving about! From heart-pounding action to heartwarming tales, grab your tickets now!"
+        ticketType={TicketEnum.MOVIE}
       />
 
       {/* Section 6 */}
       <FeatureSection
         title="Hidden Healing Gems"
         description="Dive into our curated selection of healing attractions that will help you relax, reflect, and rejuvenate in stunning settings!"
+        ticketType={TicketEnum.TOURIST_ATTRACTION}
       />
     </>
   );

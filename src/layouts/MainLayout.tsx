@@ -6,7 +6,7 @@ function MainLayout({ children }: IChildren) {
   return (
     <div className="bg-customBlack">
       <Navbar />
-      <div className="min-h-screen w-full">{children}</div>
+      <div className="min-h-screen w-full px-1">{children}</div>
       <Footer />
     </div>
   );

@@ -3,7 +3,8 @@ export function formatToRupiah(value: number | string | undefined) {
     return '0';
   }
 
-  const numberValue = typeof value === 'string' ? convertToNumber(value) : value;
+  const numberValue =
+    typeof value === 'string' ? convertToNumber(value) : value;
 
   return new Intl.NumberFormat('id-ID', {
     style: 'currency',
@@ -12,6 +13,42 @@ export function formatToRupiah(value: number | string | undefined) {
   }).format(numberValue);
 }
 
+function convertToNumber(x: string): number {
+  const retVal = parseInt(x);
+  return retVal;
+}
+
+export function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+
+  const day = date.getDate();
+  const month = date.toLocaleString('default', { month: 'long' });
+  const year = date.getFullYear();
+  const weekday = date.toLocaleString('default', { weekday: 'long' });
+
+  const daySuffix = (day: number): string => {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+      case 1:
+        return 'st';
+      case 2:
+        return 'nd';
+      case 3:
+        return 'rd';
+      default:
+        return 'th';
+    }
+  };
+
+  return `${weekday}, ${day}${daySuffix(day)} ${month} ${year}`;
+}
+
+/*--
+  Three functions below used for Notification Page.
+  1. parseStrDate
+  2. getTimeDifference
+  3. isToday
+--*/
 function parseStrDate(strDate: string): Date {
   const cleanedDateStr = strDate.replace(/(\d{1,2})(st|nd|rd|th)/, '$1');
 
@@ -66,9 +103,4 @@ export function isToday(strDate: string): boolean {
     targetDate.getMonth() === now.getMonth() &&
     targetDate.getFullYear() === now.getFullYear()
   );
-}
-
-function convertToNumber(x: string): number {
-  const retVal = parseInt(x);
-  return retVal
 }

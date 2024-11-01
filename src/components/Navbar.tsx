@@ -1,14 +1,16 @@
 import { NavLink } from 'react-router-dom';
 import Icon from './Icon';
-import Button from './Button';
 import NAVBAR_ROUTES from '../configs/NavbarRouteConfig';
 import { FiMenu } from 'react-icons/fi';
 import { useState } from 'react';
 import { BellIcon as OutlineBellIcon } from '@heroicons/react/24/outline';
 import { BellIcon as SolidBellIcon, UserIcon } from '@heroicons/react/24/solid';
+import { useUserContext } from '../contexts/UserContext';
+import Button from './Button';
 
 function Navbar() {
   const [isOpen, setOpen] = useState<boolean>(false);
+  const { user } = useUserContext();
 
   function toggleOpen() {
     setOpen((prev) => !prev);
@@ -42,27 +44,27 @@ function Navbar() {
       </div>
 
       <div className="flex gap-6 items-center">
-        {/* Condition when the user has logged in */}
-
-        <NavLink to={'/notification'}>
-          {({ isActive }) =>
-            isActive ? (
-              <SolidBellIcon className="w-6 h-6 text-customLightPurple" />
-            ) : (
-              <OutlineBellIcon className="w-6 h-6 text-customLightGrey" />
-            )
-          }
-        </NavLink>
-
-        <div className="flex items-center justify-center w-10 h-10 bg-customDarkGrey rounded-full">
-          <UserIcon className="w-6 h-6 text-customLightPurple" />
-        </div>
-
-        {/* Condition when user has not logged in */}
-        {/* <Button
-          text="Login with Internet Identity"
-          className="truncate px-5 py-4"
-        /> */}
+        {user ? (
+          <>
+            <NavLink to={'/notification'}>
+              {({ isActive }) =>
+                isActive ? (
+                  <SolidBellIcon className="w-6 h-6 text-customLightPurple" />
+                ) : (
+                  <OutlineBellIcon className="w-6 h-6 text-customLightGrey" />
+                )
+              }
+            </NavLink>
+            <div className="flex items-center justify-center w-10 h-10 bg-customDarkGrey rounded-full">
+              <UserIcon className="w-6 h-6 text-customLightPurple" />
+            </div>
+          </>
+        ) : (
+          <Button
+            text="Login with Internet Identity"
+            className="truncate px-5 py-4"
+          />
+        )}
       </div>
 
       {/* Dropdown Navbar */}
