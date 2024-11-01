@@ -15,9 +15,9 @@ import TicketRedemption from '../../components/TicketRedemption';
 import Button from '../../components/Button';
 import Ticket from '../../components/Ticket';
 import { motion } from 'framer-motion';
-import ITicketDetail from '../../interfaces/ITicketDetail';
+import ITicketDetail from '../../interfaces/ITicket';
 import { formatToRupiah } from '../../lib/utils';
-import TicketDetailEnum from '../../enums/TicketDetailEnum';
+import TicketDetailEnum from '../../enums/TicketEnum';
 import { ITicketType } from '../../interfaces/IConcert';
 
 const ticketDetails: ITicketDetail[] = [
@@ -99,7 +99,9 @@ function TicketDetail() {
     lng: 106.123456,
   });
 
-  const [selectedTicket, setSelectedTicket] = useState<ITicketType | null>(null);
+  const [selectedTicket, setSelectedTicket] = useState<ITicketType | null>(
+    null,
+  );
 
   const handleTicketSelect = (ticket: ITicketType) => {
     setSelectedTicket(ticket);
@@ -338,17 +340,19 @@ function TicketDetail() {
                   </>
                 ) : currentTicket.concert?.ticketTypeList &&
                   currentTicket.concert.ticketTypeList.length > 0 ? (
-                  currentTicket.concert.ticketTypeList.map((ticket: ITicketType) => (
-                    <Ticket
-                      key={ticket.name}
-                      ticketName={ticket.name}
-                      endDate={currentTicket.concert?.endDatePeriod ?? '0'}
-                      price={ticket.price}
-                      type={currentTicket.ticketDetailType}
-                      ticketType={ticket}
-                      onClick={handleTicketSelect}
-                    />
-                  ))
+                  currentTicket.concert.ticketTypeList.map(
+                    (ticket: ITicketType) => (
+                      <Ticket
+                        key={ticket.name}
+                        ticketName={ticket.name}
+                        endDate={currentTicket.concert?.endDatePeriod ?? '0'}
+                        price={ticket.price}
+                        type={currentTicket.ticketDetailType}
+                        ticketType={ticket}
+                        onClick={handleTicketSelect}
+                      />
+                    ),
+                  )
                 ) : (
                   <p className="text-customWhite">No Tickets Available</p>
                 )}
@@ -373,20 +377,32 @@ function TicketDetail() {
               </div>
             ) : (
               <div className="flex flex-col gap-4 bg-customDarkGrey p-10 rounded-3xl h-max w-max">
-              <p className="text-customWhite opacity-50 text-sm font-medium">
-                {selectedTicket ? `${selectedTicket.name} - General Sale` : "Select a Ticket"}
-              </p>
-              <div className="flex justify-between text-customWhite opacity-50 text-sm">
-                <p>{selectedTicket ? "1x ticket" : ""}</p>
-                <p>{selectedTicket ? formatToRupiah(selectedTicket.price) : ""}</p>
+                <p className="text-customWhite opacity-50 text-sm font-medium">
+                  {selectedTicket
+                    ? `${selectedTicket.name} - General Sale`
+                    : 'Select a Ticket'}
+                </p>
+                <div className="flex justify-between text-customWhite opacity-50 text-sm">
+                  <p>{selectedTicket ? '1x ticket' : ''}</p>
+                  <p>
+                    {selectedTicket ? formatToRupiah(selectedTicket.price) : ''}
+                  </p>
+                </div>
+                <div className="border-dashed border-t-2 border-customWhite opacity-30"></div>
+                <div className="flex justify-between text-customWhite text-xl font-semibold">
+                  <p>Total</p>
+                  <p>
+                    {selectedTicket
+                      ? formatToRupiah(selectedTicket.price)
+                      : 'IDR 0'}
+                  </p>
+                </div>
+                <Button
+                  className="p-2 px-24"
+                  text="Buy Ticket"
+                  disabledState={!selectedTicket}
+                />
               </div>
-              <div className="border-dashed border-t-2 border-customWhite opacity-30"></div>
-              <div className="flex justify-between text-customWhite text-xl font-semibold">
-                <p>Total</p>
-                <p>{selectedTicket ? formatToRupiah(selectedTicket.price) : "IDR 0"}</p>
-              </div>
-              <Button className="p-2 px-24" text="Buy Ticket" disabledState={!selectedTicket} />
-            </div>
             )}
           </div>
         </div>

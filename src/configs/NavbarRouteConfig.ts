@@ -7,10 +7,10 @@ import routerFavorite from '../views/Favorite/Favorite.router';
 import routerMyTicket from '../views/MyTicket/MyTicket.router';
 
 const NAVBAR_ROUTES: IDefaultRouter[] = [
-    ...routerHome,
-    ...routerEvent,
-    ...routerMyTicket,
-    ...routerFavorite,
+  ...routerHome,
+  ...routerEvent,
+  ...routerMyTicket,
+  ...routerFavorite,
 ];
 
 export default NAVBAR_ROUTES;

@@ -1,5 +1,5 @@
 interface ITouristAttraction {
-    ticketPrice: string;
+  ticketPrice: string;
 }
 
-export default ITouristAttraction
+export default ITouristAttraction;
