@@ -30,27 +30,29 @@ function Carousel() {
       <div className="flex justify-center items-center relative">
         <button
           onClick={goToPreviousSlide}
-          className="lg:flex hidden absolute left-[5.8rem] bg-customDarkGrey rounded-full w-12 h-12 items-center justify-center cursor-pointer z-50 hover:opacity-90"
+          className="lg:flex hidden absolute left-24 bg-customDarkGrey rounded-full w-12 h-12 items-center justify-center cursor-pointer z-50 hover:opacity-90"
         >
           <img src="../assets/images/carousel/arrow-left.png" alt="Previous" />
         </button>
-        <div className="relative w-10/12 overflow-hidden">
+        <div className="relative w-10/12 overflow-hidden aspect-w-16 aspect-h-9">
           <div
             className="flex transition-transform duration-700 ease-in-out"
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {CAROUSEL_IMAGE_LIST.map((image, index) => (
-              <img
-                key={index}
-                src={image.imageUrl}
-                className="w-full min-h-48"
-              />
+              <div key={index} className="flex-shrink-0 w-full h-full">
+                <img
+                  src={image.imageUrl}
+                  className="w-full h-full min-h-52 object-cover"
+                  alt=""
+                />
+              </div>
             ))}
           </div>
         </div>
         <button
           onClick={goToNextSlide}
-          className="lg:flex hidden absolute right-[5.8rem] bg-customDarkGrey rounded-full w-12 h-12 items-center justify-center cursor-pointer z-50 hover:opacity-90"
+          className="lg:flex hidden absolute right-24 bg-customDarkGrey rounded-full w-12 h-12 items-center justify-center cursor-pointer z-50 hover:opacity-90"
         >
           <img src="../assets/images/carousel/arrow-right.png" alt="Next" />
         </button>
