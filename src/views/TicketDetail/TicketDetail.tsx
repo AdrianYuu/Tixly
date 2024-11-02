@@ -107,6 +107,7 @@ function TicketDetail() {
     setSelectedTicket(ticket);
   };
 
+
   return (
     <>
       <Helmet>
@@ -350,6 +351,7 @@ function TicketDetail() {
                         type={currentTicket.ticketDetailType}
                         ticketType={ticket}
                         onClick={handleTicketSelect}
+                        isSelected={selectedTicket === ticket} // Pass selected state
                       />
                     ),
                   )

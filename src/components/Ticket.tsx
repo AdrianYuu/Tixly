@@ -11,6 +11,7 @@ interface IProps {
   type: TicketDetailEnum;
   ticketType?: ITicketType;
   onClick?: (ticket: ITicketType) => void;
+  isSelected?: boolean;
 }
 
 function Ticket({
@@ -20,6 +21,7 @@ function Ticket({
   type,
   onClick,
   ticketType,
+  isSelected
 }: IProps) {
   const [quantity, setQuantity] = useState(0);
 
@@ -36,11 +38,12 @@ function Ticket({
       onClick(ticketType);
     }
   };
+  
 
   return (
-    <div className="grid grid-cols-3 cursor-pointer" onClick={handleClick}>
+    <div className={`grid grid-cols-3 cursor-pointer`} onClick={handleClick}>
       {/* Image Section - 2/3 of the grid */}
-      <div className="relative col-span-2 h-56 lg:h-80 bg-customDarkGrey flex flex-col items-start justify-center border border-none rounded-l-3xl">
+      <div className={`relative col-span-2 h-56 lg:h-80 bg-customDarkGrey ${isSelected ? 'bg-customLightPurple' : ''} flex flex-col items-start justify-center border border-none rounded-l-3xl`}>
         <div className="flex flex-col gap-4 text-start lg:ml-20">
           <p className="text-customWhite text-xl font-semibold">{ticketName}</p>
           <div className="flex flex-col gap-3">
@@ -58,7 +61,7 @@ function Ticket({
       </div>
 
       {/* Text Section - 1/3 of the grid */}
-      <div className="relative h-56 lg:h-80 flex flex-col bg-customDarkGrey p-8 rounded-r-3xl col-span-1 items-center justify-center border border-none">
+      <div className={`relative h-56 lg:h-80 flex flex-col bg-customDarkGrey ${isSelected ? 'bg-customLightPurple' : ''} p-8 rounded-r-3xl col-span-1 items-center justify-center border border-none`}>
         <div className="flex flex-col gap-4 text-center ml-6">
           <p className="text-customWhite text-xl font-semibold">
             {formatToRupiah(price)}
