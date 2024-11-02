@@ -2,6 +2,7 @@ import TicketEnum from '../enums/TicketEnum';
 import { ITicket } from '../interfaces/ITicket';
 import DummyConcerBannerImage from '../assets/images/festival-rectangle.png';
 import VenueImage from '../assets/images/venue.png';
+import MoviePoster from '../assets/images/movie-poster.webp';
 
 export const TICKET_LIST: ITicket[] = [
   // Dummy Concert Tickets
@@ -100,7 +101,7 @@ export const TICKET_LIST: ITicket[] = [
     id: '5',
     name: 'Avengers: Endgame',
     description: 'The epic conclusion to the Marvel saga.',
-    imageUrl: '../assets/images/dummy-image.png',
+    imageUrl: MoviePoster,
     address: 'Cinema Complex, 100 Movie St',
     ticketType: TicketEnum.MOVIE,
     movie: {

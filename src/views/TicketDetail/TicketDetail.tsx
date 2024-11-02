@@ -17,8 +17,9 @@ import { ITicketType } from '../../interfaces/IConcert';
 import { TICKET_LIST } from '../../configs/TicketConfig';
 import TicketBanner from '../../components/TicketBanner';
 import { Link } from 'react-router-dom';
+import TicketEnum from '../../enums/TicketEnum';
 
-const currentTicket = TICKET_LIST[0];
+const currentTicket = TICKET_LIST[11];
 
 function TicketDetail() {
   const [isInfoActive, setIsInfoActive] = useState<boolean>(true);
@@ -47,6 +48,26 @@ function TicketDetail() {
     setSelectedTicket(ticket);
   };
 
+  const [quantity, setQuantity] = useState(0);
+
+  const increaseQuantity = () => {
+    setQuantity((prev) => prev + 1);
+    console.log(quantity);
+    console.log(totalPrice);
+  };
+
+  const decreaseQuantity = () => {
+    setQuantity((prev) => (prev > 0 ? prev - 1 : prev));
+  };
+
+  const ticketPrice = currentTicket.movie?.ticketPrice
+    ? parseInt(currentTicket.movie.ticketPrice)
+    : currentTicket.touristAttraction
+    ? parseInt(currentTicket.touristAttraction.ticketPrice)
+    : 0;
+
+  const totalPrice = ticketPrice * quantity;
+
   return (
     <>
       <Helmet>
@@ -64,7 +85,10 @@ function TicketDetail() {
             image={currentTicket.imageUrl}
             name={currentTicket.name}
             address={currentTicket.address}
-            date={currentTicket.concert.endDatePeriod}
+            date={
+              currentTicket.concert?.endDatePeriod ?? currentTicket.movie?.date
+            }
+            type={currentTicket.ticketType}
           />
 
           <div className="flex mt-8 justify-between lg:flex-row flex-col-reverse items-center lg:items-start">
@@ -266,19 +290,40 @@ function TicketDetail() {
                     ),
                   )
                 ) : (
-                  <p className="text-customWhite">No Tickets Available</p>
+                  <Ticket
+                    key={currentTicket.name}
+                    ticketName={currentTicket.name}
+                    price={
+                      currentTicket.movie?.ticketPrice ??
+                      currentTicket.touristAttraction?.ticketPrice ??
+                      ''
+                    }
+                    type={currentTicket.ticketType}
+                    quantity={quantity}
+                    onIncrease={increaseQuantity}
+                    onDecrease={decreaseQuantity}
+                  />
                 )}
               </div>
             </div>
             {isInfoActive ? (
               <div className="flex flex-col gap-4 bg-customDarkGrey p-10 rounded-3xl h-max w-max mb-6 lg:mb-0">
                 <p className="text-customWhite opacity-50 text-sm font-medium">
-                  Start From,
+                  Start From
                 </p>
                 <p className="text-customWhite text-xl font-semibold">
-                  {formatToRupiah(
-                    currentTicket.concert?.ticketTypeList.find(() => true)
-                      ?.price,
+                  {currentTicket.ticketType === TicketEnum.CONCERT ? (
+                    <>
+                      {formatToRupiah(
+                        currentTicket.concert?.ticketTypeList.find(() => true)
+                          ?.price,
+                      )}
+                    </>
+                  ) : (
+                    formatToRupiah(
+                      currentTicket.movie?.ticketPrice ??
+                        currentTicket.touristAttraction?.ticketPrice,
+                    )
                   )}
                 </p>
                 <Button
@@ -290,15 +335,22 @@ function TicketDetail() {
             ) : (
               <div className="flex flex-col gap-4 bg-customDarkGrey p-10 rounded-3xl h-max w-max mb-6 lg:mb-0">
                 <p className="text-customWhite opacity-50 text-sm font-medium">
-                  {selectedTicket
-                    ? `${selectedTicket.name}`
-                    : 'Select a Ticket'}
+                  {selectedTicket &&
+                  currentTicket.ticketType === TicketEnum.CONCERT
+                    ? selectedTicket.name
+                    : ''
+                    ? 'Select a ticket'
+                    : currentTicket.name}
                 </p>
                 <div className="flex justify-between text-customWhite opacity-50 text-sm">
-                  <p>{selectedTicket ? '1x ticket' : ''}</p>
                   <p>
-                    {selectedTicket ? formatToRupiah(selectedTicket.price) : ''}
+                    {selectedTicket
+                      ? `1x ${selectedTicket.name} ticket`
+                      : quantity > 0
+                      ? `${quantity}x ${currentTicket.name} ticket`
+                      : ''}
                   </p>
+                  <p>{selectedTicket ? formatToRupiah(totalPrice) : ''}</p>
                 </div>
                 <div className="border-dashed border-t-2 border-customWhite opacity-30"></div>
                 <div className="flex justify-between text-customWhite text-xl font-semibold">
@@ -306,21 +358,21 @@ function TicketDetail() {
                   <p>
                     {selectedTicket
                       ? formatToRupiah(selectedTicket.price)
-                      : 'IDR 0'}
+                      : formatToRupiah(totalPrice)}
                   </p>
                 </div>
                 <Link
                   to={{
                     pathname: `/payment/${currentTicket.id}`,
                     search: `?ticketName=${encodeURIComponent(
-                      selectedTicket?.name ?? 'a',
-                    )}&price=${selectedTicket?.price}&id=${selectedTicket?.id}`,
+                      selectedTicket?.name ?? currentTicket.name,
+                    )}&price=${selectedTicket?.price ?? totalPrice}&id=${selectedTicket?.id}&quantity=${quantity ?? 1}`,
                   }}
                 >
                   <Button
                     className="p-2 px-24"
                     text="Buy Ticket"
-                    disabledState={!selectedTicket}
+                    disabledState={!selectedTicket && quantity === 0}
                   />
                 </Link>
               </div>

@@ -1,13 +1,15 @@
 import { CalendarDaysIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import TicketEnum from '../enums/TicketEnum';
 
 interface IProps {
   image: string;
   name: string;
   address: string;
   date: string;
+  type: TicketEnum;
 }
 
-function TicketBanner({ image, name, address, date }: IProps) {
+function TicketBanner({ image, name, address, date, type }: IProps) {
   return (
     <div className="grid grid-cols-3">
       {/* Image Section - 2/3 of the grid */}
@@ -15,7 +17,7 @@ function TicketBanner({ image, name, address, date }: IProps) {
         <img
           src={image}
           alt="Product"
-          className="w-full h-56 lg:h-80 object-fit rounded-l-3xl border border-transparent"
+          className="w-full h-56 lg:h-80 object-cover rounded-l-3xl border border-transparent"
         />
         <div className="absolute top-0 right-0 w-8 h-8 rounded-bl-full bg-customBlack clip-hole"></div>
         <div className="absolute bottom-0 right-0 w-8 h-8 rounded-tl-full bg-customBlack clip-hole"></div>
@@ -32,8 +34,14 @@ function TicketBanner({ image, name, address, date }: IProps) {
               {address}
             </p>
             <p className="flex gap-2 items-center text-customLightYellow text-md font-medium">
-              <CalendarDaysIcon className="w-5 h-5" />
-              {date}
+              {type !== TicketEnum.TOURIST_ATTRACTION ? (
+                <>
+                  <CalendarDaysIcon className="w-5 h-5" />
+                  {date}
+                </>
+              ) : (
+                ''
+              )}
             </p>
           </div>
           <div className="absolute top-0 left-0 w-8 h-8 rounded-br-full bg-customBlack clip-hole"></div>

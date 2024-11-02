@@ -18,7 +18,9 @@ function Payment() {
     null,
   );
 
-  const currentTicket = TICKET_LIST[0];
+  const quantity = queryParams.get('quantity');
+
+  const currentTicket = TICKET_LIST[11];
 
   const paymentList = PAYMENT_TYPE_LIST;
 
@@ -27,19 +29,19 @@ function Payment() {
   };
 
   const handleBuyTicket = () => {
-    console.log("Event/Movie/Attraction ID: ", currentTicket.id)
-    console.log("Ticket Name: ", ticketName)
-    console.log("Ticket ID {for concert only}: ", id)
-    console.log("Name: ", currentTicket.name)
-    console.log("Selected Payment:", selectedPayment?.type ?? "")
-  }
+    console.log('Event/Movie/Attraction ID: ', currentTicket.id);
+    console.log('Ticket Name: ', ticketName);
+    console.log('Ticket ID {for concert only}: ', id);
+    console.log('Name: ', currentTicket.name);
+    console.log('Selected Payment:', selectedPayment?.type ?? '');
+  };
 
   return (
     <>
       <Helmet>
         <title>Tixly | Payment</title>
       </Helmet>
-      
+
       <motion.section
         className="flex flex-col gap-2 px-16 mt-12"
         initial={{ opacity: 0, y: -20 }}
@@ -51,7 +53,8 @@ function Payment() {
             image={currentTicket.imageUrl}
             name={ticketName ?? ''}
             address={currentTicket.address}
-            date={currentTicket.concert?.concertDate}
+            date={currentTicket.concert?.concertDate ?? currentTicket.movie?.date}
+            type={currentTicket.ticketType}
           />
           <div className="flex flex-col-reverse items-center lg:items-start lg:flex-row justify-between gap-6 mt-12">
             <div className="flex flex-col w-3/5">
@@ -74,7 +77,7 @@ function Payment() {
                 {ticketName ? `${ticketName}` : 'Select a Ticket'}
               </p>
               <div className="flex justify-between text-customWhite opacity-50 text-sm">
-                <p>{ticketName ? '1x ticket' : ''}</p>
+                <p>{ticketName ? `${quantity}x ${ticketName} ticket` : ''}</p>
                 <p>{price ? formatToRupiah(price) : ''}</p>
               </div>
               <div className="border-dashed border-t-2 border-customWhite opacity-30"></div>

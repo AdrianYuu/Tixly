@@ -3,15 +3,20 @@ import { useState } from 'react';
 import { formatToRupiah } from '../lib/utils';
 import TicketDetailEnum from '../enums/TicketEnum';
 import { ITicketType } from '../interfaces/IConcert';
+import TicketEnum from '../enums/TicketEnum';
+import { ITicket } from '../interfaces/ITicket';
 
 interface IProps {
   ticketName: string;
   endDate?: string;
-  price: number;
+  price: string;
   type: TicketDetailEnum;
   ticketType?: ITicketType;
   onClick?: (ticket: ITicketType) => void;
   isSelected?: boolean;
+  quantity?: number;
+  onIncrease?: () => void;
+  onDecrease?: () => void;
 }
 
 function Ticket({
@@ -22,17 +27,10 @@ function Ticket({
   onClick,
   ticketType,
   isSelected,
+  quantity,
+  onIncrease,
+  onDecrease,
 }: IProps) {
-  const [quantity, setQuantity] = useState(0);
-
-  const increaseQuantity = () => {
-    setQuantity((prev) => prev + 1);
-  };
-
-  const decreaseQuantity = () => {
-    setQuantity((prev) => (prev > 0 ? prev - 1 : prev));
-  };
-
   const handleClick = () => {
     if (ticketType && onClick) {
       onClick(ticketType);
@@ -55,10 +53,12 @@ function Ticket({
               {ticketName}
             </p>
             <div className="flex flex-col gap-3">
-              <p className="flex gap-2 items-center text-customWhite text-md font-medium opacity-50">
-                <ClockIcon className="w-5 h-5" />
-                Ends On: {endDate}
-              </p>
+              {type === TicketEnum.CONCERT && (
+                <p className="flex gap-2 items-center text-customWhite text-md font-medium opacity-50">
+                  <ClockIcon className="w-5 h-5" />
+                  Ends On: {endDate}
+                </p>
+              )}
               <p className="flex gap-2 items-center text-customLightYellow text-md font-medium">
                 Detail
               </p>
@@ -83,24 +83,22 @@ function Ticket({
               {formatToRupiah(price)}
             </p>
 
-            {type !== TicketDetailEnum.CONCERT ? (
+            {type !== TicketDetailEnum.CONCERT && (
               <div className="flex items-center justify-center gap-4">
                 <button
-                  onClick={decreaseQuantity}
+                  onClick={onDecrease}
                   className="bg-customLightGrey text-customWhite text-xl rounded-full w-10 h-10 flex items-center justify-center"
                 >
                   -
                 </button>
                 <span className="text-customWhite text-xl">{quantity}</span>
                 <button
-                  onClick={increaseQuantity}
+                  onClick={onIncrease}
                   className="bg-customLightPurple text-customWhite text-xl rounded-full w-10 h-10 flex items-center justify-center"
                 >
                   +
                 </button>
               </div>
-            ) : (
-              ''
             )}
           </div>
         </div>
