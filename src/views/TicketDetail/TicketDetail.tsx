@@ -107,7 +107,6 @@ function TicketDetail() {
     setSelectedTicket(ticket);
   };
 
-
   return (
     <>
       <Helmet>
