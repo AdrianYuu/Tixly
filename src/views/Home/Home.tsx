@@ -12,7 +12,7 @@ import ConcertCard from '../../components/ConcertCard';
 import Button from '../../components/Button';
 import { TICKET_LIST } from '../../configs/TicketConfig';
 import { useUserContext } from '../../contexts/UserContext';
-import StarImage from '../../assets/images/star.png'
+import StarImage from '../../assets/images/star.png';
 
 function Home() {
   function onSubmit(query: string) {
@@ -26,7 +26,7 @@ function Home() {
         <title>Tixly | Home</title>
       </Helmet>
 
-      {user ? (
+      {!user ? (
         // Section 1 (Before Login)
         <>
           <motion.section
@@ -44,10 +44,10 @@ function Home() {
                 </span>
               </p>
               <p className="text-sm font-medium mb-8">
-                Why settle for ordinary ticketing when Tixly offers so much more?
-                From quick and easy ticket purchases to real-time event updates and
-                exclusive perks, we make sure your event journey is simple and
-                enjoyable.
+                Why settle for ordinary ticketing when Tixly offers so much
+                more? From quick and easy ticket purchases to real-time event
+                updates and exclusive perks, we make sure your event journey is
+                simple and enjoyable.
               </p>
               <InputBar
                 placeholder="where do you want to go?"
@@ -77,32 +77,37 @@ function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className={`absolute inset-0 w-96 h-96 bg-customGlowingThree opacity-10 rounded-full blur-2xl z-0 top-96 left-28`}></div>
-          <div className="w-full xl:w-1/2 xl:pe-10">
+          <div
+            className={`absolute inset-0 w-96 h-96 bg-customGlowingThree opacity-10 rounded-full blur-2xl z-0 top-96 left-28`}
+          ></div>
+          <div className="w-full xl:w-1/2 xl:pe-10 relative z-20">
             <p className="text-4xl font-bold mb-4 leading-normal">
               <span className="bg-gradient-to-r from-customLightPurple to-customLightYellow bg-clip-text text-transparent">
                 Catch Your Next Event
-              </span>, See Your<br /> 
+              </span>
+              , See Your
+              <br />
               Latest and Upcoming Tickets Here!
             </p>
-            <div className='w-full'>
+            <div className="flex gap-6 items-center">
               <Button
                 text="Shop More Tickets"
-                className="truncate px-20 py-4 mr-4"
+                className="truncate px-20 py-4"
               />
               <Button
                 text="View My Tickets"
                 className="truncate px-20 py-4"
-                type='transparent'
+                type="transparent"
               />
             </div>
           </div>
-
           <div className="relative w-[500px] h-[580px] top-10">
-            <div className={`absolute inset-0 w-[600px] h-[500px] bg-customGlowingTwo opacity-20 rounded-full blur-2xl z-0 top-30`}></div>
+            <div
+              className={`absolute inset-0 w-[600px] h-[500px] bg-customGlowingTwo opacity-20 rounded-full blur-2xl z-0 top-30`}
+            ></div>
             <div className="absolute inset-0 z-20 mx-20">
-              <ConcertCard 
-                ticket={TICKET_LIST[0]} 
+              <ConcertCard
+                ticket={TICKET_LIST[0]}
                 style="transform-gpu hover:scale-105 transition-transform duration-300"
               />
             </div>
@@ -112,15 +117,14 @@ function Home() {
                 style="transform-gpu translate-x-5 bottom-10 translate-y-5 opacity-60 rotate-3"
               />
             </div>
-            <img 
-              src={StarImage} 
-              alt="Star" 
-              className="absolute z-0 -bottom-24 opacity-80 left-1/2 transform -translate-x-1/2 w-[900px]" 
+            <img
+              src={StarImage}
+              alt="Star"
+              className="absolute z-0 -bottom-24 opacity-80 left-1/2 transform -translate-x-1/2 w-[900px]"
             />
           </div>
         </motion.section>
       )}
-
 
       {/* Section 3 */}
       <section className="flex w-full justify-center items-center mt-32">
