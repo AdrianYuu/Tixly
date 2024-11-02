@@ -6,11 +6,12 @@ import { formatDate, formatToRupiah } from '../lib/utils';
 
 interface IProps {
   ticket: ITicket;
+  style?: string;
 }
 
-function ConcertCard({ ticket }: IProps) {
+function ConcertCard({ ticket, style = "" }: IProps) {
   return (
-    <div className="bg-customDarkGrey rounded-3xl max-w-96">
+    <div className={`bg-customDarkGrey rounded-3xl max-w-96 ${style}`}>
       <img src={ticket.imageUrl} alt="" className="h-60 w-96 rounded-3xl" />
       <div className="pb-20 p-5 flex justify-between">
         <div>
