@@ -4,6 +4,7 @@ import IMovie from './IMovie';
 import ITouristAttraction from './ITouristAttraction';
 
 export interface ITicket {
+  id: string;
   name: string;
   description: string;
   imageUrl: string;

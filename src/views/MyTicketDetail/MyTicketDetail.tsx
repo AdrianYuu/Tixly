@@ -75,7 +75,7 @@ function MyTicketDetail() {
             <img src={QRCodeImage} alt="" className="w-80" />
           </div>
           <div className="mt-6">
-            <TermsAndCondition />
+            <TermsAndCondition useTitle={true} />
           </div>
         </div>
       </motion.section>
