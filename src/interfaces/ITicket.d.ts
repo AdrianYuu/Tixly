@@ -12,4 +12,5 @@ export interface ITicket {
   concert?: IConcert;
   movie?: IMovie;
   touristAttraction?: ITouristAttraction;
+  festival?: IFestival;
 }
