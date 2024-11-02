@@ -47,7 +47,7 @@ function Payment() {
             address={currentTicket.address}
             date={currentTicket.concert?.concertDate}
           />
-          <div className="flex flex-col-reverse items-center lg:flex-row justify-between gap-6 mt-12">
+          <div className="flex flex-col-reverse items-center lg:items-start lg:flex-row justify-between gap-6 mt-12">
             <div className="flex flex-col w-3/5">
               {paymentList.length > 0 ? (
                 paymentList.map((payment) => (
