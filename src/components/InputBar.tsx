@@ -27,7 +27,7 @@ function InputBar({
   }
 
   return (
-    <div className="w-full flex relative">
+    <div className="w-full flex flex-col gap-4 sm:relative">
       {haveIcon ? (
         <>
           <div className="flex items-center absolute left-5 top-6">
@@ -35,7 +35,7 @@ function InputBar({
           </div>
           <input
             type="text"
-            className="outline-none bg-customDarkGrey pl-12 pr-36 py-4 w-full rounded-full"
+            className="outline-none bg-customDarkGrey px-5 py-4 md:pe-36 w-full rounded-full"
             placeholder={placeholder}
             value={input}
             onChange={handleInputChange}
@@ -46,7 +46,7 @@ function InputBar({
           <div className="w-full flex relative">
             <input
               type="text"
-              className="outline-none bg-customDarkGrey ps-5 lg:pe-36 py-4 w-full rounded-full"
+              className="outline-none bg-customDarkGrey px-5 py-4 md:pe-36 w-full rounded-full"
               placeholder={placeholder}
               value={input}
               onChange={handleInputChange}
@@ -56,7 +56,7 @@ function InputBar({
       )}
       <Button
         text={buttonText}
-        className="px-4 py-4 absolute right-0 md:px-10"
+        className="px-6 py-4 sm:absolute sm:right-0 md:px-10"
         onClick={handleButtonClick}
       />
     </div>
