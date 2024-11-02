@@ -11,8 +11,8 @@ function FilterOptions({ activeFilter, onFilterChange }: IProps) {
   const filters = ['All', TicketEnum.CONCERT, TicketEnum.MOVIE, TicketEnum.TOURIST_ATTRACTION];
 
   return (
-    <div className="flex items-center gap-4 p-4 bg-gray-900">
-      <button className="p-2 border border-gray-500 rounded-full text-gray-400 focus:outline-none">
+    <div className="flex items-center gap-4 p-4 bg-customBlack">
+      <button className="p-2 border border-customLightGrey rounded-full text-customLightGrey focus:outline-none">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -34,10 +34,10 @@ function FilterOptions({ activeFilter, onFilterChange }: IProps) {
           <button
             key={filter}
             onClick={() => onFilterChange(filter)}
-            className={`px-6 py-2 rounded-full border ${
+            className={`w-28 py-2 rounded-full border ${
               activeFilter === filter
-                ? 'bg-yellow-500 text-gray-900 border-transparent'
-                : 'text-gray-400 border-gray-500'
+                ? 'bg-customLightYellow text-customBlack border-transparent'
+                : 'text-customLightGrey border-customLightGrey'
             }`}
           >
             {getFilterLabel(filter)}

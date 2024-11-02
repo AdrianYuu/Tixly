@@ -26,10 +26,10 @@ function Unauthorized() {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="text-center"
         >
-          <h1 className="text-4xl font-bold text-white mb-4">
+          <h1 className="text-4xl font-bold text-customWhite mb-4">
             Oops! You're Almost There!
           </h1>
-          <p className="text-gray-400 mb-8 max-w-md mx-auto">
+          <p className="text-customLightGrey mb-8 max-w-md mx-auto">
             Login to unlock all the fun and get full access to this page. Don't
             miss out login and dive right in
           </p>
