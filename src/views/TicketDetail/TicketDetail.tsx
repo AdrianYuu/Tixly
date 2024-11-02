@@ -1,11 +1,8 @@
 import { Helmet } from 'react-helmet-async';
-import TicketRectangle from '../../assets/images/festival-rectangle.png';
-import { CalendarDaysIcon, MapPinIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import DocumentIconImage from '../../assets/images/document-icon.png';
 import DocumentIconImage2 from '../../assets/images/document-icon-2.png';
 import LocationIconImage from '../../assets/images/location-icon.png';
-import VenueImage from '../../assets/images/venue.png';
 import VenueIconImage from '../../assets/images/venue-icon.png';
 import TicketIconImage from '../../assets/images/ticket-icon.png';
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
@@ -15,70 +12,13 @@ import TicketRedemption from '../../components/TicketRedemption';
 import Button from '../../components/Button';
 import Ticket from '../../components/Ticket';
 import { motion } from 'framer-motion';
-import ITicketDetail from '../../interfaces/ITicket';
 import { formatToRupiah } from '../../lib/utils';
-import TicketDetailEnum from '../../enums/TicketEnum';
 import { ITicketType } from '../../interfaces/IConcert';
+import { TICKET_LIST } from '../../configs/TicketConfig';
+import TicketBanner from '../../components/TicketBanner';
+import { Link } from 'react-router-dom';
 
-const ticketDetails: ITicketDetail[] = [
-  {
-    name: 'WATERBOMB 2024 JAKARTA',
-    description:
-      'A high-energy festival featuring top South Korean idols and local talent.',
-    image: TicketRectangle,
-    address: 'Phantom Ground Park, PIK 2',
-    ticketDetailType: TicketDetailEnum.CONCERT,
-    concert: {
-      concertDate: '2024-11-02',
-      concertTime: '14:00',
-      concertLocation: 'Phantom Ground Park, PIK 2',
-      venueImage: VenueImage,
-      ticketTypeCount: 3,
-      startingDatePeriod: '2024-09-01',
-      endDatePeriod: '2024-11-01',
-      ticketTypeList: [
-        { name: 'General Admission', price: 1400000, quotas: 500 },
-        { name: 'VIP Admission', price: 2500000, quotas: 200 },
-        { name: 'VVIP Admission', price: 4000000, quotas: 100 },
-      ],
-    },
-  },
-  {
-    name: 'Movie Night: The Greatest Showman',
-    description:
-      "Join us for a screening of 'The Greatest Showman' under the stars.",
-    image: 'path/to/movie-night-image.png',
-    address: 'Outdoor Cinema, PIK 2',
-    ticketDetailType: TicketDetailEnum.MOVIE,
-    movie: {
-      cinemaName: 'Outdoor Cinema',
-      cinemaLocation: 'PIK 2',
-      date: '2024-11-05',
-      time: '19:00',
-      theathreNumber: '1',
-      movieGenre: ['Musical', 'Drama'],
-      ratingAge: 'PG',
-      movieLanguage: 'English',
-      movieTrailer: 'url/to/trailer',
-      movieDuration: '105 mins',
-      movieDirector: 'Michael Gracey',
-      movieStars: ['Hugh Jackman', 'Michelle Williams', 'Zac Efron'],
-      ticketPrice: 'IDR 150,000',
-    },
-  },
-  {
-    name: 'Visit to Dreamland Waterpark',
-    description: 'A day of fun and excitement at Dreamland Waterpark.',
-    image: 'path/to/dreamland-image.png',
-    address: 'Dreamland, Bali',
-    ticketDetailType: TicketDetailEnum.TOURIST_ATTRACTION,
-    touristAttraction: {
-      ticketPrice: 'IDR 300,000',
-    },
-  },
-];
-
-const currentTicket = ticketDetails[0];
+const currentTicket = TICKET_LIST[0];
 
 function TicketDetail() {
   const [isInfoActive, setIsInfoActive] = useState<boolean>(true);
@@ -120,43 +60,14 @@ function TicketDetail() {
         transition={{ duration: 0.5 }}
       >
         <div className="flex flex-col px-16">
-          <div className="grid grid-cols-3">
-            {/* Image Section - 2/3 of the grid */}
+          <TicketBanner
+            image={currentTicket.imageUrl}
+            name={currentTicket.name}
+            address={currentTicket.address}
+            date={currentTicket.concert.endDatePeriod}
+          />
 
-            <div className="relative col-span-2 h-full">
-              <img
-                src={TicketRectangle}
-                alt="Product"
-                className="w-full h-56 lg:h-80 object-fit rounded-l-3xl border border-transparent"
-              />
-              <div className="absolute top-0 right-0 w-8 h-8 rounded-bl-full bg-customBlack clip-hole"></div>
-              <div className="absolute bottom-0 right-0 w-8 h-8 rounded-tl-full bg-customBlack clip-hole"></div>
-            </div>
-
-            {/* Text Section - 1/3 of the grid */}
-            <div className="relative h-56 lg:h-80 flex flex-col bg-customDarkGrey p-8 rounded-r-3xl col-span-1 items-start justify-center border border-none">
-              <div className="flex flex-col gap-4 text-start ml-6">
-                <p className="text-customWhite text-xl font-semibold">
-                  {currentTicket.name}
-                </p>
-
-                <div className="flex flex-col gap-2">
-                  <p className="flex gap-2 items-center text-customWhite text-md font-medium opacity-50">
-                    <MapPinIcon className="w-5 h-5" />
-                    {currentTicket.address}
-                  </p>
-                  <p className="flex gap-2 items-center text-customLightYellow text-md font-medium">
-                    <CalendarDaysIcon className="w-5 h-5" />
-                    {currentTicket.concert?.concertDate}
-                  </p>
-                </div>
-                <div className="absolute top-0 left-0 w-8 h-8 rounded-br-full bg-customBlack clip-hole"></div>
-                <div className="absolute bottom-0 left-0 w-8 h-8 rounded-tr-full bg-customBlack clip-hole"></div>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex mt-8 justify-between">
+          <div className="flex mt-8 justify-between lg:flex-row flex-col-reverse items-center lg:items-start">
             <div className="flex flex-col w-3/5">
               <div className="relative flex">
                 <button
@@ -310,7 +221,7 @@ function TicketDetail() {
                           )}
                         </div>
                       </div>
-                      {showTerms && <TermsAndCondition />}
+                      {showTerms && <TermsAndCondition useTitle={false} />}
                     </div>
 
                     {/* Ticket Redemption */}
@@ -347,10 +258,10 @@ function TicketDetail() {
                         ticketName={ticket.name}
                         endDate={currentTicket.concert?.endDatePeriod ?? '0'}
                         price={ticket.price}
-                        type={currentTicket.ticketDetailType}
+                        type={currentTicket.ticketType}
                         ticketType={ticket}
                         onClick={handleTicketSelect}
-                        isSelected={selectedTicket === ticket} // Pass selected state
+                        isSelected={selectedTicket === ticket}
                       />
                     ),
                   )
@@ -360,7 +271,7 @@ function TicketDetail() {
               </div>
             </div>
             {isInfoActive ? (
-              <div className="flex flex-col gap-4 bg-customDarkGrey p-10 rounded-3xl h-max w-max">
+              <div className="flex flex-col gap-4 bg-customDarkGrey p-10 rounded-3xl h-max w-max mb-6 lg:mb-0">
                 <p className="text-customWhite opacity-50 text-sm font-medium">
                   Start From,
                 </p>
@@ -377,7 +288,7 @@ function TicketDetail() {
                 />
               </div>
             ) : (
-              <div className="flex flex-col gap-4 bg-customDarkGrey p-10 rounded-3xl h-max w-max">
+              <div className="flex flex-col gap-4 bg-customDarkGrey p-10 rounded-3xl h-max w-max mb-6 lg:mb-0">
                 <p className="text-customWhite opacity-50 text-sm font-medium">
                   {selectedTicket
                     ? `${selectedTicket.name} - General Sale`
@@ -398,11 +309,22 @@ function TicketDetail() {
                       : 'IDR 0'}
                   </p>
                 </div>
-                <Button
-                  className="p-2 px-24"
-                  text="Buy Ticket"
-                  disabledState={!selectedTicket}
-                />
+                <Link
+                  to={{
+                    pathname: `/payment/${currentTicket.id}`,
+                    search: `?ticketName=${encodeURIComponent(
+                      selectedTicket?.name ?? 'a',
+                    )}&price=${selectedTicket?.price}&idTicket=${
+                      selectedTicket?.ticketTypeId
+                    }`,
+                  }}
+                >
+                  <Button
+                    className="p-2 px-24"
+                    text="Buy Ticket"
+                    disabledState={!selectedTicket}
+                  />
+                </Link>
               </div>
             )}
           </div>

@@ -9,7 +9,7 @@ function Button({ text = 'Button', className, onClick, disabledState }: IProps) 
   return (
     <button
       className={`text-customWhite font-medium rounded-full bg-gradient-to-r from-customLightPurple to-customDarkPurple 
-                  transition-all duration-300 hover:from-customDarkPurple hover:to-customLightPurple ${className}`}
+                  transition-all duration-300 hover:from-customDarkPurple hover:to-customLightPurple ${className} ${disabledState ? 'opacity-30 cursor-not-allowed': ''}`}
       onClick={!disabledState ? onClick : undefined}
       disabled={disabledState}
     >

@@ -23,6 +23,7 @@ export default {
         customGlowingTwo: '#7135BC',
         customGlowingThree: '#B6B373',
         customDarkPurpleV2: '#403541',
+        customSoLightPurple: '#CCA3FF',
       },
     },
   },

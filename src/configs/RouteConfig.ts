@@ -8,6 +8,7 @@ import routerMyTicket from '../views/MyTicket/MyTicket.router';
 import routerNotification from '../views/Notification/Notification.router';
 import routerMyTicketDetail from '../views/MyTicketDetail/MyTicketDetail.router';
 import routerTicketDetail from '../views/TicketDetail/TicketDetail.router';
+import routerPayment from '../views/Payment/Payment.router';
 
 const ROUTES: IDefaultRouter[] = [
   ...routerHome,
@@ -17,6 +18,7 @@ const ROUTES: IDefaultRouter[] = [
   ...routerNotification,
   ...routerMyTicketDetail,
   ...routerTicketDetail,
+  ...routerPayment,
 ];
 
 export default ROUTES;

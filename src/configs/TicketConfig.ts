@@ -1,29 +1,33 @@
 import TicketEnum from '../enums/TicketEnum';
 import { ITicket } from '../interfaces/ITicket';
+import DummyConcerBannerImage from '../assets/images/festival-rectangle.png';
+import VenueImage from '../assets/images/venue.png';
 
 export const TICKET_LIST: ITicket[] = [
   // Dummy Concert Tickets
   {
+    id: '1',
     name: 'Rock Concert',
     description: 'Join us for an amazing night of rock music!',
-    imageUrl: '../assets/images/dummy-image.png',
+    imageUrl: DummyConcerBannerImage,
     address: '123 Rock St, Music City',
     ticketType: TicketEnum.CONCERT,
     concert: {
       concertDate: '2024-12-01',
       concertTime: '20:00',
       concertLocation: 'Music Arena',
-      venueImage: '../assets/images/dummy-image.png',
+      venueImage: VenueImage,
       ticketTypeCount: 100,
       startingDatePeriod: '2024-10-01',
       endDatePeriod: '2024-11-30',
       ticketTypeList: [
-        { name: 'VIP', price: 150, quotas: 50 },
-        { name: 'General', price: 70, quotas: 50 },
+        { ticketTypeId: '1', name: 'General', price: 70, quotas: 50 },
+        { ticketTypeId: '2', name: 'VIP', price: 150, quotas: 50 },
       ],
     },
   },
   {
+    id: '2',
     name: 'Jazz Night',
     description: 'Experience the smooth sounds of jazz.',
     imageUrl: '../assets/images/dummy-image.png',
@@ -38,12 +42,13 @@ export const TICKET_LIST: ITicket[] = [
       startingDatePeriod: '2024-10-05',
       endDatePeriod: '2024-11-30',
       ticketTypeList: [
-        { name: 'Front Row', price: 120, quotas: 20 },
-        { name: 'Standard', price: 50, quotas: 60 },
+        { ticketTypeId: '1', name: 'Front Row', price: 120, quotas: 20 },
+        { ticketTypeId: '2', name: 'Standard', price: 50, quotas: 60 },
       ],
     },
   },
   {
+    id: '3',
     name: 'Classical Evening',
     description: 'An evening of classical music by renowned artists.',
     imageUrl: '../assets/images/dummy-image.png',
@@ -58,12 +63,13 @@ export const TICKET_LIST: ITicket[] = [
       startingDatePeriod: '2024-10-10',
       endDatePeriod: '2024-12-01',
       ticketTypeList: [
-        { name: 'Orchestra', price: 140, quotas: 30 },
-        { name: 'Balcony', price: 60, quotas: 90 },
+        { ticketTypeId: '1', name: 'Orchestra', price: 140, quotas: 30 },
+        { ticketTypeId: '2', name: 'Balcony', price: 60, quotas: 90 },
       ],
     },
   },
   {
+    id: '4',
     name: 'Pop Concert',
     description: 'Catch your favorite pop stars live!',
     imageUrl: '../assets/images/dummy-image.png',
@@ -78,14 +84,20 @@ export const TICKET_LIST: ITicket[] = [
       startingDatePeriod: '2024-10-15',
       endDatePeriod: '2024-12-10',
       ticketTypeList: [
-        { name: 'Front Row', price: 180, quotas: 40 },
-        { name: 'General Admission', price: 75, quotas: 110 },
+        { ticketTypeId: '1', name: 'Front Row', price: 180, quotas: 40 },
+        {
+          ticketTypeId: '2',
+          name: 'General Admission',
+          price: 75,
+          quotas: 110,
+        },
       ],
     },
   },
 
   // Dummy Movie Tickets
   {
+    id: '5',
     name: 'Avengers: Endgame',
     description: 'The epic conclusion to the Marvel saga.',
     imageUrl: '../assets/images/dummy-image.png',
@@ -108,6 +120,7 @@ export const TICKET_LIST: ITicket[] = [
     },
   },
   {
+    id: '6',
     name: 'The Lion King',
     description: "Experience the circle of life with Disney's classic.",
     imageUrl: '../assets/images/dummy-image.png',
@@ -130,6 +143,7 @@ export const TICKET_LIST: ITicket[] = [
     },
   },
   {
+    id: '7',
     name: 'Inception',
     description:
       'A mind-bending thriller that will leave you questioning reality.',
@@ -153,6 +167,7 @@ export const TICKET_LIST: ITicket[] = [
     },
   },
   {
+    id: '8',
     name: 'Frozen II',
     description: 'Join Anna and Elsa on a new adventure.',
     imageUrl: '../assets/images/dummy-image.png',
@@ -177,6 +192,7 @@ export const TICKET_LIST: ITicket[] = [
 
   // Dummy Tourist Attraction Tickets
   {
+    id: '9',
     name: 'Eiffel Tower',
     description: 'Visit the iconic Eiffel Tower in Paris.',
     imageUrl: '../assets/images/dummy-image.png',
@@ -187,6 +203,7 @@ export const TICKET_LIST: ITicket[] = [
     },
   },
   {
+    id: '10',
     name: 'Louvre Museum',
     description: "Explore the world's largest art museum.",
     imageUrl: '../assets/images/dummy-image.png',
@@ -197,6 +214,7 @@ export const TICKET_LIST: ITicket[] = [
     },
   },
   {
+    id: '11',
     name: 'Grand Canyon',
     description: 'Experience the natural wonder of the Grand Canyon.',
     imageUrl: '../assets/images/dummy-image.png',
@@ -207,6 +225,7 @@ export const TICKET_LIST: ITicket[] = [
     },
   },
   {
+    id: '12',
     name: 'Statue of Liberty',
     description: 'Visit the historic Statue of Liberty in New York.',
     imageUrl: '../assets/images/dummy-image.png',
