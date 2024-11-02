@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface SortOptionsProps {
+interface IProps {
   onSortChange: (sortBy: string) => void;
 }
 
-const SortOptions: React.FC<SortOptionsProps> = ({ onSortChange }) => {
+function SortOptions({ onSortChange }: IProps) {
   return (
     <div className="flex items-center justify-end p-4 gap-2">
       <span className="text-gray-400">Sort By:</span>

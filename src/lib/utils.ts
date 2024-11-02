@@ -1,3 +1,5 @@
+import TicketEnum from "../enums/TicketEnum";
+
 export function formatToRupiah(value: number | string | undefined) {
   if (value === undefined) {
     return '0';
@@ -103,4 +105,19 @@ export function isToday(strDate: string): boolean {
     targetDate.getMonth() === now.getMonth() &&
     targetDate.getFullYear() === now.getFullYear()
   );
+}
+
+export function getFilterLabel(filter: string) {
+  switch (filter) {
+    case 'All':
+      return 'All';
+    case TicketEnum.CONCERT:
+      return 'Concert';
+    case TicketEnum.MOVIE:
+      return 'Movie';
+    case TicketEnum.TOURIST_ATTRACTION:
+      return 'Attraction';
+    default:
+      return filter;
+  }
 }

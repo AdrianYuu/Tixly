@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import Button from './Button';
 import UnauthorizedImage from '../assets/images/unauthorized.png';
 
-const Unauthorized = () => {
+function Unauthorized() {
   return (
     <div className="min-h-screen relative overflow-hidden">
       <div className="absolute w-[600px] h-[500px] bg-customGlowingThree opacity-10 rounded-full blur-2xl -left-48 top-72 transform -translate-y-1/2" />
@@ -44,6 +44,6 @@ const Unauthorized = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Unauthorized;

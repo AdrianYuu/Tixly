@@ -1,28 +1,14 @@
 import React from 'react';
 import TicketEnum from '../enums/TicketEnum';
+import { getFilterLabel } from '../lib/utils';
 
-interface FilterOptionsProps {
+interface IProps {
   activeFilter: string;
   onFilterChange: (filter: string) => void;
 }
 
-const FilterOptions: React.FC<FilterOptionsProps> = ({ activeFilter, onFilterChange }) => {
+function FilterOptions({ activeFilter, onFilterChange }: IProps) {
   const filters = ['All', TicketEnum.CONCERT, TicketEnum.MOVIE, TicketEnum.TOURIST_ATTRACTION];
-
-  const getFilterLabel = (filter: string) => {
-    switch (filter) {
-      case 'All':
-        return 'All';
-      case TicketEnum.CONCERT:
-        return 'Concert';
-      case TicketEnum.MOVIE:
-        return 'Movie';
-      case TicketEnum.TOURIST_ATTRACTION:
-        return 'Attraction';
-      default:
-        return filter;
-    }
-  };
 
   return (
     <div className="flex items-center gap-4 p-4 bg-gray-900">
