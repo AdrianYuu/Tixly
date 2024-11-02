@@ -2,6 +2,7 @@ import { CurrencyDollarIcon, WalletIcon } from '@heroicons/react/24/solid';
 import PaymentTypeEnum from '../enums/PaymentTypeEnum';
 import { formatToRupiah } from '../lib/utils';
 import IPaymentType from '../interfaces/IPaymentType';
+import QrCodeImage from '../assets/images/qr-code.png';
 
 interface IProps {
   payment: IPaymentType;
@@ -53,6 +54,12 @@ function PaymentType({ payment, onClick, isSelected }: IProps) {
           ''
         )}
       </div>
+
+      {isSelected && payment.type === PaymentTypeEnum.QRIS && (
+        <div className="flex mt-4 justify-center">
+          <img src={QrCodeImage} alt="QRIS Barcode" className="w-full max-w-xs" />
+        </div>
+      )}
     </div>
   );
 }
