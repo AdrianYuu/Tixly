@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 
-interface SearchBarProps {
+interface IProps {
   onSearch: (query: string) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+function SearchBar({ onSearch }: IProps) {
   const [query, setQuery] = useState('');
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
     setQuery(event.target.value);
     onSearch(event.target.value);
-  };
+  }
 
   return (
     <div className="p-4">
@@ -37,6 +37,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       </div>
     </div>
   );
-};
+}
 
 export default SearchBar;

@@ -1,12 +1,12 @@
 import React from 'react';
 
-interface PaginationProps {
+interface IProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPageChange }) => {
+function Pagination({ currentPage, totalPages, onPageChange }: IProps) {
   return (
     <div className="flex justify-center items-center p-4 gap-4 text-gray-400">
       {[...Array(totalPages)].map((_, index) => (

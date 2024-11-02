@@ -7,7 +7,7 @@ import Pagination from '../../components/Pagination';
 import { TICKET_LIST } from '../../configs/TicketConfig';
 import { ITicket } from '../../interfaces/ITicket';
 
-const Tickets: React.FC = () => {
+function Tickets() {
   const [activeFilter, setActiveFilter] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortOption, setSortOption] = useState<string>('date');
