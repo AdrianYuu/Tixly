@@ -5,8 +5,8 @@ import { ITicket } from '../interfaces/ITicket';
 import { TICKET_LIST } from '../configs/TicketConfig';
 
 interface IProps {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   ticketType: TicketEnum;
 }
 
