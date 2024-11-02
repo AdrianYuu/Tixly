@@ -14,9 +14,9 @@ function SearchBar({ onSearch }: IProps) {
 
   return (
     <div className="p-4">
-      <div className="relative flex items-center text-gray-300">
+      <div className="relative flex items-center text-customLightGrey">
         <svg
-          className="absolute left-4 w-5 h-5 text-gray-400"
+          className="absolute left-4 w-5 h-5 text-customLightGrey"
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -29,10 +29,10 @@ function SearchBar({ onSearch }: IProps) {
         </svg>
         <input
           type="text"
-          placeholder="Where do you want to go?"
+          placeholder="where do you want to go?"
           value={query}
           onChange={handleSearch}
-          className="w-full p-3 pl-12 rounded-3xl text-gray-300 bg-gray-700 placeholder-gray-500 focus:outline-none"
+          className="w-full p-3 pl-12 rounded-3xl text-customLightGrey bg-customDarkGrey placeholder-customLightGrey focus:outline-none"
         />
       </div>
     </div>

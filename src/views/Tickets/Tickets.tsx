@@ -39,7 +39,7 @@ function Tickets() {
   }, [activeFilter, searchQuery, sortOption]);
 
   return (
-    <div className="min-h-screen bg-customBlack text-white p-4">
+    <div className="min-h-screen bg-customBlack text-customWhite p-4">
       <SearchBar onSearch={setSearchQuery} />
       
       <div className="flex justify-between items-center mb-6">
@@ -47,7 +47,7 @@ function Tickets() {
         <SortOptions onSortChange={setSortOption} />
       </div>
       
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4">
         {paginatedTickets.map((ticket, index) => (
           <TicketCard key={index} ticket={ticket} />
         ))}

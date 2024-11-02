@@ -8,15 +8,15 @@ interface IProps {
 
 function Pagination({ currentPage, totalPages, onPageChange }: IProps) {
   return (
-    <div className="flex justify-center items-center p-4 gap-4 text-gray-400">
+    <div className="flex justify-center items-center p-4 gap-4 text-customLightGrey">
       {[...Array(totalPages)].map((_, index) => (
         <button
           key={index}
           onClick={() => onPageChange(index + 1)}
           className={`px-2 py-1 ${
             currentPage === index + 1
-              ? 'text-yellow-400 underline'
-              : 'text-gray-400'
+              ? 'text-customLightYellow underline'
+              : 'text-customLightGrey'
           }`}
         >
           {index + 1}
