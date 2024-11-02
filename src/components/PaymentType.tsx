@@ -25,16 +25,16 @@ function PaymentType({ payment, onClick, isSelected }: IProps) {
       <div className="flex items-center justify-between">
         <div className="flex gap-4 items-center">
           {payment.type === PaymentTypeEnum.WALLET ? (
-            <WalletIcon className="w-10 h-10 text-customSoLightPurple" />
+            <WalletIcon className={`w-10 h-10 ${isSelected ? 'text-customSoLightPurple' : 'text-customWhite' }`} />
           ) : (
-            <CurrencyDollarIcon className="w-10 h-10 text-customSoLightPurple" />
+            <CurrencyDollarIcon className={`w-10 h-10 ${isSelected ? 'text-customSoLightPurple' : 'text-customWhite' }`} />
           )}
 
           <div className="flex flex-col">
             {payment.type === PaymentTypeEnum.WALLET ? (
               <>
                 <p>My {PaymentTypeEnum.WALLET}</p>
-                <p className="text-xl text-customSoLightPurple font-medium">
+                <p className={`text-xl ${isSelected ? 'text-customSoLightPurple' : 'text-customWhite' } font-medium`}>
                   {formatToRupiah(payment.balance)}
                 </p>
               </>

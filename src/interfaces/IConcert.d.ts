@@ -1,5 +1,5 @@
 interface ITicketType {
-  ticketTypeId: string;
+  id: string;
   name: string;
   price: number;
   quotas: number;

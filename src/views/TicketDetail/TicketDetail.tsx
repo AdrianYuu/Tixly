@@ -291,7 +291,7 @@ function TicketDetail() {
               <div className="flex flex-col gap-4 bg-customDarkGrey p-10 rounded-3xl h-max w-max mb-6 lg:mb-0">
                 <p className="text-customWhite opacity-50 text-sm font-medium">
                   {selectedTicket
-                    ? `${selectedTicket.name} - General Sale`
+                    ? `${selectedTicket.name}`
                     : 'Select a Ticket'}
                 </p>
                 <div className="flex justify-between text-customWhite opacity-50 text-sm">
@@ -314,9 +314,7 @@ function TicketDetail() {
                     pathname: `/payment/${currentTicket.id}`,
                     search: `?ticketName=${encodeURIComponent(
                       selectedTicket?.name ?? 'a',
-                    )}&price=${selectedTicket?.price}&idTicket=${
-                      selectedTicket?.ticketTypeId
-                    }`,
+                    )}&price=${selectedTicket?.price}&id=${selectedTicket?.id}`,
                   }}
                 >
                   <Button

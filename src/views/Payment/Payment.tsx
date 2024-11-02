@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link, useLocation, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import PaymentBanner from '../../components/PaymentBanner';
 import { TICKET_LIST } from '../../configs/TicketConfig';
@@ -11,11 +10,10 @@ import { formatToRupiah } from '../../lib/utils';
 import Button from '../../components/Button';
 
 function Payment() {
-  const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const ticketName = queryParams.get('ticketName');
   const price = queryParams.get('price');
-  const idTicket = queryParams.get('idTicket');
+  const id = queryParams.get('id');
   const [selectedPayment, setSelectedPayment] = useState<IPaymentType | null>(
     null,
   );
@@ -28,12 +26,20 @@ function Payment() {
     setSelectedPayment(payment);
   };
 
+  const handleBuyTicket = () => {
+    console.log("Event/Movie/Attraction ID: ", currentTicket.id)
+    console.log("Ticket Name: ", ticketName)
+    console.log("Ticket ID {for concert only}: ", id)
+    console.log("Name: ", currentTicket.name)
+    console.log("Selected Payment:", selectedPayment?.type ?? "")
+  }
+
   return (
     <>
       <Helmet>
         <title>Tixly | Payment</title>
       </Helmet>
-
+      
       <motion.section
         className="flex flex-col gap-2 px-16 mt-12"
         initial={{ opacity: 0, y: -20 }}
@@ -80,6 +86,7 @@ function Payment() {
                 className="p-2 px-24"
                 text="Buy Ticket"
                 disabledState={!selectedPayment}
+                onClick={handleBuyTicket}
               />
             </div>
           </div>

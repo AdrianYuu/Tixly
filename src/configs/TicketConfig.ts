@@ -21,8 +21,8 @@ export const TICKET_LIST: ITicket[] = [
       startingDatePeriod: '2024-10-01',
       endDatePeriod: '2024-11-30',
       ticketTypeList: [
-        { ticketTypeId: '1', name: 'General', price: 70, quotas: 50 },
-        { ticketTypeId: '2', name: 'VIP', price: 150, quotas: 50 },
+        { id: '1', name: 'General', price: 70, quotas: 50 },
+        { id: '2', name: 'VIP', price: 150, quotas: 50 },
       ],
     },
   },
@@ -42,8 +42,8 @@ export const TICKET_LIST: ITicket[] = [
       startingDatePeriod: '2024-10-05',
       endDatePeriod: '2024-11-30',
       ticketTypeList: [
-        { ticketTypeId: '1', name: 'Front Row', price: 120, quotas: 20 },
-        { ticketTypeId: '2', name: 'Standard', price: 50, quotas: 60 },
+        { id: '1', name: 'Front Row', price: 120, quotas: 20 },
+        { id: '2', name: 'Standard', price: 50, quotas: 60 },
       ],
     },
   },
@@ -63,8 +63,8 @@ export const TICKET_LIST: ITicket[] = [
       startingDatePeriod: '2024-10-10',
       endDatePeriod: '2024-12-01',
       ticketTypeList: [
-        { ticketTypeId: '1', name: 'Orchestra', price: 140, quotas: 30 },
-        { ticketTypeId: '2', name: 'Balcony', price: 60, quotas: 90 },
+        { id: '1', name: 'Orchestra', price: 140, quotas: 30 },
+        { id: '2', name: 'Balcony', price: 60, quotas: 90 },
       ],
     },
   },
@@ -84,9 +84,9 @@ export const TICKET_LIST: ITicket[] = [
       startingDatePeriod: '2024-10-15',
       endDatePeriod: '2024-12-10',
       ticketTypeList: [
-        { ticketTypeId: '1', name: 'Front Row', price: 180, quotas: 40 },
+        { id: '1', name: 'Front Row', price: 180, quotas: 40 },
         {
-          ticketTypeId: '2',
+          id: '2',
           name: 'General Admission',
           price: 75,
           quotas: 110,
