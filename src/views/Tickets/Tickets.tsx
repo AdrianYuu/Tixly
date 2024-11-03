@@ -56,7 +56,6 @@ function Tickets() {
   return (
     <div className="min-h-screen bg-customBlack text-customWhite p-4">
       <SearchBar onSearch={setSearchQuery} />
-
       <div className="flex justify-between items-center mb-4">
         <div className="hidden md:block">
           <FilterOptions

@@ -15,10 +15,11 @@ import { useUserContext } from '../../contexts/UserContext';
 import StarImage from '../../assets/images/star.png';
 
 function Home() {
+  const { user } = useUserContext();
+
   function onSubmit(query: string) {
     // Handle when search button clicked.
   }
-  const { user } = useUserContext();
 
   return (
     <>
