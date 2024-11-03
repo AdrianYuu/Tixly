@@ -16,11 +16,19 @@ body {
 }
 
 li::marker {
-  color: #F0EC8B;
+  color: #f0ec8b;
 }
 
 @layer utilities {
   .clip-hole {
     clip-path: inset(0 0 0 0);
   }
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+input[type='file'] {
+  display: hidden;
 }

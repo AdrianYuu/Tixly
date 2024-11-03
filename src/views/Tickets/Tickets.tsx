@@ -55,7 +55,10 @@ function Tickets() {
 
   return (
     <div className="min-h-screen bg-customBlack text-customWhite p-4">
-      <SearchBar onSearch={setSearchQuery} placeholder={'where you want to go?'} />
+      <SearchBar
+        onSearch={setSearchQuery}
+        placeholder={'where you want to go?'}
+      />
       <div className="flex justify-between items-center mb-4">
         <div className="hidden md:block">
           <FilterOptions
