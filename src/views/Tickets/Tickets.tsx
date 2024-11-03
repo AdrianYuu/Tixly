@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import TicketCard from '../../components/TicketCard';
 import FilterOptions from '../../components/FilterOptions';
 import SearchBar from '../../components/SearchBar';
@@ -70,17 +70,17 @@ function Tickets() {
           <SortOptions onSortChange={setSortOption} />
         </div>
       </div>
-      <div className="md:hidden mb-4 flex justify-start ml-2">
+      <div className="md:hidden mb-4 flex lg:justify-start ml-2 justify-center">
         <FilterOptions
           activeFilter={activeFilter}
           onFilterChange={setActiveFilter}
         />
       </div>
-      <div className="md:hidden mb-4 flex justify-start">
+      <div className="md:hidden mb-8 flex lg:justify-start justify-center">
         <SortOptions onSortChange={setSortOption} />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-4 place-items-center">
         {paginatedTickets.map((ticket, index) => (
           <TicketCard key={index} ticket={ticket} />
         ))}

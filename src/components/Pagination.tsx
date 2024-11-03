@@ -1,5 +1,4 @@
-import React from 'react';
-import ArrowImage from '../assets/images/arrow.png'; // Adjust the path to arrow.png based on your folder structure
+import ArrowImage from '../assets/images/arrow.png';
 
 interface IProps {
   currentPage: number;
