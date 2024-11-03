@@ -1,4 +1,5 @@
 import React from 'react';
+import ArrowImage from '../assets/images/arrow.png'; // Adjust the path to arrow.png based on your folder structure
 
 interface IProps {
   currentPage: number;
@@ -26,18 +27,13 @@ function Pagination({ currentPage, totalPages, onPageChange }: IProps) {
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-2 rounded-full bg-gray-700 text-gray-300 disabled:opacity-50 focus:outline-none"
+        className="p-2 rounded-full text-gray-300 disabled:opacity-50 focus:outline-none"
       >
-        <svg
-          className="w-5 h-5"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
+        <img
+          src={ArrowImage}
+          alt="Next Page"
+          className="w-10 h-10"
+        />
       </button>
     </div>
   );

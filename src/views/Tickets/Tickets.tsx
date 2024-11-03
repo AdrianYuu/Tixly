@@ -55,16 +55,25 @@ function Tickets() {
 
   return (
     <div className="min-h-screen bg-customBlack text-customWhite p-4">
-      <SearchBar
-        onSearch={setSearchQuery}
-        placeholder="where do you want to go?"
-      />
-
-      <div className="flex justify-between items-center mb-6">
+      <SearchBar onSearch={setSearchQuery} />
+      <div className="flex justify-between items-center mb-4">
+        <div className="hidden md:block">
+          <FilterOptions
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+          />
+        </div>
+        <div className="hidden md:block">
+          <SortOptions onSortChange={setSortOption} />
+        </div>
+      </div>
+      <div className="md:hidden mb-4 flex justify-start ml-2">
         <FilterOptions
           activeFilter={activeFilter}
           onFilterChange={setActiveFilter}
         />
+      </div>
+      <div className="md:hidden mb-4 flex justify-start">
         <SortOptions onSortChange={setSortOption} />
       </div>
 
