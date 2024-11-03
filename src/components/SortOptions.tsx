@@ -6,7 +6,7 @@ interface IProps {
 
 function SortOptions({ onSortChange }: IProps) {
   return (
-    <div className="flex items-center justify-end p-4 gap-2">
+    <div className="flex items-center justify-end px-4 gap-2">
       <span className="text-customLightGrey">Sort By:</span>
       
       <div className="relative">

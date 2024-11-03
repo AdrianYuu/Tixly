@@ -15,24 +15,39 @@ function Tickets() {
   const [ticketsPerPage] = useState<number>(8);
 
   const filteredTickets = TICKET_LIST.filter((ticket: ITicket) => {
-    const matchesFilter = activeFilter === 'All' || ticket.ticketType === activeFilter;
-    const matchesSearch = ticket.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesFilter =
+      activeFilter === 'All' || ticket.ticketType === activeFilter;
+    const matchesSearch = ticket.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
     return matchesFilter && matchesSearch;
   });
 
   const sortedTickets = [...filteredTickets].sort((a, b) => {
     if (sortOption === 'priceLowToHigh') {
-      return (a.concert?.ticketTypeList[0].price || 0) - (b.concert?.ticketTypeList[0].price || 0);
+      return (
+        (a.concert?.ticketTypeList[0].price || 0) -
+        (b.concert?.ticketTypeList[0].price || 0)
+      );
     } else if (sortOption === 'priceHighToLow') {
-      return (b.concert?.ticketTypeList[0].price || 0) - (a.concert?.ticketTypeList[0].price || 0);
+      return (
+        (b.concert?.ticketTypeList[0].price || 0) -
+        (a.concert?.ticketTypeList[0].price || 0)
+      );
     } else if (sortOption === 'date') {
-      return new Date(a.concert?.concertDate || '').getTime() - new Date(b.concert?.concertDate || '').getTime();
+      return (
+        new Date(a.concert?.concertDate || '').getTime() -
+        new Date(b.concert?.concertDate || '').getTime()
+      );
     }
     return 0;
   });
 
   const totalPages = Math.ceil(sortedTickets.length / ticketsPerPage);
-  const paginatedTickets = sortedTickets.slice((currentPage - 1) * ticketsPerPage, currentPage * ticketsPerPage);
+  const paginatedTickets = sortedTickets.slice(
+    (currentPage - 1) * ticketsPerPage,
+    currentPage * ticketsPerPage,
+  );
 
   useEffect(() => {
     setCurrentPage(1);
@@ -41,22 +56,42 @@ function Tickets() {
   return (
     <div className="min-h-screen bg-customBlack text-customWhite p-4">
       <SearchBar onSearch={setSearchQuery} />
-      
-      <div className="flex justify-between items-center mb-6">
-        <FilterOptions activeFilter={activeFilter} onFilterChange={setActiveFilter} />
+
+      <div className="flex justify-between items-center mb-4">
+        <div className="hidden md:block">
+          <FilterOptions
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+          />
+        </div>
+        <div className="hidden md:block">
+          <SortOptions onSortChange={setSortOption} />
+        </div>
+      </div>
+      <div className="md:hidden mb-4 flex justify-start ml-2">
+        <FilterOptions
+          activeFilter={activeFilter}
+          onFilterChange={setActiveFilter}
+        />
+      </div>
+      <div className="md:hidden mb-4 flex justify-start">
         <SortOptions onSortChange={setSortOption} />
       </div>
-      
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-4">
         {paginatedTickets.map((ticket, index) => (
           <TicketCard key={index} ticket={ticket} />
         ))}
       </div>
-      
+
       <br />
-      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
-};
+}
 
 export default Tickets;

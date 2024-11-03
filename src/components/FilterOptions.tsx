@@ -1,6 +1,7 @@
 import React from 'react';
 import TicketEnum from '../enums/TicketEnum';
 import { getFilterLabel } from '../lib/utils';
+import FilterImage from '../assets/images/filter.png';
 
 interface IProps {
   activeFilter: string;
@@ -8,33 +9,29 @@ interface IProps {
 }
 
 function FilterOptions({ activeFilter, onFilterChange }: IProps) {
-  const filters = ['All', TicketEnum.CONCERT, TicketEnum.MOVIE, TicketEnum.TOURIST_ATTRACTION];
+  const filters = [
+    'All',
+    TicketEnum.CONCERT,
+    TicketEnum.MOVIE,
+    TicketEnum.TOURIST_ATTRACTION,
+  ];
 
   return (
-    <div className="flex items-center gap-4 p-4 bg-customBlack">
-      <button className="p-2 border border-customLightGrey rounded-full text-customLightGrey focus:outline-none">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="w-5 h-5"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3.75 12a8.25 8.25 0 0116.5 0m-8.25-8.25a8.25 8.25 0 110 16.5M8.625 12c0-1.5 1.125-2.625 2.625-2.625S14.25 10.5 14.25 12s-1.125 2.625-2.625 2.625S8.625 13.5 8.625 12z"
-          />
-        </svg>
+    <div className="flex items-center gap-2 p-2 md:gap-4 md:p-4 bg-customBlack">
+      <button className="hidden md:block p-1 md:p-2 text-customLightGrey focus:outline-none">
+        <img
+          src={FilterImage}
+          alt="Filter"
+          className="w-10 h-10"
+        />
       </button>
 
-      <div className="flex gap-4">
+      <div className="flex gap-2 md:gap-4">
         {filters.map((filter) => (
           <button
             key={filter}
             onClick={() => onFilterChange(filter)}
-            className={`w-28 py-2 rounded-full border ${
+            className={`px-3 py-1 md:px-4 md:py-2 text-sm md:text-base rounded-full border ${
               activeFilter === filter
                 ? 'bg-customLightYellow text-customBlack border-transparent'
                 : 'text-customLightGrey border-customLightGrey'
@@ -46,6 +43,6 @@ function FilterOptions({ activeFilter, onFilterChange }: IProps) {
       </div>
     </div>
   );
-};
+}
 
 export default FilterOptions;
