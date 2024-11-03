@@ -9,8 +9,8 @@ import Button from './Button';
 import { NAVBAR_ROUTES } from '../configs/NavbarRouteConfig';
 
 function Navbar() {
-  const [isOpen, setOpen] = useState<boolean>(false);
   const { user } = useUserContext();
+  const [isOpen, setOpen] = useState<boolean>(false);
 
   function toggleOpen() {
     setOpen((prev) => !prev);
@@ -69,7 +69,7 @@ function Navbar() {
 
       {/* Dropdown Navbar */}
       <div
-        className={`absolute top-24 bg-customBlack ps-20 left-0 w-full pb-6 shadow-lg rounded-lg p-2 xl:hidden transition-transform duration-300 ease-in-out transform ${
+        className={`absolute top-20 bg-customBlack ps-20 left-0 w-full pb-6 shadow-lg rounded-lg p-2 xl:hidden transition-transform duration-300 ease-in-out transform ${
           isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
         }`}
       >
