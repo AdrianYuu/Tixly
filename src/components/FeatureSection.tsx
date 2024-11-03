@@ -3,6 +3,8 @@ import TicketEnum from '../enums/TicketEnum';
 import TicketCard from './TicketCard';
 import { ITicket } from '../interfaces/ITicket';
 import { TICKET_LIST } from '../configs/TicketConfig';
+import ArrowRightYellowImage from '../assets/images/arrow-right-yellow.png';
+import { Link } from 'react-router-dom';
 
 interface IProps {
   title?: string;
@@ -25,10 +27,21 @@ function FeatureSection({ title, description, ticketType }: IProps) {
         {title}
       </span>
       <p className="text-sm font-medium mt-4 text-center px-8">{description}</p>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-16 px-16">
-        {tickets.map((ticket, index) => (
-          <TicketCard key={index} ticket={ticket} />
-        ))}
+      <div className="mt-16 flex flex-col gap-4">
+        <Link
+          to="/tickets"
+          className="flex items-center gap-2 justify-end pe-16 cursor-pointer"
+        >
+          <p className="text-base font-semibold hover:underline underline-offset-4 text-customLightYellow">
+            See All
+          </p>
+          <img src={ArrowRightYellowImage} alt="" className="w-5 h-5" />
+        </Link>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-16 ">
+          {tickets.map((ticket, index) => (
+            <TicketCard key={index} ticket={ticket} />
+          ))}
+        </div>
       </div>
     </section>
   );

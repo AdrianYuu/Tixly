@@ -25,6 +25,8 @@ export default {
         customDarkPurpleV2: '#403541',
         customSoLightPurple: '#CCA3FF',
         customLightRed: '#FF9797',
+        customDarkGreyV2: '#424242',
+        customPlaceHolder: '#6A6A6A',
       },
     },
   },

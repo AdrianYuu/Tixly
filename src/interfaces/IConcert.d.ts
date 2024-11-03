@@ -1,8 +1,8 @@
-interface ITicketType {
-  id: string;
+export interface ITicketType {
+  id?: string;
   name: string;
   price: string;
-  quotas: number;
+  capacity: string;
 }
 
 export interface IConcert {

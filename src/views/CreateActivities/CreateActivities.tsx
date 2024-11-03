@@ -8,7 +8,7 @@ import MovieForm from '../../components/forms/MovieForm';
 import AttractionForm from '../../components/forms/AttractionForm';
 
 function CreateActivities() {
-  const [chosenIndex, setChosenIndex] = useState<number>(0);
+  const [chosenIndex, setChosenIndex] = useState<number | null>(-1);
 
   return (
     <>
@@ -42,7 +42,7 @@ function CreateActivities() {
       </motion.section>
 
       <motion.section
-        className="relative flex md:flex-row flex-col items-center justify-center mt-24 text-customWhite px-10 gap-10"
+        className="relative flex md:flex-row flex-col items-center justify-center mt-20 text-customWhite px-10 gap-10"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

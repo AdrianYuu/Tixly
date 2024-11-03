@@ -19,7 +19,7 @@ import TicketBanner from '../../components/TicketBanner';
 import { Link } from 'react-router-dom';
 import TicketEnum from '../../enums/TicketEnum';
 
-const currentTicket = TICKET_LIST[11];
+const currentTicket = TICKET_LIST[0];
 
 function TicketDetail() {
   const [isInfoActive, setIsInfoActive] = useState<boolean>(true);
