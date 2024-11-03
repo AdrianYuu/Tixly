@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 
 interface IProps {
   onSearch: (query: string) => void;
+  placeholder: string;
 }
 
-function SearchBar({ onSearch }: IProps) {
-  const [query, setQuery] = useState('');
-
+function SearchBar({ onSearch, placeholder }: IProps) {
   function handleSearch(event: React.ChangeEvent<HTMLInputElement>) {
-    setQuery(event.target.value);
     onSearch(event.target.value);
   }
 
@@ -29,8 +27,7 @@ function SearchBar({ onSearch }: IProps) {
         </svg>
         <input
           type="text"
-          placeholder="where do you want to go?"
-          value={query}
+          placeholder={placeholder}
           onChange={handleSearch}
           className="w-full p-3 pl-12 rounded-3xl text-customLightGrey bg-customDarkGrey placeholder-customLightGrey focus:outline-none"
         />

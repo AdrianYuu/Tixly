@@ -3,9 +3,9 @@ import IDefaultRouter from '../../interfaces/IDefaultRouter';
 
 const routes: IDefaultRouter[] = [
   {
-    path: '/event',
-    name: 'Event',
-    component: React.lazy(() => import('./Event')),
+    path: '/my-tickets',
+    name: 'My Tickets',
+    component: React.lazy(() => import('./MyTickets')),
     exact: true,
   },
 ];

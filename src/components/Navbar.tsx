@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import Icon from './Icon';
-import NAVBAR_ROUTES from '../configs/NavbarRouteConfig';
 import { FiMenu } from 'react-icons/fi';
 import { useState } from 'react';
 import { BellIcon as OutlineBellIcon } from '@heroicons/react/24/outline';
 import { BellIcon as SolidBellIcon, UserIcon } from '@heroicons/react/24/solid';
 import { useUserContext } from '../contexts/UserContext';
 import Button from './Button';
+import { NAVBAR_ROUTES } from '../configs/NavbarRouteConfig';
 
 function Navbar() {
   const [isOpen, setOpen] = useState<boolean>(false);

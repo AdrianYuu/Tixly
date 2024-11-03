@@ -1,16 +1,48 @@
-import IDefaultRouter from '../interfaces/IDefaultRouter';
+interface INavbarRoute {
+  path: string;
+  name: string;
+  needAuthorized?: boolean;
+}
 
-// Area Import Component Router
-import routerHome from '../views/Home/Home.router';
-import routerEvent from '../views/Event/Event.router';
-import routerFavorite from '../views/Favorite/Favorite.router';
-import routerMyTicket from '../views/MyTicket/MyTicket.router';
-
-const NAVBAR_ROUTES: IDefaultRouter[] = [
-  ...routerHome,
-  ...routerEvent,
-  ...routerMyTicket,
-  ...routerFavorite,
+export const NAVBAR_ROUTES: INavbarRoute[] = [
+  {
+    path: '/',
+    name: 'Home',
+    needAuthorized: false,
+  },
+  {
+    path: '/tickets',
+    name: 'Tickets',
+    needAuthorized: false,
+  },
+  {
+    path: '/my-tickets',
+    name: 'My Tickets',
+    needAuthorized: false,
+  },
+  {
+    path: '/create-activities',
+    name: 'Create Activities',
+    needAuthorized: false,
+  },
+  {
+    path: '/favorite',
+    name: 'Favorite',
+    needAuthorized: false,
+  },
+  // {
+  //   path: '/notification',
+  //   name: 'Notification',
+  //   needAuthorized: true,
+  // },
+  // {
+  //   path: '/wallet',
+  //   name: 'Wallet',
+  //   needAuthorized: true,
+  // },
+  // {
+  //   path: '/wishlist',
+  //   name: 'Wishlist',
+  //   needAuthorized: true,
+  // },
 ];
-
-export default NAVBAR_ROUTES;

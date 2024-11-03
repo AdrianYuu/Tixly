@@ -366,7 +366,9 @@ function TicketDetail() {
                     pathname: `/payment/${currentTicket.id}`,
                     search: `?ticketName=${encodeURIComponent(
                       selectedTicket?.name ?? currentTicket.name,
-                    )}&price=${selectedTicket?.price ?? totalPrice}&id=${selectedTicket?.id}&quantity=${quantity ?? 1}`,
+                    )}&price=${selectedTicket?.price ?? totalPrice}&id=${
+                      selectedTicket?.id
+                    }&quantity=${quantity ?? 1}`,
                   }}
                 >
                   <Button
