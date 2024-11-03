@@ -14,7 +14,7 @@ interface IUserContext {
 
 export function UserProvider({ children }: IChildren) {
   const authClient = AuthClient.create();
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<IUser | null>({} as IUser);
   const [principal, setPrincipal] = useState<string>('');
 
   async function login() {
