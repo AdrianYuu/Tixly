@@ -1,9 +1,9 @@
-interface FooterLink {
+interface IFooterLink {
   to: string;
   imageUrl: string;
 }
 
-export const FOOTER_LINK_LIST: FooterLink[] = [
+export const FOOTER_LINK_LIST: IFooterLink[] = [
   {
     to: 'https://instagram.com',
     imageUrl: '../assets/images/instagram.png',
