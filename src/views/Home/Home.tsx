@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet-async';
 import TicketImage from '../../assets/images/ticket.png';
-import DummyBannerImage from '../../assets/images/dummy-banner.avif';
 import InputBar from '../../components/InputBar';
 import { BENEFIT_LIST } from '../../configs/BenefitConfig';
 import BenefitCard from '../../components/BenefitCard';

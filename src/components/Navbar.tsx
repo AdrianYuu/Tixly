@@ -77,7 +77,7 @@ function Navbar() {
               {isDropdownOpen && (
                 <div className="absolute w-56 right-10 lg:right-48 mt-48 bg-customBlack bg-opacity-70 shadow-lg rounded-xl transition-transform duration-300 ease-in-out transform">
                   <NavLink
-                    to="/profile"
+                    to="/my-wallet"
                     className="block text-customWhite border-b border-b-customWhite px-2 py-3"
                   >
                     <div className="flex gap-2 items-center">

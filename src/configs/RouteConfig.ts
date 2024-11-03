@@ -10,6 +10,7 @@ import routerTicketDetail from '../views/TicketDetail/TicketDetail.router';
 import routerTickets from '../views/Tickets/Tickets.router';
 import routerPayment from '../views/Payment/Payment.router';
 import routerCreateActivities from '../views/CreateActivities/CreateActivities.router';
+import routerMyWallet from '../views/MyWallet/MyWallet.router';
 
 const ROUTES: IDefaultRouter[] = [
   ...routerHome,
@@ -21,6 +22,7 @@ const ROUTES: IDefaultRouter[] = [
   ...routerMyTicketDetail,
   ...routerTicketDetail,
   ...routerPayment,
+  ...routerMyWallet,
 ];
 
 export default ROUTES;
