@@ -2,6 +2,7 @@ interface INavbarRoute {
   path: string;
   name: string;
   needAuthorized?: boolean;
+  dropdownProperty?: boolean;
 }
 
 export const NAVBAR_ROUTES: INavbarRoute[] = [
@@ -30,19 +31,22 @@ export const NAVBAR_ROUTES: INavbarRoute[] = [
     name: 'Favorite',
     needAuthorized: false,
   },
-  // {
-  //   path: '/notification',
-  //   name: 'Notification',
-  //   needAuthorized: true,
-  // },
-  // {
-  //   path: '/wallet',
-  //   name: 'Wallet',
-  //   needAuthorized: true,
-  // },
-  // {
-  //   path: '/wishlist',
-  //   name: 'Wishlist',
-  //   needAuthorized: true,
-  // },
+  {
+    path: '/notification',
+    name: 'Notification',
+    needAuthorized: true,
+    dropdownProperty: true
+  },
+  {
+    path: '/wallet',
+    name: 'Wallet',
+    needAuthorized: true,
+    dropdownProperty: true
+  },
+  {
+    path: '/wishlist',
+    name: 'Wishlist',
+    needAuthorized: true,
+    dropdownProperty: true
+  },
 ];
