@@ -1,7 +1,7 @@
 import { ITicket } from '../interfaces/ITicket';
 import LocationImage from '../assets/images/location.png';
-import CalendarImage from '../assets/images/calendar.png';
-import FavoriteNotActiveImage from '../assets/images/favorite-not-active.png';
+import { HeartIcon as SolidHeartIcon } from '@heroicons/react/24/solid';
+import { HeartIcon as OutlineHeartIcon } from '@heroicons/react/24/outline';
 import { formatToRupiah } from '../lib/utils';
 
 interface IProps {
@@ -28,7 +28,8 @@ function TouristAttractionCard({ ticket }: IProps) {
           </p>
         </div>
         <div className="">
-          <img src={FavoriteNotActiveImage} alt="" />
+          <SolidHeartIcon className='w-6 h-6 text-red-500'/>
+          {/* <OutlineHeartIcon className='w-6 h-6 text-customLightGrey'/> */}
         </div>
       </div>
     </div>

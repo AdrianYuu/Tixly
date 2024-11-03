@@ -12,7 +12,7 @@ function Tickets() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortOption, setSortOption] = useState<string>('date');
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [ticketsPerPage] = useState<number>(8);
+  const [ticketsPerPage] = useState<number>(10);
 
   const filteredTickets = TICKET_LIST.filter((ticket: ITicket) => {
     const matchesFilter =

@@ -36,8 +36,8 @@ function ConcertCard({ ticket, style = '' }: IProps) {
           </p>
         </div>
         <div className="">
-          {/* <SolidHeartIcon className='w-6 h-6 text-red-500'/> */}
-          <OutlineHeartIcon className='w-6 h-6 text-customLightGrey'/>
+          <SolidHeartIcon className='w-6 h-6 text-red-500'/>
+          {/* <OutlineHeartIcon className='w-6 h-6 text-customLightGrey'/> */}
         </div>
       </div>
     </div>
