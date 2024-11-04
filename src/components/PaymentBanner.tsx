@@ -13,7 +13,7 @@ function PaymentBanner({ image, name, address, date, type }: IProps) {
   return (
     <div className="grid grid-cols-3">
       {/* Text Section - 2/3 of the grid */}
-      <div className="relative h-56 lg:h-80 flex flex-col bg-customDarkGrey p-8 rounded-l-3xl col-span-2 items-start justify-center border border-none">
+      <div className="relative h-56 lg:h-80 lg:flex lg:flex-col bg-customDarkGrey p-8 rounded-l-3xl col-span-3 lg:col-span-2 items-start justify-center border border-none">
         <div className="flex flex-col gap-4 text-start ml-6">
           <p className="text-customWhite text-xl font-semibold">{name}</p>
 
@@ -39,7 +39,7 @@ function PaymentBanner({ image, name, address, date, type }: IProps) {
       </div>
 
       {/* Image Section - 1/3 of the grid */}
-      <div className="relative col-span-1 h-full">
+      <div className="relative col-span-1 h-full hidden lg:block">
         <img
           src={image}
           alt="Product"

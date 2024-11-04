@@ -18,8 +18,10 @@ import { TICKET_LIST } from '../../configs/TicketConfig';
 import TicketBanner from '../../components/TicketBanner';
 import { Link } from 'react-router-dom';
 import TicketEnum from '../../enums/TicketEnum';
+import { FilmIcon } from '@heroicons/react/24/solid';
+import ISeat from '../../interfaces/ISeat';
 
-const currentTicket = TICKET_LIST[0];
+const currentTicket = TICKET_LIST[4];
 
 function TicketDetail() {
   const [isInfoActive, setIsInfoActive] = useState<boolean>(true);
@@ -68,6 +70,37 @@ function TicketDetail() {
 
   const totalPrice = ticketPrice * quantity;
 
+  const takenSeats = ['A1', 'A2', 'B3'];
+
+  const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
+
+  const handleSeatSelect = (seat: string) => {
+    if (selectedSeats.includes(seat)) {
+      setSelectedSeats(selectedSeats.filter((s) => s !== seat));
+      decreaseQuantity();
+    } else {
+      setSelectedSeats([...selectedSeats, seat]);
+      increaseQuantity();
+    }
+  };
+
+  const Seat = ({ label, isSelected, onClick, isTaken }: ISeat) => (
+    <button
+      onClick={!isTaken ? onClick : undefined}
+      className={`w-10 h-10 flex items-center justify-center text-white rounded-full transition-colors 
+                ${
+                  isSelected
+                    ? 'bg-green-500'
+                    : isTaken
+                    ? 'bg-red-500 cursor-not-allowed'
+                    : 'bg-gray-400'
+                } mx-1`}
+      disabled={isTaken}
+    >
+      {label}
+    </button>
+  );
+
   return (
     <>
       <Helmet>
@@ -92,7 +125,7 @@ function TicketDetail() {
           />
 
           <div className="flex mt-8 justify-between lg:flex-row flex-col-reverse items-center lg:items-start">
-            <div className="flex flex-col w-3/5">
+            <div className="flex flex-col lg:w-3/5 ">
               <div className="relative flex">
                 <button
                   onClick={() => setIsInfoActive(true)}
@@ -140,10 +173,10 @@ function TicketDetail() {
                         </div>
                       </div>
                       {showDescription && (
-                        <p className="text-customWhite font-medium text-sm bg-customDarkGrey rounded-3xl p-8">
-                          {currentTicket.description}
-                        </p>
-                      )}
+  <p className="text-customWhite font-medium text-sm bg-customDarkGrey rounded-3xl p-8 w-full sm:w-auto">
+    {currentTicket.description}
+  </p>
+)}
                     </div>
 
                     {/* Location */}
@@ -195,35 +228,39 @@ function TicketDetail() {
                     </div>
 
                     {/* Venue */}
-                    <div className="flex flex-col gap-6">
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-2">
+                    {currentTicket.ticketType === TicketEnum.CONCERT ? (
+                      <div className="flex flex-col gap-6">
+                        <div className="flex justify-between items-center">
+                          <div className="flex items-center gap-2">
+                            <img
+                              src={VenueIconImage}
+                              className="w-6 h-6 rounded-3xl"
+                            />
+                            <p className="text-xl font-semibold text-customWhite">
+                              Venue
+                            </p>
+                          </div>
+                          <div
+                            className="cursor-pointer"
+                            onClick={() => setShowVenue(!showVenue)}
+                          >
+                            {showVenue ? (
+                              <ChevronUpIcon className="w-5 h-5 text-customWhite" />
+                            ) : (
+                              <ChevronDownIcon className="w-5 h-5 text-customWhite" />
+                            )}
+                          </div>
+                        </div>
+                        {showVenue && (
                           <img
-                            src={VenueIconImage}
-                            className="w-6 h-6 rounded-3xl"
+                            src={currentTicket.concert?.venueImage}
+                            className="w-full h-max rounded-xl"
                           />
-                          <p className="text-xl font-semibold text-customWhite">
-                            Venue
-                          </p>
-                        </div>
-                        <div
-                          className="cursor-pointer"
-                          onClick={() => setShowVenue(!showVenue)}
-                        >
-                          {showVenue ? (
-                            <ChevronUpIcon className="w-5 h-5 text-customWhite" />
-                          ) : (
-                            <ChevronDownIcon className="w-5 h-5 text-customWhite" />
-                          )}
-                        </div>
+                        )}
                       </div>
-                      {showVenue && (
-                        <img
-                          src={currentTicket.concert?.venueImage}
-                          className="w-full h-max rounded-xl"
-                        />
-                      )}
-                    </div>
+                    ) : (
+                      ''
+                    )}
 
                     {/* Terms & Conditions */}
                     <div className="flex flex-col gap-6">
@@ -289,6 +326,60 @@ function TicketDetail() {
                       />
                     ),
                   )
+                ) : currentTicket.ticketType === TicketEnum.MOVIE ? (
+                  <div>
+                    <div className="flex flex-col text-customWhite">
+                      <p className="font-semibold text-lg">Seat Status:</p>
+
+                      <div className="flex items-center mb-2">
+                        <div className="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
+                        <p>Taken Seats</p>
+                      </div>
+
+                      <div className="flex items-center mb-2">
+                        <div className="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
+                        <p>Selected Seats</p>
+                      </div>
+
+                      <div className="flex items-center mb-2">
+                        <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
+                        <p>Available Seats</p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center ">
+                      <FilmIcon className="w-10 h-10 text-customWhite mb-6" />
+                      {Array.from({ length: 12 }, (_, rowIndex) => (
+                        <div
+                          key={rowIndex}
+                          className="flex justify-center mb-2 gap-2"
+                        >
+                          {Array.from({ length: 12 }, (_, seatIndex) => {
+                            const seatLabel =
+                              String.fromCharCode(76 - rowIndex) +
+                              (seatIndex + 1);
+                            const isTaken = takenSeats.includes(seatLabel);
+                            return (
+                              <Seat
+                                key={seatLabel}
+                                label={seatLabel}
+                                isSelected={selectedSeats.includes(seatLabel)}
+                                onClick={() => handleSeatSelect(seatLabel)}
+                                isTaken={isTaken}
+                              />
+                            );
+                          })}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-4 text-customWhite">
+                      <p>Selected Seat:</p>
+                      <p>
+                        {selectedSeats.length > 0
+                          ? selectedSeats.join(', ')
+                          : 'None'}
+                      </p>
+                    </div>
+                  </div>
                 ) : (
                   <Ticket
                     key={currentTicket.name}
@@ -368,7 +459,9 @@ function TicketDetail() {
                       selectedTicket?.name ?? currentTicket.name,
                     )}&price=${selectedTicket?.price ?? totalPrice}&id=${
                       selectedTicket?.id
-                    }&quantity=${quantity ?? 1}`,
+                    }&quantity=${quantity ?? 1}&seats=${encodeURIComponent(
+                      selectedSeats.join(','),
+                    )}`,
                   }}
                 >
                   <Button

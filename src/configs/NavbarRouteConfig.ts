@@ -31,22 +31,4 @@ export const NAVBAR_ROUTES: INavbarRoute[] = [
     name: 'Favorite',
     needAuthorized: false,
   },
-  {
-    path: '/notification',
-    name: 'Notification',
-    needAuthorized: true,
-    dropdownProperty: true
-  },
-  {
-    path: '/wallet',
-    name: 'Wallet',
-    needAuthorized: true,
-    dropdownProperty: true
-  },
-  {
-    path: '/wishlist',
-    name: 'Wishlist',
-    needAuthorized: true,
-    dropdownProperty: true
-  },
 ];

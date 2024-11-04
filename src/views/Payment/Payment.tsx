@@ -29,12 +29,15 @@ function Payment() {
   };
 
   const handleBuyTicket = () => {
+    console.log('Selected Seats:', seats);
     console.log('Event/Movie/Attraction ID: ', currentTicket.id);
     console.log('Ticket Name: ', ticketName);
     console.log('Ticket ID {for concert only}: ', id);
     console.log('Name: ', currentTicket.name);
     console.log('Selected Payment:', selectedPayment?.type ?? '');
   };
+
+  const seats = queryParams.get('seats')?.split(',') || [];
 
   return (
     <>
@@ -57,7 +60,7 @@ function Payment() {
             type={currentTicket.ticketType}
           />
           <div className="flex flex-col-reverse items-center lg:items-start lg:flex-row justify-between gap-6 mt-12">
-            <div className="flex flex-col w-3/5">
+            <div className="flex flex-col lg:w-3/5">
               {paymentList.length > 0 ? (
                 paymentList.map((payment) => (
                   <PaymentType

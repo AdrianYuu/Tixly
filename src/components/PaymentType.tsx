@@ -19,10 +19,10 @@ function PaymentType({ payment, onClick, isSelected }: IProps) {
 
   return (
     <div
-      className="text-customWhite bg-customLightBlack p-5 rounded-xl mb-6 cursor-pointer"
+      className="w-full text-customWhite bg-customLightBlack p-5 rounded-xl mb-6 cursor-pointer"
       onClick={handleClick}
     >
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between lg:gap-4 gap-8">
         <div className="flex gap-4 items-center">
           {payment.type === PaymentTypeEnum.WALLET ? (
             <WalletIcon className={`w-10 h-10 ${isSelected ? 'text-customSoLightPurple' : 'text-customWhite' }`} />
