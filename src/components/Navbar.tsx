@@ -86,7 +86,7 @@ function Navbar() {
                     </div>
                   </NavLink>
                   <NavLink
-                    to="/settings"
+                    to="/wishlist"
                     className="block text-customWhite py-2 border-b border-b-customWhite px-2"
                   >
                     <div className='flex gap-2 items-center'>

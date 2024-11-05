@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import TicketCard from '../../components/TicketCard';
+import FilterOptions from '../../components/FilterOptions';
 import SearchBar from '../../components/SearchBar';
+import SortOptions from '../../components/SortOptions';
 import Pagination from '../../components/Pagination';
-import TabOptions from '../../components/TabOptions';
 import { TICKET_LIST } from '../../configs/TicketConfig';
 import { ITicket } from '../../interfaces/ITicket';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 
-function MyTickets() {
-  const [activeTab, setActiveTab] = useState<string>('My Ticket');
+function Wishlist() {
   const [activeFilter, setActiveFilter] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortOption, setSortOption] = useState<string>('date');
@@ -58,7 +58,7 @@ function MyTickets() {
   return (
     <>
       <Helmet>
-        <title>Tixly | My Tickets</title>
+        <title>Tixly | Wishlist</title>
       </Helmet>
 
       <motion.section
@@ -70,34 +70,24 @@ function MyTickets() {
         <div className="min-h-screen bg-customBlack text-customWhite p-4">
           <SearchBar
             onSearch={setSearchQuery}
-            placeholder={'search your tickets'}
+            placeholder={'search your wishlist'}
           />
-          <TabOptions activeTab={activeTab} onTabChange={setActiveTab} />
-          {activeTab === 'My Ticket' && (
-            <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-4 place-items-center">
-                {paginatedTickets.map((ticket, index) => (
-                  <TicketCard key={index} ticket={ticket} />
-                ))}
-              </div>
-              <br />
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
-              />
-            </>
-          )}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-4 place-items-center">
+            {paginatedTickets.map((ticket, index) => (
+              <TicketCard key={index} ticket={ticket} />
+            ))}
+          </div>
 
-          {activeTab === 'Upcoming War' && (
-            <div className="flex justify-center items-center h-full">
-              <h2 className="text-xl text-customWhite">Upcoming War Content</h2>
-            </div>
-          )}
+          <br />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
         </div>
       </motion.section>
     </>
   );
 }
 
-export default MyTickets;
+export default Wishlist;
