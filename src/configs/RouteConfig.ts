@@ -11,6 +11,8 @@ import routerTickets from '../views/Tickets/Tickets.router';
 import routerPayment from '../views/Payment/Payment.router';
 import routerCreateActivities from '../views/CreateActivities/CreateActivities.router';
 import routerMyWallet from '../views/MyWallet/MyWallet.router';
+import routerWishlist from '../views/Wishlist/Wishlist.router';
+
 
 const ROUTES: IDefaultRouter[] = [
   ...routerHome,
@@ -23,6 +25,7 @@ const ROUTES: IDefaultRouter[] = [
   ...routerTicketDetail,
   ...routerPayment,
   ...routerMyWallet,
+  ...routerWishlist,
 ];
 
 export default ROUTES;
