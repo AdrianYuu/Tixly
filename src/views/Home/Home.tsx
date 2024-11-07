@@ -6,7 +6,7 @@ import BenefitCard from '../../components/BenefitCard';
 import FeatureSection from '../../components/FeatureSection';
 import { motion } from 'framer-motion';
 import Carousel from '../../components/Carousel';
-import TicketEnum from '../../enums/TicketEnum';
+import TicketEnum from '../../enums/ActivityEnum';
 import ConcertCard from '../../components/ConcertCard';
 import Button from '../../components/Button';
 import { TICKET_LIST } from '../../configs/TicketConfig';

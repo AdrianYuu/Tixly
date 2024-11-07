@@ -1,5 +1,5 @@
 import { CalendarDaysIcon, MapPinIcon } from '@heroicons/react/24/outline';
-import TicketEnum from '../enums/TicketEnum';
+import TicketEnum from '../enums/ActivityEnum';
 
 interface IProps {
   image: string;

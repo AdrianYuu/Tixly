@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import IChildren from '../interfaces/IChildren';
 import { AuthClient } from '@dfinity/auth-client';
 import { iiUrl } from '../configs/InternetIdentityConfig';
@@ -6,19 +6,23 @@ import IUser from '../interfaces/IUser';
 
 interface IUserContext {
   login: () => Promise<void>;
-  register: (username: string) => Promise<void>;
   logout: () => Promise<void>;
   user: IUser | null;
-  principal: string | null;
 }
 
 export function UserProvider({ children }: IChildren) {
-  const authClient = AuthClient.create();
-  const [user, setUser] = useState<IUser | null>({} as IUser);
-  const [principal, setPrincipal] = useState<string>('');
+  const [user, setUser] = useState<IUser | null>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   async function login() {
     try {
+      const authClient = AuthClient.create();
       (await authClient).login({
         identityProvider: iiUrl,
       });
@@ -26,25 +30,19 @@ export function UserProvider({ children }: IChildren) {
       const identity = (await authClient).getIdentity();
       const principal = identity.getPrincipal().toString();
 
-      console.log('Principal: ', principal);
-      setPrincipal(principal);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function register(username: string) {
-    try {
+      const userData: IUser = { principalId: principal };
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
       console.error(error);
     }
   }
 
   async function logout() {
-    setPrincipal('');
+    setUser(null);
   }
 
-  const data = { login, register, user, logout, principal };
+  const data = { user, login, logout };
 
   return <UserContext.Provider value={data}>{children}</UserContext.Provider>;
 }

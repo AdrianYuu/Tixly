@@ -5,7 +5,7 @@ import SearchBar from '../../components/SearchBar';
 import SortOptions from '../../components/SortOptions';
 import Pagination from '../../components/Pagination';
 import { TICKET_LIST } from '../../configs/TicketConfig';
-import { ITicket } from '../../interfaces/ITicket';
+import { ITicket } from '../../interfaces/IActivity';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 

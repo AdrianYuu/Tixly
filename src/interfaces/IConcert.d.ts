@@ -1,17 +1,23 @@
-export interface ITicketType {
-  id?: string;
+export interface IConcertTicketType {
+  id?: bigint;
   name: string;
   price: string;
   capacity: string;
+
+  // Reference
+  concertId?: bigint;
 }
 
 export interface IConcert {
-  concertDate: string;
-  concertTime: string;
-  concertLocation: string;
+  id?: bigint;
+  date: string;
+  time: string;
+  location: string;
   venueImage: string;
-  ticketTypeCount: number;
-  startingDatePeriod: string;
-  endDatePeriod: string;
-  ticketTypeList: ITicketType[];
+  concertTicketTypeCount: number;
+  salesStartDate: string;
+  salesEndDate: string;
+  activityId?: bigint;
+
+  concertTicketTypes: ITicketType[];
 }

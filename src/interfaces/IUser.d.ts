@@ -1,6 +1,5 @@
 interface IUser {
-  principal: string;
-  username: string;
+  principalId: string;
 }
 
 export default IUser;

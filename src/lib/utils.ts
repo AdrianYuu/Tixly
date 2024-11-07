@@ -1,4 +1,4 @@
-import TicketEnum from "../enums/TicketEnum";
+import TicketEnum from '../enums/ActivityEnum';
 
 export function formatToRupiah(value: number | string | undefined) {
   if (value === undefined) {
@@ -120,4 +120,24 @@ export function getFilterLabel(filter: string) {
     default:
       return filter;
   }
+}
+
+/*---
+
+
+---*/
+export function changeBlobToUrl(picture: File) {
+  let url = '';
+  if (picture) {
+    let blob = new Blob([picture], {
+      type: 'image/jpeg',
+    });
+    url = URL.createObjectURL(blob);
+  }
+  return url;
+}
+
+export function normalizeId(id: bigint): number {
+  const normalizedId = id.toString().replace('n', '');
+  return Number(normalizedId);
 }

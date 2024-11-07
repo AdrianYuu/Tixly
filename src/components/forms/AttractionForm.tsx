@@ -4,6 +4,9 @@ import EmptyImage from '../../assets/images/empty-image.png';
 import PlusPurpleImage from '../../assets/images/plus-purple.png';
 import Button from '../Button';
 import { ITicketType } from '../../interfaces/IConcert';
+import { backend_activity } from '../../declarations/backend_activity';
+import ActivityEnum from '../../enums/ActivityEnum';
+import { backend_tourist_attraction } from '../../declarations/backend_tourist_attraction';
 
 function AttractionForm() {
   const [attractionName, setAttractionName] = useState<string | null>(null);
@@ -41,8 +44,25 @@ function AttractionForm() {
     if (typeof value === 'string') setTicketPrice(value);
   }
 
-  function handleSubmit() {
-    console.log();
+  async function handleSubmit() {
+    let response: any;
+
+    response = await backend_activity.createActivity({
+      id: BigInt(0),
+      name: attractionName!,
+      description: attractionDescription!,
+      address: attractionAddress!,
+      image: new Uint8Array(await attractionImage!.arrayBuffer()),
+      activityType: ActivityEnum.TOURIST_ATTRACTION,
+    });
+
+    const activityId = response.ok[1];
+
+    response = await backend_tourist_attraction.createTouristAttraction({
+      id: BigInt(0),
+      price: BigInt(ticketPrice!),
+      activityId: activityId!,
+    });
   }
 
   return (

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 interface IChildren {
-  children: ReactNode;
+  children: ReactNode | ReactNode[];
 }
 
 export default IChildren;

@@ -17,7 +17,7 @@ import { ITicketType } from '../../interfaces/IConcert';
 import { TICKET_LIST } from '../../configs/TicketConfig';
 import TicketBanner from '../../components/TicketBanner';
 import { Link } from 'react-router-dom';
-import TicketEnum from '../../enums/TicketEnum';
+import TicketEnum from '../../enums/ActivityEnum';
 import { FilmIcon } from '@heroicons/react/24/solid';
 import ISeat from '../../interfaces/ISeat';
 
@@ -173,10 +173,10 @@ function TicketDetail() {
                         </div>
                       </div>
                       {showDescription && (
-  <p className="text-customWhite font-medium text-sm bg-customDarkGrey rounded-3xl p-8 w-full sm:w-auto">
-    {currentTicket.description}
-  </p>
-)}
+                        <p className="text-customWhite font-medium text-sm bg-customDarkGrey rounded-3xl p-8 w-full sm:w-auto">
+                          {currentTicket.description}
+                        </p>
+                      )}
                     </div>
 
                     {/* Location */}

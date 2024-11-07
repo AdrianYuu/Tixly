@@ -8,14 +8,14 @@ import {
   UserIcon,
   WalletIcon,
   HeartIcon,
-  ArrowLeftStartOnRectangleIcon
+  ArrowLeftStartOnRectangleIcon,
 } from '@heroicons/react/24/solid';
 import { useUserContext } from '../contexts/UserContext';
 import Button from './Button';
 import { NAVBAR_ROUTES } from '../configs/NavbarRouteConfig';
 
 function Navbar() {
-  const { user } = useUserContext();
+  const { user, login } = useUserContext();
   const [isOpen, setOpen] = useState<boolean>(false);
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
@@ -81,7 +81,7 @@ function Navbar() {
                     className="block text-customWhite border-b border-b-customWhite px-2 py-3"
                   >
                     <div className="flex gap-2 items-center">
-                      <WalletIcon className='w-6 h-6'/>
+                      <WalletIcon className="w-6 h-6" />
                       <p>My Wallet</p>
                     </div>
                   </NavLink>
@@ -89,20 +89,17 @@ function Navbar() {
                     to="/wishlist"
                     className="block text-customWhite py-2 border-b border-b-customWhite px-2"
                   >
-                    <div className='flex gap-2 items-center'>
-                      <HeartIcon className='w-6 h-6'/>
+                    <div className="flex gap-2 items-center">
+                      <HeartIcon className="w-6 h-6" />
                       <p>My Wishlist</p>
                     </div>
-                    
                   </NavLink>
                   <button
                     className="block text-customWhite py-2  px-2"
-                    onClick={() => {
-                      
-                    }}
+                    onClick={() => {}}
                   >
-                    <div className='flex gap-2 items-center text-customLightRed'>
-                      <ArrowLeftStartOnRectangleIcon className='w-6 h-6'/>
+                    <div className="flex gap-2 items-center text-customLightRed">
+                      <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />
                       <p>Logout</p>
                     </div>
                   </button>
@@ -114,6 +111,7 @@ function Navbar() {
           <Button
             text="Login with Internet Identity"
             className="truncate px-5 py-4"
+            onClick={() => login()}
           />
         )}
       </div>

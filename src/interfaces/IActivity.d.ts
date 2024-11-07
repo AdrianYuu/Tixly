@@ -1,15 +1,16 @@
-import TicketEnum from '../enums/TicketEnum';
+import ActivityEnum from '../enums/ActivityEnum';
 import IConcert from './IConcert';
 import IMovie from './IMovie';
 import ITouristAttraction from './ITouristAttraction';
 
-export interface ITicket {
-  id: string;
+export interface IActivity {
+  id?: bigint;
   name: string;
   description: string;
-  imageUrl: string;
   address: string;
-  ticketType: TicketEnum;
+  image?: File;
+  activityType: ActivityEnum;
+
   concert?: IConcert;
   movie?: IMovie;
   touristAttraction?: ITouristAttraction;
