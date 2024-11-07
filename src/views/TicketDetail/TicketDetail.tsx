@@ -13,13 +13,13 @@ import Button from '../../components/Button';
 import Ticket from '../../components/Ticket';
 import { motion } from 'framer-motion';
 import { formatToRupiah } from '../../lib/utils';
-import { ITicketType } from '../../interfaces/IConcert';
 import { TICKET_LIST } from '../../configs/TicketConfig';
 import TicketBanner from '../../components/TicketBanner';
 import { Link } from 'react-router-dom';
 import TicketEnum from '../../enums/ActivityEnum';
 import { FilmIcon } from '@heroicons/react/24/solid';
 import ISeat from '../../interfaces/ISeat';
+import { IActivity } from '../../interfaces/IActivity';
 
 const currentTicket = TICKET_LIST[4];
 
@@ -42,11 +42,11 @@ function TicketDetail() {
     lng: 106.123456,
   });
 
-  const [selectedTicket, setSelectedTicket] = useState<ITicketType | null>(
+  const [selectedTicket, setSelectedTicket] = useState<IActivity | null>(
     null,
   );
 
-  const handleTicketSelect = (ticket: ITicketType) => {
+  const handleTicketSelect = (ticket: IActivity) => {
     setSelectedTicket(ticket);
   };
 
@@ -313,12 +313,12 @@ function TicketDetail() {
                 ) : currentTicket.concert?.ticketTypeList &&
                   currentTicket.concert.ticketTypeList.length > 0 ? (
                   currentTicket.concert.ticketTypeList.map(
-                    (ticket: ITicketType) => (
+                    (ticket: IActivity) => (
                       <Ticket
                         key={ticket.name}
                         ticketName={ticket.name}
                         endDate={currentTicket.concert?.endDatePeriod ?? '0'}
-                        price={ticket.price}
+                        price={currentTicket.price}
                         type={currentTicket.ticketType}
                         ticketType={ticket}
                         onClick={handleTicketSelect}
@@ -448,7 +448,7 @@ function TicketDetail() {
                   <p>Total</p>
                   <p>
                     {selectedTicket
-                      ? formatToRupiah(selectedTicket.price)
+                      ? formatToRupiah(selectedTicket?.concert.concertTicketTypes.price)
                       : formatToRupiah(totalPrice)}
                   </p>
                 </div>
@@ -457,7 +457,7 @@ function TicketDetail() {
                     pathname: `/payment/${currentTicket.id}`,
                     search: `?ticketName=${encodeURIComponent(
                       selectedTicket?.name ?? currentTicket.name,
-                    )}&price=${selectedTicket?.price ?? totalPrice}&id=${
+                    )}&price=${selectedTicket?.concert.concertTicketTypes.price ?? totalPrice}&id=${
                       selectedTicket?.id
                     }&quantity=${quantity ?? 1}&seats=${encodeURIComponent(
                       selectedSeats.join(','),
