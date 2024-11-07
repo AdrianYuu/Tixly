@@ -3,7 +3,13 @@ import FormInput from '../form-component/FormInput';
 import EmptyImage from '../../assets/images/empty-image.png';
 import PlusPurpleImage from '../../assets/images/plus-purple.png';
 import Button from '../Button';
-import { ITicketType } from '../../interfaces/IConcert';
+import { IConcertTicketType } from '../../interfaces/IConcert';
+import { backend_activity } from '../../declarations/backend_activity';
+import ActivityEnum from '../../enums/ActivityEnum';
+import { backend_concert } from '../../declarations/backend_concert';
+import { backend_concert_ticket_type } from '../../declarations/backend_concert_ticket_type';
+import { backend_tourist_attraction } from '../../declarations/backend_tourist_attraction';
+import { backend_movie } from '../../declarations/backend_movie';
 
 function ConcertForm() {
   const [concertDate, setConcertDate] = useState<string | null>(null);
@@ -24,7 +30,7 @@ function ConcertForm() {
   const [venueImagePreview, setVenueImagePreview] = useState<string | null>(
     null,
   );
-  const [ticketTypes, setTicketTypes] = useState<ITicketType[]>([
+  const [ticketTypes, setTicketTypes] = useState<IConcertTicketType[]>([
     { name: '', price: '', capacity: '' },
   ]);
 
@@ -88,8 +94,47 @@ function ConcertForm() {
     setTicketTypes([...ticketTypes, { name: '', price: '', capacity: '' }]);
   }
 
-  function handleSubmit() {
-    console.log(ticketTypes);
+  async function handleSubmit() {
+    console.log(await backend_activity.getActivities());
+    console.log(await backend_tourist_attraction.getTouristAttractions());
+    console.log(await backend_movie.getMovies());
+    console.log(await backend_concert.getConcerts());
+    console.log(await backend_concert_ticket_type.getConcertTicketType());
+    return;
+
+    let response: any;
+    response = await backend_activity.createActivity({
+      id: BigInt(0),
+      name: concertName!,
+      description: concertDescription!,
+      address: concertAddress!,
+      image: new Uint8Array(await bannerImage!.arrayBuffer()),
+      activityType: ActivityEnum.CONCERT,
+    });
+    const activityId = response.ok[1];
+    response = await backend_concert.createConcert({
+      id: BigInt(0),
+      date: concertDate!,
+      time: concertTime!,
+      location: concertLocation!,
+      venueImage: new Uint8Array(await venueImage!.arrayBuffer()),
+      concertTicketTypeCount: BigInt(ticketTypes.length!),
+      salesStartDate: startDate!,
+      salesEndDate: endDate!,
+      activityId: activityId,
+    });
+    const concertId = response.ok[1];
+    await Promise.all(
+      ticketTypes.map(async (ticketType) => {
+        await backend_concert_ticket_type.createConcertTicketType({
+          id: BigInt(0),
+          name: ticketType.name,
+          price: ticketType.price,
+          capacity: BigInt(ticketType.capacity),
+          concertId: concertId,
+        });
+      }),
+    );
   }
 
   return (

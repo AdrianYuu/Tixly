@@ -1,5 +1,7 @@
 interface ITouristAttraction {
-  ticketPrice: string;
+  id?: bigint;
+  price: number;
+  activityId?: bigint;
 }
 
 export default ITouristAttraction;

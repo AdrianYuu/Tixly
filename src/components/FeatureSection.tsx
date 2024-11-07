@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import TicketEnum from '../enums/TicketEnum';
+import TicketEnum from '../enums/ActivityEnum';
 import TicketCard from './TicketCard';
-import { ITicket } from '../interfaces/ITicket';
+import { ITicket } from '../interfaces/IActivity';
 import { TICKET_LIST } from '../configs/TicketConfig';
 import ArrowRightYellowImage from '../assets/images/arrow-right-yellow.png';
 import { Link } from 'react-router-dom';

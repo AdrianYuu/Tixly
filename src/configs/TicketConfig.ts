@@ -1,5 +1,5 @@
-import TicketEnum from '../enums/TicketEnum';
-import { ITicket } from '../interfaces/ITicket';
+import TicketEnum from '../enums/ActivityEnum';
+import { ITicket } from '../interfaces/IActivity';
 import DummyConcerBannerImage from '../assets/images/festival-rectangle.png';
 import VenueImage from '../assets/images/venue.png';
 import MoviePoster from '../assets/images/movie-poster.webp';

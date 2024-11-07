@@ -1,5 +1,5 @@
 import React from 'react';
-import TicketEnum from '../enums/TicketEnum';
+import TicketEnum from '../enums/ActivityEnum';
 import { getFilterLabel } from '../lib/utils';
 import FilterImage from '../assets/images/filter.png';
 

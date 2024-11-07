@@ -4,6 +4,26 @@
       "type": "motoko",
       "main": "backend/user/main.mo"
     },
+    "backend_activity": {
+      "type": "motoko",
+      "main": "backend/activity/main.mo"
+    },
+    "backend_concert": {
+      "type": "motoko",
+      "main": "backend/concert/main.mo"
+    },
+    "backend_movie": {
+      "type": "motoko",
+      "main": "backend/movie/main.mo"
+    },
+    "backend_tourist_attraction": {
+      "type": "motoko",
+      "main": "backend/tourist_attraction/main.mo"
+    },
+    "backend_concert_ticket_type": {
+      "type": "motoko",
+      "main": "backend/concert_ticket_type/main.mo"
+    },
     "frontend": {
       "dependencies": ["backend_user"],
       "type": "assets",

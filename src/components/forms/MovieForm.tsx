@@ -3,7 +3,7 @@ import FormInput from '../form-component/FormInput';
 import EmptyImage from '../../assets/images/empty-image.png';
 import PlusPurpleImage from '../../assets/images/plus-purple.png';
 import Button from '../Button';
-import { ITicketType } from '../../interfaces/IConcert';
+import { IConcert } from '../../interfaces/IConcert';
 import { IActor } from '../../interfaces/IActor';
 import FormSelect from '../form-component/FormSelect';
 import {
@@ -11,6 +11,10 @@ import {
   MOVIE_GENRE_LIST,
   MOVIE_LANGUAGE_LIST,
 } from '../../configs/MovieInformationConfig';
+import { backend_activity } from '../../declarations/backend_activity';
+import ActivityEnum from '../../enums/ActivityEnum';
+import { backend_concert } from '../../declarations/backend_concert';
+import { backend_movie } from '../../declarations/backend_movie';
 
 function MovieForm() {
   const [movieDate, setMovieDate] = useState<string | null>(null);
@@ -99,8 +103,36 @@ function MovieForm() {
     setActors([...actors, { name: '', role: '' }]);
   }
 
-  function handleSubmit() {
-    console.log(actors);
+  async function handleSubmit() {
+    let response: any;
+
+    response = await backend_activity.createActivity({
+      id: BigInt(0),
+      name: movieName!,
+      description: movieSynopsis!,
+      address: cinemaLocation!,
+      image: new Uint8Array(await posterImage!.arrayBuffer()),
+      activityType: ActivityEnum.MOVIE,
+    });
+
+    const activityId = response.ok[1];
+
+    response = await backend_movie.createMovie({
+      id: BigInt(0),
+      cinemaName: cinemaName!,
+      cinemaLocation: cinemaLocation!,
+      date: movieDate!,
+      time: movieTime!,
+      theaterNumber: BigInt(theaterNumber!),
+      genre: movieGenre!,
+      ageRating: movieAgeRating!,
+      language: movieLanguage!,
+      trailerUrl: movieTrailerLink!,
+      duration: movieDuration!,
+      director: movieDirector!,
+      price: BigInt(ticketPrice!),
+      activityId: activityId!,
+    });
   }
 
   return (
@@ -161,7 +193,7 @@ function MovieForm() {
         <FormInput
           name="Movie Synopsis"
           type="textarea"
-          onChange={handleTheaterNumber}
+          onChange={handleMovieSynopsis}
           placeholder="Describe the movie"
         />
       </div>
@@ -209,14 +241,14 @@ function MovieForm() {
         <FormInput
           name="Movie Duration"
           type="input"
-          onChange={handleTheaterNumber}
+          onChange={handleMovieDuration}
           placeholder="Select theater number"
           inputType="time"
         />
         <FormInput
           name="Movie Director"
           type="input"
-          onChange={handleMovieName}
+          onChange={handleMovieDirector}
           placeholder="Enter the movie director"
           inputType="text"
         />
@@ -225,7 +257,7 @@ function MovieForm() {
         <FormInput
           name="Ticket Price"
           type="input"
-          onChange={handleTheaterNumber}
+          onChange={handleTicketPrice}
           placeholder="Enter the ticket price"
           inputType="text"
         />

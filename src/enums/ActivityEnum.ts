@@ -1,7 +1,7 @@
-enum TicketEnum {
+enum ActivityEnum {
   CONCERT = 'CONCERT',
   MOVIE = 'MOVIE',
   TOURIST_ATTRACTION = 'TOURIST_ATTRACTION',
 }
 
-export default TicketEnum;
+export default ActivityEnum;

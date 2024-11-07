@@ -1,21 +1,23 @@
-import { ITicket } from '../interfaces/ITicket';
-import TicketEnum from '../enums/TicketEnum';
+import { IActivity } from '../interfaces/IActivity';
+import TicketEnum from '../enums/ActivityEnum';
 import ConcertCard from './ConcertCard';
 import MovieCard from './MovieCard';
 import TouristAttractionCard from './TouristAttractionCard';
 
 interface IProps {
-  ticket: ITicket;
+  ticket: IActivity;
 }
 
 function TicketCard({ ticket }: IProps) {
   return (
     <>
-      {ticket.ticketType === TicketEnum.CONCERT && (
+      {ticket.activityType === TicketEnum.CONCERT && (
         <ConcertCard ticket={ticket} />
       )}
-      {ticket.ticketType === TicketEnum.MOVIE && <MovieCard ticket={ticket} />}
-      {ticket.ticketType === TicketEnum.TOURIST_ATTRACTION && (
+      {ticket.activityType === TicketEnum.MOVIE && (
+        <MovieCard ticket={ticket} />
+      )}
+      {ticket.activityType === TicketEnum.TOURIST_ATTRACTION && (
         <TouristAttractionCard ticket={ticket} />
       )}
     </>

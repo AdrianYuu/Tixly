@@ -6,7 +6,13 @@ interface IProps {
   type?: 'purple' | 'transparent';
 }
 
-function Button({ text = 'Button', className, onClick, disabledState, type = 'purple' }: IProps) {
+function Button({
+  text = 'Button',
+  className,
+  onClick,
+  disabledState,
+  type = 'purple',
+}: IProps) {
   if (type === 'transparent') {
     return (
       <button
@@ -22,7 +28,9 @@ function Button({ text = 'Button', className, onClick, disabledState, type = 'pu
   return (
     <button
       className={`text-customWhite font-medium rounded-full bg-gradient-to-r from-customLightPurple to-customDarkPurple 
-                  transition-all duration-300 hover:from-customDarkPurple hover:to-customLightPurple ${className} ${disabledState ? 'opacity-30 cursor-not-allowed': ''}`}
+                  transition-all duration-300 hover:from-customDarkPurple hover:to-customLightPurple ${className} ${
+        disabledState ? 'opacity-30 cursor-not-allowed' : ''
+      }`}
       onClick={!disabledState ? onClick : undefined}
       disabled={disabledState}
       type="button"

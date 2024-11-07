@@ -4,7 +4,6 @@ module Types {
 
   public type User = {
     identity : Text;
-    username : Text;
   };
 
 };
