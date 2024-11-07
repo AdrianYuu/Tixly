@@ -25,7 +25,7 @@
       "main": "backend/concert_ticket_type/main.mo"
     },
     "frontend": {
-      "dependencies": ["backend_user"],
+      "dependencies": ["backend_user", "backend_activity", "backend_concert", "backend_movie", "backend_tourist_attraction", "backend_concert_ticket_type"],
       "type": "assets",
       "source": ["dist/"]
     }
