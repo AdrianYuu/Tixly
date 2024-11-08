@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 const LoadingSpinner = () => {
   return (
     <motion.div
-      className="flex justify-center items-center h-screen"
+      className="flex justify-center items-center mt-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}

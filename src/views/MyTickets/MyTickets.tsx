@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import TicketCard from '../../components/TicketCard';
 import FilterOptions from '../../components/FilterOptions';
 import SearchBar from '../../components/SearchBar';
-import SortOptions from '../../components/SortOptions';
 import Pagination from '../../components/Pagination';
 import { IActivity } from '../../interfaces/IActivity';
 import { Helmet } from 'react-helmet-async';
@@ -67,7 +66,7 @@ function MyTickets() {
       </Helmet>
 
       <motion.section
-        className="flex flex-col gap-2 px-4 mt-12"
+        className="flex flex-col gap-2 px-4"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
