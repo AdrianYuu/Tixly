@@ -32,6 +32,10 @@
       "type": "motoko",
       "main": "backend/favorite/main.mo"
     },
+    "backend_transaction": {
+      "type": "motoko",
+      "main": "backend/transaction/main.mo"
+    },
     "frontend": {
       "dependencies": [
         "backend_user",

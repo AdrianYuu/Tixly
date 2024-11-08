@@ -1,6 +1,6 @@
-import Ticket from '../components/Ticket';
+import { IActivity } from './IActivity';
 
-interface IMyTicket {
+export interface ITransaction {
   bookingCode: string;
   bookingDate: string;
 
@@ -10,5 +10,7 @@ interface IMyTicket {
   // Kalau ticketnya movie (A1, A2, .., L12)
   seatNumber?: string;
 
-  ticket: Ticket;
+  principalId?: string;
+
+  activity: IActivity;
 }

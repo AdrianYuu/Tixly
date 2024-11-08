@@ -95,6 +95,7 @@ export const fetchActivityById = async (
 ): Promise<IActivity | null> => {
   try {
     const response: any = await backend_activity.getActivityById(id);
+
     if ('ok' in response) {
       const activity: IActivity = response.ok[1];
 

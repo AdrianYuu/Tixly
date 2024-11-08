@@ -43,6 +43,9 @@ function TicketDetail() {
   useEffect(() => {
     async function fetchData() {
       const updatedActivities = await fetchActivityById(BigInt(id!));
+
+      console.log(updatedActivities);
+
       if (updatedActivities) {
         setActivity(updatedActivities);
         setLoading(false);

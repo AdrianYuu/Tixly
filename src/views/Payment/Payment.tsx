@@ -11,6 +11,11 @@ import Button from '../../components/Button';
 import { fetchActivityById } from '../../services/ActivitiesService';
 import { IActivity } from '../../interfaces/IActivity';
 import LoadingSpinner from '../../components/LoadingSpinner';
+import ActivityEnum from '../../enums/ActivityEnum';
+import PaymentTypeEnum from '../../enums/PaymentTypeEnum';
+import { useUserContext } from '../../contexts/UserContext';
+import { backend_transaction } from '../../declarations/backend_transaction';
+import { backend_user } from '../../declarations/backend_user';
 
 function Payment() {
   const queryParams = new URLSearchParams(location.search);
@@ -19,9 +24,12 @@ function Payment() {
   const activityId = queryParams.get('activityId');
   const id = queryParams.get('id');
 
-  const [selectedPayment, setSelectedPayment] = useState<IPaymentType | null>(
-    null,
-  );
+  const { user, refetch } = useUserContext();
+
+  const userBalance = user?.balance!;
+
+  const [selectedPayment, setSelectedPayment] =
+    useState<PaymentTypeEnum | null>(null);
 
   const quantity = queryParams.get('quantity');
 
@@ -31,19 +39,63 @@ function Payment() {
 
   const [loading, setLoading] = useState<boolean>(true);
 
-  const handlePaymentSelect = (payment: IPaymentType) => {
+  const handlePaymentSelect = (payment: PaymentTypeEnum) => {
     setSelectedPayment(payment);
   };
 
   const handleBuyTicket = async () => {
     console.log('Selected Seats:', seats);
-    console.log('Event/Movie/Attraction ID: ', currentTicket.id);
+    console.log('Event/Movie/Attraction ID: ', activityId);
     console.log('Ticket Name: ', ticketName);
     console.log('Ticket ID {for concert only}: ', id);
     console.log('Name: ', currentTicket.name);
+
+    console.log(ticket?.activityType!);
+
+    let response;
+
+    if (ticket!.activityType === ActivityEnum.CONCERT) {
+      response = await backend_transaction.createTransaction({
+        id: BigInt(0),
+        bookingCode: 'Mario',
+        bookingDate: 'Orlando',
+        seatNumber: [''],
+        concertTicketType: ticketName!,
+        activityId: BigInt(ticket!.id!),
+        principalId: user?.principalId!,
+      });
+    } else if (ticket!.activityType === ActivityEnum.MOVIE) {
+      response = await backend_transaction.createTransaction({
+        id: BigInt(0),
+        bookingCode: 'Mario',
+        bookingDate: '123',
+        seatNumber: seats,
+        concertTicketType: '',
+        activityId: BigInt(ticket!.id!),
+        principalId: user?.principalId!,
+      });
+    } else if (ticket!.activityType === ActivityEnum.TOURIST_ATTRACTION) {
+      response = await backend_transaction.createTransaction({
+        id: BigInt(0),
+        bookingCode: 'Stefanus',
+        bookingDate: 'Wilson',
+        seatNumber: [''],
+        concertTicketType: '',
+        activityId: BigInt(ticket!.id!),
+        principalId: user?.principalId!,
+      });
+    }
+
+    if (selectedPayment === PaymentTypeEnum.WALLET) {
+      await backend_user.updateUserBalance(
+        user?.principalId!,
+        BigInt(BigInt(user?.balance!) - BigInt(price!)),
+      );
+      await refetch();
+    }
   };
 
-  const seats = queryParams.get('seats')?.split(',') || [];
+  const seats: string[] = queryParams.get('seats')?.split(',') || [];
 
   const [ticket, setTickets] = useState<IActivity | null>(null);
 
@@ -54,12 +106,8 @@ function Payment() {
 
       if (activity) {
         setTickets(activity);
-        console.log(ticket);
         setLoading(false);
       }
-
-      console.log(activity?.activityType!);
-      console.log(ticket);
     }
     fetchData();
   }, []);
@@ -81,27 +129,35 @@ function Payment() {
         ) : (
           <>
             <div className="flex flex-col px-16 text-white">
-              <PaymentBanner
-                image={changeBlobToUrl(ticket?.image!)}
-                name={ticketName ?? ''}
-                address={ticket?.address!}
-                date={ticket?.concert!.date! ?? ticket?.movie!.date!}
-                type={ticket?.activityType!}
-              />
+              <>
+                {ticket?.activityType != ActivityEnum.TOURIST_ATTRACTION && (
+                  <PaymentBanner
+                    image={changeBlobToUrl(ticket?.image!)}
+                    name={ticketName ?? ''}
+                    address={ticket?.address!}
+                    date={ticket!.concert?.date! || ticket!.movie?.date!}
+                    type={ticket?.activityType!}
+                  />
+                )}
+              </>
               <div className="flex flex-col-reverse items-center lg:items-start lg:flex-row justify-between gap-6 mt-12">
                 <div className="flex flex-col lg:w-3/5">
-                  {paymentList.length > 0 ? (
-                    paymentList.map((payment) => (
-                      <PaymentType
-                        key={payment.type}
-                        payment={payment}
-                        onClick={handlePaymentSelect}
-                        isSelected={selectedPayment === payment}
-                      />
-                    ))
-                  ) : (
-                    <p>No payment types available.</p>
-                  )}
+                  {/* Wallet Payment Type */}
+                  <PaymentType
+                    payment={{
+                      type: PaymentTypeEnum.WALLET,
+                      balance: userBalance.toString(),
+                    }}
+                    onClick={() => handlePaymentSelect(PaymentTypeEnum.WALLET)}
+                    isSelected={selectedPayment === PaymentTypeEnum.WALLET}
+                  />
+
+                  {/* QRIS Payment Type */}
+                  <PaymentType
+                    payment={{ type: PaymentTypeEnum.QRIS }}
+                    onClick={() => handlePaymentSelect(PaymentTypeEnum.QRIS)}
+                    isSelected={selectedPayment === PaymentTypeEnum.QRIS}
+                  />
                 </div>
 
                 <div className="flex flex-col gap-4 bg-customDarkGrey p-10 rounded-3xl h-max w-max mb-6 lg:mb-0">
@@ -122,7 +178,9 @@ function Payment() {
                   <Button
                     className="p-2 px-24"
                     text="Buy Ticket"
-                    disabledState={!selectedPayment}
+                    disabledState={
+                      !selectedPayment || userBalance < Number(price)
+                    }
                     onClick={handleBuyTicket}
                   />
                 </div>

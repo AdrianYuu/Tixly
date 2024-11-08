@@ -84,7 +84,7 @@ function Home() {
           ></div>
 
           <div className="w-3/4 relative z-20 flex flex-col items-center xl:items-baseline xl:mb-0 mb-8">
-            <p className="text-4xl font-bold mb-3 leading-tight text-center xl:text-start">
+            <p className="text-5xl font-bold mb-3 leading-tight text-center xl:text-start">
               <span className="bg-gradient-to-r from-customLightPurple to-customLightYellow bg-clip-text text-transparent">
                 Catch Your Next Event
               </span>
@@ -95,17 +95,17 @@ function Home() {
             <div className="flex flex-col md:flex-row gap-3 items-center mt-5">
               <Button
                 text="Shop More Tickets"
-                className="truncate px-10 py-2"
+                className="truncate px-16 py-2"
               />
               <Button
                 text="View My Tickets"
-                className="truncate px-10 py-2"
+                className="truncate px-16 py-2"
                 type="transparent"
               />
             </div>
           </div>
 
-          <div className="relative h-[600px] min-w-80">
+          <div className="relative h-[600px] min-w-[20rem]">
             <div
               className={`absolute inset-0 w-[600px] h-[500px] bg-customGlowingTwo opacity-20 rounded-full blur-2xl z-0 top-12 sm:top-16 md:top-20 xl:top-30`}
             ></div>
