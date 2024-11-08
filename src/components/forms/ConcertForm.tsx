@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
         
 function ConcertForm() {
+  
   const navigate = useNavigate();
 
   const [concertDate, setConcertDate] = useState<string | null>(null);
@@ -100,6 +101,7 @@ function ConcertForm() {
   }
 
   async function handleSubmit() {
+
     if (!concertName || concertName.trim() === '') {
       toast.error('Concert name is required!', { position: 'top-right' });
       return;
@@ -171,6 +173,7 @@ function ConcertForm() {
     }
 
     try {
+      setLoading(true);
       let response: any;
       response = await backend_activity.createActivity({
         id: BigInt(0),
@@ -211,6 +214,8 @@ function ConcertForm() {
         position: 'top-right',
       });
 
+      setLoading(false);
+
       navigate('/tickets');
     } catch (error) {
       toast.error('Failed to create concert. Please try again.', {
@@ -221,9 +226,6 @@ function ConcertForm() {
 
   return (
     <>
-      {loading ? (
-        <LoadingSpinner />
-      ) : (
         <>
           <form className="bg-customDarkGrey w-4/5 rounded-3xl py-12 px-6 lg:px-12">
             <p className="bg-gradient-to-r from-customLightPurple to-customLightYellow bg-clip-text text-transparent text-5xl text-center font-bold">
@@ -385,10 +387,10 @@ function ConcertForm() {
               text="Create Activity"
               className="truncate py-3 w-full mt-16"
               onClick={handleSubmit}
+              disabledState={loading}
             />
           </form>
         </>
-      )}
 
       {isModalOpen && !loading && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">

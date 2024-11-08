@@ -25,6 +25,7 @@ import { IActivity } from '../../interfaces/IActivity';
 import { fetchActivityById } from '../../services/ActivitiesService';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { backend_activity } from '../../declarations/backend_activity';
+import ActivityEnum from '../../enums/ActivityEnum';
 
 function TicketDetail() {
   const [activity, setActivity] = useState<IActivity>();
@@ -36,7 +37,6 @@ function TicketDetail() {
   const [showTicketRedemption, setShowTicketRedemption] =
     useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
-  const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     async function fetchData() {
@@ -80,6 +80,14 @@ function TicketDetail() {
 
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
 
+  const ticketPrice = activity?.movie?.price!
+  ? parseInt(activity.movie.price)
+  : activity?.touristAttraction?.price!
+  ? parseInt(activity.touristAttraction.price)
+  : 0;
+
+  const totalPrice = ticketPrice * quantity;
+
   const handleSeatSelect = (seat: string) => {
     if (selectedSeats.includes(seat)) {
       setSelectedSeats(selectedSeats.filter((s) => s !== seat));
@@ -122,7 +130,14 @@ function TicketDetail() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
+
+          {/* <p>{selected}</p> */}
           <div className="flex flex-col px-16">
+            {
+              activity?.activityType! == ActivityEnum.MOVIE ?
+
+              <p className='text-white'>{activity?.activityType!}</p> : <p className='text-white'>assa</p>
+            }
             <TicketBanner
               image={changeBlobToUrl(activity!.image!)}
               name={activity!.name}
@@ -325,14 +340,16 @@ function TicketDetail() {
                         {showTicketRedemption && <TicketRedemption />}
                       </div>
                     </>
-                  ) : activity!.concert?.ticketTypeList &&
-                    activity!.concert.ticketTypeList.length > 0 ? (
-                    activity!.concert.ticketTypeList.map(
+                  ) : 
+                  
+                  activity!.concert?.concertTicketTypes &&
+                    activity!.concert.concertTicketTypes.length > 0 ? (
+                    activity!.concert.concertTicketTypes.map(
                       (ticket: IConcertTicketType) => (
                         <Ticket
                           key={ticket.name}
                           ticketName={ticket.name}
-                          endDate={activity!.concert?.endDatePeriod ?? '0'}
+                          endDate={activity!.concert!.salesEndDate ?? '0'}
                           price={ticket.price}
                           type={activity!.activityType}
                           ticketType={ticket}
@@ -341,7 +358,9 @@ function TicketDetail() {
                         />
                       ),
                     )
-                  ) : activity!.activityType === TicketEnum.MOVIE ? (
+                  ) : 
+                  
+                  activity!.activityType === TicketEnum.MOVIE ? (
                     <div>
                       <div className="flex flex-col text-customWhite">
                         <p className="font-semibold text-lg">Seat Status:</p>
@@ -399,7 +418,6 @@ function TicketDetail() {
                       key={activity!.name}
                       ticketName={activity!.name}
                       price={
-                        activity!.movie!.price.toString() ||
                         activity!.touristAttraction!.price.toString()
                       }
                       type={activity!.activityType}
@@ -417,7 +435,7 @@ function TicketDetail() {
                   </p>
                   <p className="text-customWhite text-xl font-semibold">
                     {activity!.activityType === TicketEnum.CONCERT ? (
-                      <>{formatToRupiah(0)}</>
+                      <>{formatToRupiah(activity!.concert.concertTicketTypes[0].price)}</>
                     ) : (
                       formatToRupiah(
                         activity!.movie?.price ??
@@ -457,7 +475,7 @@ function TicketDetail() {
                     <p>
                       {selectedTicket
                         ? formatToRupiah(selectedTicket.price)
-                        : formatToRupiah(0)}
+                        : formatToRupiah(String(totalPrice))}
                     </p>
                   </div>
                   <Link
@@ -465,9 +483,9 @@ function TicketDetail() {
                       pathname: `/payment/${activity!.id}`,
                       search: `?ticketName=${encodeURIComponent(
                         selectedTicket?.name ?? activity!.name,
-                      )}&price=${selectedTicket?.price ?? 0}&id=${
+                      )}&activityId=${activity!.id}&price=${selectedTicket?.price ?? totalPrice}&id=${
                         selectedTicket?.id
-                      }&quantity=${quantity ?? 1}&seats=${encodeURIComponent(
+                      }&quantity=${quantity == 0 ? 1 : quantity}&seats=${encodeURIComponent(
                         selectedSeats.join(','),
                       )}`,
                     }}
