@@ -16,7 +16,6 @@ import { backend_concert_ticket_type } from '../../declarations/backend_concert_
 import { backend_actor } from '../../declarations/backend_actor';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import { fetchActivities } from '../../services/ActivitiesService';
-import { useParams } from 'react-router-dom';
 
 function Tickets() {
   const [activeFilter, setActiveFilter] = useState<string>('All');
@@ -26,8 +25,6 @@ function Tickets() {
   const [ticketsPerPage] = useState<number>(10);
   const [tickets, setTickets] = useState<IActivity[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-
-  const { search } = useParams<{ search: string }>();
 
   const applyFilters = () => {
     if (!tickets) return [];
@@ -51,16 +48,6 @@ function Tickets() {
   );
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [activeFilter, searchQuery, sortOption]);
-
-  useEffect(() => {
-    if (search) {
-      setSearchQuery(search);
-    }
-  }, [location.search]);
-
-  useEffect(() => {
     async function fetchData() {
       const updatedActivities = await fetchActivities();
       if (updatedActivities) {
@@ -79,52 +66,21 @@ function Tickets() {
       </Helmet>
 
       <motion.section
-        className="flex flex-col gap-2 px-4 mt-12"
+        className="flex flex-col gap-2 px-4"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : (
-          <>
-            <div className="min-h-screen bg-customBlack text-customWhite p-4">
-              <SearchBar
-                onSearch={setSearchQuery}
-                placeholder={'where you want to go?'}
-              />
-              <div className="flex justify-between items-center mb-4">
-                <div className="hidden md:block">
-                  <FilterOptions
-                    activeFilter={activeFilter}
-                    onFilterChange={setActiveFilter}
-                  />
-                </div>
-                <div className="hidden md:block">
-                  <SortOptions onSortChange={setSortOption} />
-                </div>
-              </div>
-              <div className="md:hidden mb-4 flex lg:justify-start ml-2 justify-center">
-                <FilterOptions
-                  activeFilter={activeFilter}
-                  onFilterChange={setActiveFilter}
-                />
-              </div>
-              <div className="md:hidden mb-8 flex lg:justify-start justify-center">
-                <SortOptions onSortChange={setSortOption} />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 px-4 place-items-center">
-                {paginatedTickets.map((ticket, index) => (
-                  <TicketCard key={index} ticket={ticket} />
-                ))}
-              </div>
-
-              <br />
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={setCurrentPage}
+        <div className="min-h-screen bg-customBlack text-customWhite p-4">
+          <SearchBar
+            onSearch={setSearchQuery}
+            placeholder={'search your ticket'}
+          />
+          <div className="flex justify-between items-center mb-4">
+            <div className="hidden md:block">
+              <FilterOptions
+                activeFilter={activeFilter}
+                onFilterChange={setActiveFilter}
               />
             </div>
           </div>
