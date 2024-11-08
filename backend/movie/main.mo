@@ -11,7 +11,7 @@ actor Main {
 
   var currId : Nat = 1;
 
-  public func createMovie(movie : Types.Movie) : async Result.Result<Text, Text> {
+  public func createMovie(movie : Types.Movie) : async Result.Result<(Text, Nat), Text> {
     try {
       let newMovie : Types.Movie = {
         id = currId;
@@ -32,7 +32,7 @@ actor Main {
 
       rbTree.put(currId, newMovie);
       currId := currId + 1;
-      return #ok(("Successfully created movie."));
+      return #ok(("Successfully created movie.", currId - 1));
 
     } catch (_) {
       return #err(("Failed to create movie."));

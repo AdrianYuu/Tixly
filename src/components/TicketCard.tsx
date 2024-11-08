@@ -3,6 +3,7 @@ import TicketEnum from '../enums/ActivityEnum';
 import ConcertCard from './ConcertCard';
 import MovieCard from './MovieCard';
 import TouristAttractionCard from './TouristAttractionCard';
+import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   ticket: IActivity;

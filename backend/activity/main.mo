@@ -44,4 +44,18 @@ actor Main {
     };
   };
 
+  public func getActivityById(id : Nat) : async Result.Result<(Text, Types.Activity), Text> {
+    try {
+      for (entry in RBTree.iter(rbTree.share(), #bwd)) {
+        if (entry.1.id == id) {
+          return #ok(("Successfully retrieved the activity.", entry.1));
+        };
+      };
+
+      return #err(("No movie found for the given activityId."));
+    } catch (_) {
+      return #err(("Failed to get movie by activityId."));
+    };
+  };
+
 };

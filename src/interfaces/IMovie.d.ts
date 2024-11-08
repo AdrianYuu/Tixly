@@ -13,6 +13,8 @@ interface IMovie {
   director: string;
   price: number;
 
+  actors?: Actor[];
+
   activityId?: bigint;
 }
 

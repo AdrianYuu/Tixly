@@ -4,10 +4,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import ROUTES from './configs/RouteConfig';
 import MainLayout from './layouts/MainLayout';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
     <HelmetProvider>
+      <ToastContainer></ToastContainer>
       <UserProvider>
         <Router>
           <React.Suspense

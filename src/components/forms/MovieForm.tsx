@@ -15,8 +15,13 @@ import { backend_activity } from '../../declarations/backend_activity';
 import ActivityEnum from '../../enums/ActivityEnum';
 import { backend_concert } from '../../declarations/backend_concert';
 import { backend_movie } from '../../declarations/backend_movie';
+import { backend_actor } from '../../declarations/backend_actor';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function MovieForm() {
+  const navigate = useNavigate();
+
   const [movieDate, setMovieDate] = useState<string | null>(null);
   const [movieTime, setMovieTime] = useState<string | null>(null);
   const [cinemaName, setCinemaName] = useState<string | null>(null);
@@ -24,7 +29,6 @@ function MovieForm() {
   const [theaterNumber, setTheaterNumber] = useState<string | null>(null);
   const [movieName, setMovieName] = useState<string | null>(null);
   const [movieSynopsis, setMovieSynopsis] = useState<string | null>(null);
-  // Movie Genre, Movie Age Rating, Movie Language,
   const [movieGenre, setMovieGenre] = useState<string | null>(null);
   const [movieAgeRating, setMovieAgeRating] = useState<string | null>(null);
   const [movieLanguage, setMovieLanguage] = useState<string | null>(null);
@@ -104,35 +108,153 @@ function MovieForm() {
   }
 
   async function handleSubmit() {
-    let response: any;
+    if (!movieDate) {
+      toast.error('Movie date is required!', { position: 'top-right' });
+      return;
+    }
 
-    response = await backend_activity.createActivity({
-      id: BigInt(0),
-      name: movieName!,
-      description: movieSynopsis!,
-      address: cinemaLocation!,
-      image: new Uint8Array(await posterImage!.arrayBuffer()),
-      activityType: ActivityEnum.MOVIE,
-    });
+    if (!movieTime) {
+      toast.error('Movie time is required!', { position: 'top-right' });
+      return;
+    }
 
-    const activityId = response.ok[1];
+    if (!cinemaName || cinemaName.trim() === '') {
+      toast.error('Cinema name is required!', { position: 'top-right' });
+      return;
+    }
 
-    response = await backend_movie.createMovie({
-      id: BigInt(0),
-      cinemaName: cinemaName!,
-      cinemaLocation: cinemaLocation!,
-      date: movieDate!,
-      time: movieTime!,
-      theaterNumber: BigInt(theaterNumber!),
-      genre: movieGenre!,
-      ageRating: movieAgeRating!,
-      language: movieLanguage!,
-      trailerUrl: movieTrailerLink!,
-      duration: movieDuration!,
-      director: movieDirector!,
-      price: BigInt(ticketPrice!),
-      activityId: activityId!,
-    });
+    if (!cinemaLocation || cinemaLocation.trim() === '') {
+      toast.error('Cinema location is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (
+      !theaterNumber ||
+      theaterNumber.trim() === '' ||
+      isNaN(Number(theaterNumber))
+    ) {
+      toast.error('Theater number is required and numeric!', {
+        position: 'top-right',
+      });
+      return;
+    }
+
+    if (!movieName || movieName.trim() === '') {
+      toast.error('Movie name is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!movieSynopsis || movieSynopsis.trim() === '') {
+      toast.error('Movie synopsis is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!movieGenre || movieGenre.trim() === '') {
+      toast.error('Movie genre is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!movieAgeRating || movieAgeRating.trim() === '') {
+      toast.error('Movie age rating is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!movieLanguage || movieLanguage.trim() === '') {
+      toast.error('Movie language is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!movieTrailerLink || movieTrailerLink.trim() === '') {
+      toast.error('Movie trailer link is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!posterImage) {
+      toast.error('Movie poster is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!movieDuration || movieDuration.trim() === '') {
+      toast.error('Movie duration is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!movieDirector || movieDirector.trim() === '') {
+      toast.error('Movie director is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!ticketPrice || isNaN(Number(ticketPrice))) {
+      toast.error('Ticket price is required and numeric!', {
+        position: 'top-right',
+      });
+      return;
+    }
+
+    for (const actor of actors) {
+      if (!actor.name || actor.name.trim() === '') {
+        toast.error('Each actor must have a name!', {
+          position: 'top-right',
+        });
+        return;
+      }
+      if (!actor.role) {
+        toast.error('Each actor must have a role!', {
+          position: 'top-right',
+        });
+        return;
+      }
+    }
+
+    try {
+      let response: any;
+      response = await backend_activity.createActivity({
+        id: BigInt(0),
+        name: movieName!,
+        description: movieSynopsis!,
+        address: cinemaLocation!,
+        image: new Uint8Array(await posterImage!.arrayBuffer()),
+        activityType: ActivityEnum.MOVIE,
+      });
+      const activityId = response.ok[1];
+      response = await backend_movie.createMovie({
+        id: BigInt(0),
+        cinemaName: cinemaName!,
+        cinemaLocation: cinemaLocation!,
+        date: movieDate!,
+        time: movieTime!,
+        theaterNumber: BigInt(theaterNumber!),
+        genre: movieGenre!,
+        ageRating: movieAgeRating!,
+        language: movieLanguage!,
+        trailerUrl: movieTrailerLink!,
+        duration: movieDuration!,
+        director: movieDirector!,
+        price: BigInt(ticketPrice!),
+        activityId: activityId!,
+      });
+      const movieId = response.ok[1];
+      await Promise.all(
+        actors.map(async (actor) => {
+          await backend_actor.createNewActor({
+            id: BigInt(0),
+            name: actor.name,
+            role: actor.role,
+            movieId: movieId,
+          });
+        }),
+      );
+
+      toast.success('Successfully created movie!', {
+        position: 'top-right',
+      });
+
+      navigate('/tickets');
+    } catch (error) {
+      toast.error('Failed to create movie. Please try again.', {
+        position: 'top-right',
+      });
+    }
   }
 
   return (

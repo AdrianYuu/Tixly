@@ -8,10 +8,12 @@ import { backend_activity } from '../../declarations/backend_activity';
 import ActivityEnum from '../../enums/ActivityEnum';
 import { backend_concert } from '../../declarations/backend_concert';
 import { backend_concert_ticket_type } from '../../declarations/backend_concert_ticket_type';
-import { backend_tourist_attraction } from '../../declarations/backend_tourist_attraction';
-import { backend_movie } from '../../declarations/backend_movie';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function ConcertForm() {
+  const navigate = useNavigate();
+
   const [concertDate, setConcertDate] = useState<string | null>(null);
   const [concertTime, setConcertTime] = useState<string | null>(null);
   const [concertName, setConcertName] = useState<string | null>(null);
@@ -95,46 +97,123 @@ function ConcertForm() {
   }
 
   async function handleSubmit() {
-    console.log(await backend_activity.getActivities());
-    console.log(await backend_tourist_attraction.getTouristAttractions());
-    console.log(await backend_movie.getMovies());
-    console.log(await backend_concert.getConcerts());
-    console.log(await backend_concert_ticket_type.getConcertTicketType());
-    return;
+    if (!concertName || concertName.trim() === '') {
+      toast.error('Concert name is required!', { position: 'top-right' });
+      return;
+    }
 
-    let response: any;
-    response = await backend_activity.createActivity({
-      id: BigInt(0),
-      name: concertName!,
-      description: concertDescription!,
-      address: concertAddress!,
-      image: new Uint8Array(await bannerImage!.arrayBuffer()),
-      activityType: ActivityEnum.CONCERT,
-    });
-    const activityId = response.ok[1];
-    response = await backend_concert.createConcert({
-      id: BigInt(0),
-      date: concertDate!,
-      time: concertTime!,
-      location: concertLocation!,
-      venueImage: new Uint8Array(await venueImage!.arrayBuffer()),
-      concertTicketTypeCount: BigInt(ticketTypes.length!),
-      salesStartDate: startDate!,
-      salesEndDate: endDate!,
-      activityId: activityId,
-    });
-    const concertId = response.ok[1];
-    await Promise.all(
-      ticketTypes.map(async (ticketType) => {
-        await backend_concert_ticket_type.createConcertTicketType({
-          id: BigInt(0),
-          name: ticketType.name,
-          price: ticketType.price,
-          capacity: BigInt(ticketType.capacity),
-          concertId: concertId,
+    if (!concertLocation || concertLocation.trim() === '') {
+      toast.error('Concert location is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!startDate) {
+      toast.error('Start date is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!endDate) {
+      toast.error('End date is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (new Date(startDate) > new Date(endDate)) {
+      toast.error('Start date cannot be after end date!', {
+        position: 'top-right',
+      });
+      return;
+    }
+
+    if (!concertDescription || concertDescription.trim() === '') {
+      toast.error('Concert description is required!', {
+        position: 'top-right',
+      });
+      return;
+    }
+
+    if (!concertAddress || concertAddress.trim() === '') {
+      toast.error('Concert address is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!bannerImage) {
+      toast.error('Banner image is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!venueImage) {
+      toast.error('Venue image is required!', { position: 'top-right' });
+      return;
+    }
+
+    for (const ticketType of ticketTypes) {
+      if (!ticketType.name || ticketType.name.trim() === '') {
+        toast.error('Each ticket type must have a name!', {
+          position: 'top-right',
         });
-      }),
-    );
+        return;
+      }
+      if (!ticketType.price || isNaN(Number(ticketType.price))) {
+        toast.error('Each ticket type must have a valid price!', {
+          position: 'top-right',
+        });
+        return;
+      }
+      if (!ticketType.capacity || isNaN(Number(ticketType.capacity))) {
+        toast.error('Each ticket type must have a valid capacity!', {
+          position: 'top-right',
+        });
+        return;
+      }
+    }
+
+    try {
+      let response: any;
+      response = await backend_activity.createActivity({
+        id: BigInt(0),
+        name: concertName,
+        description: concertDescription,
+        address: concertAddress,
+        image: new Uint8Array(await bannerImage.arrayBuffer()),
+        activityType: ActivityEnum.CONCERT,
+      });
+
+      const activityId = response.ok[1];
+      response = await backend_concert.createConcert({
+        id: BigInt(0),
+        date: concertDate!,
+        time: concertTime!,
+        location: concertLocation,
+        venueImage: new Uint8Array(await venueImage.arrayBuffer()),
+        concertTicketTypeCount: BigInt(ticketTypes.length),
+        salesStartDate: startDate,
+        salesEndDate: endDate,
+        activityId: activityId,
+      });
+
+      const concertId = response.ok[1];
+      await Promise.all(
+        ticketTypes.map(async (ticketType) => {
+          await backend_concert_ticket_type.createConcertTicketType({
+            id: BigInt(0),
+            name: ticketType.name,
+            price: ticketType.price,
+            capacity: BigInt(ticketType.capacity),
+            concertId: concertId,
+          });
+        }),
+      );
+
+      toast.success('Successfully created concert!', {
+        position: 'top-right',
+      });
+
+      navigate('/tickets');
+    } catch (error) {
+      toast.error('Failed to create concert. Please try again.', {
+        position: 'top-right',
+      });
+    }
   }
 
   return (

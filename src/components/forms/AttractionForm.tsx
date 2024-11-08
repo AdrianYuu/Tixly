@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import FormInput from '../form-component/FormInput';
 import EmptyImage from '../../assets/images/empty-image.png';
-import PlusPurpleImage from '../../assets/images/plus-purple.png';
 import Button from '../Button';
-import { ITicketType } from '../../interfaces/IConcert';
 import { backend_activity } from '../../declarations/backend_activity';
 import ActivityEnum from '../../enums/ActivityEnum';
 import { backend_tourist_attraction } from '../../declarations/backend_tourist_attraction';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function AttractionForm() {
+  const navigate = useNavigate();
+
   const [attractionName, setAttractionName] = useState<string | null>(null);
   const [attractionDescription, setAttractionDescription] = useState<
     string | null
@@ -45,24 +47,63 @@ function AttractionForm() {
   }
 
   async function handleSubmit() {
-    let response: any;
+    if (!attractionName || attractionName.trim() === '') {
+      toast.error('Attraction name is required!', { position: 'top-right' });
+      return;
+    }
 
-    response = await backend_activity.createActivity({
-      id: BigInt(0),
-      name: attractionName!,
-      description: attractionDescription!,
-      address: attractionAddress!,
-      image: new Uint8Array(await attractionImage!.arrayBuffer()),
-      activityType: ActivityEnum.TOURIST_ATTRACTION,
-    });
+    if (!attractionDescription || attractionDescription.trim() === '') {
+      toast.error('Attraction description is required!', {
+        position: 'top-right',
+      });
+      return;
+    }
 
-    const activityId = response.ok[1];
+    if (!attractionAddress || attractionAddress.trim() === '') {
+      toast.error('Attraction address is required!', { position: 'top-right' });
+      return;
+    }
 
-    response = await backend_tourist_attraction.createTouristAttraction({
-      id: BigInt(0),
-      price: BigInt(ticketPrice!),
-      activityId: activityId!,
-    });
+    if (!attractionImage) {
+      toast.error('Attraction image is required!', { position: 'top-right' });
+      return;
+    }
+
+    if (!ticketPrice || isNaN(Number(ticketPrice))) {
+      toast.error('Ticket price is required!', { position: 'top-right' });
+      return;
+    }
+
+    try {
+      let response: any;
+
+      response = await backend_activity.createActivity({
+        id: BigInt(0),
+        name: attractionName!,
+        description: attractionDescription!,
+        address: attractionAddress!,
+        image: new Uint8Array(await attractionImage!.arrayBuffer()),
+        activityType: ActivityEnum.TOURIST_ATTRACTION,
+      });
+
+      const activityId = response.ok[1];
+
+      response = await backend_tourist_attraction.createTouristAttraction({
+        id: BigInt(0),
+        price: BigInt(ticketPrice!),
+        activityId: activityId!,
+      });
+
+      toast.success('Successfully created attraction!', {
+        position: 'top-right',
+      });
+
+      navigate('/tickets');
+    } catch (error) {
+      toast.error('Failed to create attraction. Please try again.', {
+        position: 'top-right',
+      });
+    }
   }
 
   return (

@@ -4,14 +4,24 @@ import CalendarImage from '../assets/images/calendar.png';
 import { HeartIcon as SolidHeartIcon } from '@heroicons/react/24/solid';
 import { HeartIcon as OutlineHeartIcon } from '@heroicons/react/24/outline';
 import { changeBlobToUrl } from '../lib/utils';
+import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   ticket: IActivity;
 }
 
 function MovieCard({ ticket }: IProps) {
+  const navigate = useNavigate();
+
+  function handleNavigate() {
+    navigate(`/ticket-detail/${ticket?.id}`);
+  }
+
   return (
-    <div className="bg-customDarkGrey rounded-3xl max-w-96 min-h-[30rem]">
+    <div
+      className="bg-customDarkGrey rounded-3xl max-w-96 min-h-[30rem]"
+      onClick={handleNavigate}
+    >
       <img
         src={changeBlobToUrl(ticket.image!)}
         alt=""

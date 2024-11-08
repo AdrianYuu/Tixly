@@ -9,15 +9,17 @@ import Carousel from '../../components/Carousel';
 import TicketEnum from '../../enums/ActivityEnum';
 import ConcertCard from '../../components/ConcertCard';
 import Button from '../../components/Button';
-import { TICKET_LIST } from '../../configs/TicketConfig';
 import { useUserContext } from '../../contexts/UserContext';
 import StarImage from '../../assets/images/star.png';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+  const navigate = useNavigate();
+
   const { user } = useUserContext();
 
   function onSubmit(query: string) {
-    // Handle when search button clicked.
+    navigate(`/tickets?search=${query}`);
   }
 
   return (
@@ -109,13 +111,13 @@ function Home() {
             ></div>
             <div className="absolute inset-0 z-20">
               <ConcertCard
-                ticket={TICKET_LIST[0]}
+                isDummy={true}
                 style="transform-gpu hover:scale-105 transition-transform duration-300"
               />
             </div>
             <div className="absolute inset-0 z-10">
               <ConcertCard
-                ticket={TICKET_LIST[1]}
+                isDummy={true}
                 style="transform-gpu translate-x-1 md:translate-x-3 bottom-2 sm:bottom-4 md:bottom-6 translate-y-2 sm:translate-y-3 opacity-60 rotate-3"
               />
             </div>

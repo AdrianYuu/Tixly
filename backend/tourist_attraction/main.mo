@@ -56,8 +56,4 @@ actor Main {
     };
   };
 
-  public func ping() {
-
-  };
-
 };

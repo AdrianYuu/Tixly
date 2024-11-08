@@ -26,9 +26,4 @@ export const NAVBAR_ROUTES: INavbarRoute[] = [
     name: 'Create Activities',
     needAuthorized: false,
   },
-  {
-    path: '/favorite',
-    name: 'Favorite',
-    needAuthorized: false,
-  },
 ];
