@@ -24,12 +24,12 @@ export const MOVIE_GENRE_LIST: string[] = [
 ];
 
 export const MOVIE_AGE_RATING_LIST: string[] = [
-  'G', // General Audience
-  'PG', // Parental Guidance
-  'PG-13', // Parents Strongly Cautioned
-  'R', // Restricted
-  'NC-17', // Adults Only
-  'Unrated', // No rating available
+  'G',
+  'PG',
+  'PG-13',
+  'R',
+  'NC-17',
+  'Unrated',
 ];
 
 export const MOVIE_LANGUAGE_LIST: string[] = [

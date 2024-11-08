@@ -105,13 +105,18 @@ function MovieCard({ ticket, isTicketOwned, transaction }: IProps) {
             </p>
           </div>
         </div>
-        <div onClick={handleHeartClick}>
-          {isFavorited ? (
-            <SolidHeartIcon className="w-6 h-6 text-red-500" />
-          ) : (
-            <OutlineHeartIcon className="w-6 h-6 text-customLightGrey" />
-          )}
-        </div>
+        
+        {user ? (
+          <div onClick={handleHeartClick}>
+            {isFavorited ? (
+              <SolidHeartIcon className="w-6 h-6 text-red-500" />
+            ) : (
+              <OutlineHeartIcon className="w-6 h-6 text-customLightGrey" />
+            )}
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

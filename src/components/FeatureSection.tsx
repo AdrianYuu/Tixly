@@ -4,14 +4,9 @@ import TicketCard from './TicketCard';
 import { IActivity } from '../interfaces/IActivity';
 import ArrowRightYellowImage from '../assets/images/arrow-right-yellow.png';
 import { Link } from 'react-router-dom';
-import { backend_movie } from '../declarations/backend_movie';
-import ActivityEnum from '../enums/ActivityEnum';
-import { backend_tourist_attraction } from '../declarations/backend_tourist_attraction';
-import { backend_concert } from '../declarations/backend_concert';
-import { backend_activity } from '../declarations/backend_activity';
+
 import LoadingSpinner from './LoadingSpinner';
-import { backend_actor } from '../declarations/backend_actor';
-import { backend_concert_ticket_type } from '../declarations/backend_concert_ticket_type';
+
 import { fetchActivities } from '../services/ActivitiesService';
 
 interface IProps {
@@ -22,7 +17,7 @@ interface IProps {
 
 function FeatureSection({ title, description, ticketType }: IProps) {
   const [tickets, setTickets] = useState<IActivity[]>([]);
-  const [loading, setLoading] = useState<boolean>(true); // State to track loading
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function fetchData() {

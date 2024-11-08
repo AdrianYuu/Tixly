@@ -1,10 +1,7 @@
 import { ClockIcon } from '@heroicons/react/24/solid';
-import { useState } from 'react';
 import { formatToRupiah } from '../lib/utils';
 import TicketDetailEnum from '../enums/ActivityEnum';
-import { IConcert } from '../interfaces/IConcert';
 import TicketEnum from '../enums/ActivityEnum';
-import { IActivity } from '../interfaces/IActivity';
 
 interface IProps {
   ticketName: string;

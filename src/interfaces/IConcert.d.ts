@@ -4,7 +4,6 @@ export interface IConcertTicketType {
   price: string;
   capacity: string;
 
-  // Reference
   concertId?: bigint;
 }
 

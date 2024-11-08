@@ -131,7 +131,7 @@ function ConcertCard({
           </p>
           <div className="flex gap-2 mt-4">
             <img src={LocationImage} alt="" className="w-5 h-5" />
-            <p className="text-customWhite opacity-50 text-sm font-medium">
+            <p className="text-customWhite opacity-50 text-sm font-medium truncate w-56">
               {ticket!.address}
             </p>
           </div>
@@ -145,13 +145,18 @@ function ConcertCard({
             {formatToRupiah(ticket!.concert.concertTicketTypes[0].price)}
           </p>
         </div>
-        <div onClick={handleHeartClick}>
-          {isFavorited ? (
-            <SolidHeartIcon className="w-6 h-6 text-red-500" />
-          ) : (
-            <OutlineHeartIcon className="w-6 h-6 text-customLightGrey" />
-          )}
-        </div>
+        
+        {user ? (
+          <div onClick={handleHeartClick}>
+            {isFavorited ? (
+              <SolidHeartIcon className="w-6 h-6 text-red-500" />
+            ) : (
+              <OutlineHeartIcon className="w-6 h-6 text-customLightGrey" />
+            )}
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

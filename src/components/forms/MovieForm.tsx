@@ -3,7 +3,6 @@ import FormInput from '../form-component/FormInput';
 import EmptyImage from '../../assets/images/empty-image.png';
 import PlusPurpleImage from '../../assets/images/plus-purple.png';
 import Button from '../Button';
-import { IConcert } from '../../interfaces/IConcert';
 import { IActor } from '../../interfaces/IActor';
 import FormSelect from '../form-component/FormSelect';
 import {
@@ -13,8 +12,6 @@ import {
 } from '../../configs/MovieInformationConfig';
 import { backend_activity } from '../../declarations/backend_activity';
 import ActivityEnum from '../../enums/ActivityEnum';
-import { backend_concert } from '../../declarations/backend_concert';
-import { backend_movie } from '../../declarations/backend_movie';
 import { backend_actor } from '../../declarations/backend_actor';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';

@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion';
 import Button from './Button';
 import UnauthorizedImage from '../assets/images/unauthorized.png';
-import { useUserContext } from '../contexts/UserContext';
+import { Link } from 'react-router-dom';
 
-function Unauthorized() {
-  const { login } = useUserContext();
+function NotfoundComponent() {
   return (
-    <div className="min-h-screen relative overflow-hidden mt-[-5rem]">
+    <div className="min-h-screen relative overflow-hidden mt-[-10rem]">
       <div className="absolute w-[600px] h-[500px] bg-customGlowingThree opacity-10 rounded-full blur-2xl -left-32 top-72 transform -translate-y-1/2" />
 
       <div className="absolute w-[600px] h-[500px] bg-customGlowingTwo opacity-20 rounded-full blur-2xl -right-48 top-96 transform -translate-y-1/2" />
@@ -28,19 +27,19 @@ function Unauthorized() {
           className="text-center"
         >
           <h1 className="text-4xl font-bold text-customWhite mb-4">
-            Oops! You're Almost There!
+            Sorry, We can't find the page you're looking for!
           </h1>
           <p className="text-customLightGrey mb-8 max-w-md mx-auto">
-            Login to unlock all the fun and get full access to this page. Don't
-            miss out login and dive right in
+            Press the button to redirect to main page
           </p>
 
           <div className="flex gap-4 justify-center">
-            <Button
-              text="Login with Internet Identity"
-              className="truncate px-5 py-4"
-              onClick={() => login()}
-            />
+            <Link to={'/'}>
+              <Button
+                text="Redirect to main page"
+                className="truncate px-5 py-4"
+              />
+            </Link>
           </div>
         </motion.div>
       </div>
@@ -48,4 +47,4 @@ function Unauthorized() {
   );
 }
 
-export default Unauthorized;
+export default NotfoundComponent;

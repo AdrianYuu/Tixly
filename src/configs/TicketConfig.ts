@@ -5,7 +5,6 @@ import VenueImage from '../assets/images/venue.png';
 import MoviePoster from '../assets/images/movie-poster.webp';
 
 export const TICKET_LIST: IActivity[] = [
-  // Dummy Concert Tickets
   {
     name: 'Rock Concert',
     description: 'Join us for an amazing night of rock music!',
@@ -94,7 +93,6 @@ export const TICKET_LIST: IActivity[] = [
     },
   },
 
-  // Dummy Movie Tickets
   {
     id: '5',
     name: 'Avengers: Endgame',
@@ -189,7 +187,6 @@ export const TICKET_LIST: IActivity[] = [
     },
   },
 
-  // Dummy Tourist Attraction Tickets
   {
     id: '9',
     name: 'Eiffel Tower',

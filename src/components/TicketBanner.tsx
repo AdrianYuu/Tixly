@@ -17,7 +17,7 @@ function TicketBanner({ image, name, address, date, type }: IProps) {
         <img
           src={image}
           alt="Product"
-          className="w-full h-56 lg:h-80 object-cover rounded-l-3xl border border-transparent"
+          className="w-full h-56 lg:h-80 object-fit rounded-l-3xl border border-transparent"
         />
         <div className="absolute top-0 right-0 w-8 h-8 rounded-bl-full bg-customBlack clip-hole"></div>
         <div className="absolute bottom-0 right-0 w-8 h-8 rounded-tl-full bg-customBlack clip-hole"></div>

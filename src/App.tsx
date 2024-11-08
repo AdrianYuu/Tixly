@@ -6,6 +6,7 @@ import ROUTES from './configs/RouteConfig';
 import MainLayout from './layouts/MainLayout';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Notfound from './views/Notfound/Notfound';
 
 const App = () => {
   return (
@@ -32,6 +33,8 @@ const App = () => {
                   }
                 />
               ))}
+
+              <Route path="*" element={<Notfound />} />
             </Routes>
           </React.Suspense>
         </Router>
