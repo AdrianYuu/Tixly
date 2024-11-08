@@ -15,7 +15,7 @@ import Button from './Button';
 import { NAVBAR_ROUTES } from '../configs/NavbarRouteConfig';
 
 function Navbar() {
-  const { user, login } = useUserContext();
+  const { user, login, logout } = useUserContext();
   const [isOpen, setOpen] = useState<boolean>(false);
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
@@ -96,7 +96,9 @@ function Navbar() {
                   </NavLink>
                   <button
                     className="block text-customWhite py-2  px-2"
-                    onClick={() => {}}
+                    onClick={() => {
+                      logout();
+                    }}
                   >
                     <div className="flex gap-2 items-center text-customLightRed">
                       <ArrowLeftStartOnRectangleIcon className="w-6 h-6" />

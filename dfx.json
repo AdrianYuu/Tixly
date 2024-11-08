@@ -24,8 +24,19 @@
       "type": "motoko",
       "main": "backend/concert_ticket_type/main.mo"
     },
+    "backend_actor": {
+      "type": "motoko",
+      "main": "backend/actor/main.mo"
+    },
     "frontend": {
-      "dependencies": ["backend_user", "backend_activity", "backend_concert", "backend_movie", "backend_tourist_attraction", "backend_concert_ticket_type"],
+      "dependencies": [
+        "backend_user",
+        "backend_activity",
+        "backend_concert",
+        "backend_movie",
+        "backend_tourist_attraction",
+        "backend_concert_ticket_type"
+      ],
       "type": "assets",
       "source": ["dist/"]
     }

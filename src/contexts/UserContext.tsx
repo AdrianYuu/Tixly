@@ -40,6 +40,7 @@ export function UserProvider({ children }: IChildren) {
 
   async function logout() {
     setUser(null);
+    localStorage.setItem('user', '');
   }
 
   const data = { user, login, logout };

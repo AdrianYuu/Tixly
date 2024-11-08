@@ -137,6 +137,17 @@ export function changeBlobToUrl(picture: File) {
   return url;
 }
 
+export const createBlobFromImage = async (imagePath: string): Promise<Blob> => {
+  try {
+    const response = await fetch(imagePath);
+    const blob = await response.blob();
+    return blob;
+  } catch (error) {
+    console.error('Error creating Blob from image:', error);
+    throw error;
+  }
+};
+
 export function normalizeId(id: bigint): number {
   const normalizedId = id.toString().replace('n', '');
   return Number(normalizedId);

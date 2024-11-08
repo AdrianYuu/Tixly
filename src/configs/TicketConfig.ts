@@ -1,13 +1,12 @@
 import TicketEnum from '../enums/ActivityEnum';
-import { ITicket } from '../interfaces/IActivity';
+import { IActivity } from '../interfaces/IActivity';
 import DummyConcerBannerImage from '../assets/images/festival-rectangle.png';
 import VenueImage from '../assets/images/venue.png';
 import MoviePoster from '../assets/images/movie-poster.webp';
 
-export const TICKET_LIST: ITicket[] = [
+export const TICKET_LIST: IActivity[] = [
   // Dummy Concert Tickets
   {
-    id: '1',
     name: 'Rock Concert',
     description: 'Join us for an amazing night of rock music!',
     imageUrl: DummyConcerBannerImage,
@@ -28,7 +27,6 @@ export const TICKET_LIST: ITicket[] = [
     },
   },
   {
-    id: '2',
     name: 'Jazz Night',
     description: 'Experience the smooth sounds of jazz.',
     imageUrl: '../assets/images/dummy-image.png',
