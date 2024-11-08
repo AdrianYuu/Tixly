@@ -28,6 +28,10 @@
       "type": "motoko",
       "main": "backend/actor/main.mo"
     },
+    "backend_favorite": {
+      "type": "motoko",
+      "main": "backend/favorite/main.mo"
+    },
     "frontend": {
       "dependencies": [
         "backend_user",
