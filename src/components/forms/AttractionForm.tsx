@@ -23,6 +23,7 @@ function AttractionForm() {
     string | null
   >(null);
   const [ticketPrice, setTicketPrice] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
   function handleAttractionName(value: string | File) {
     if (typeof value === 'string') setAttractionName(value);
@@ -47,6 +48,7 @@ function AttractionForm() {
   }
 
   async function handleSubmit() {
+    setLoading(true);
     if (!attractionName || attractionName.trim() === '') {
       toast.error('Attraction name is required!', { position: 'top-right' });
       return;
@@ -167,6 +169,7 @@ function AttractionForm() {
         text="Create Activity"
         className="truncate py-3 w-full mt-16"
         onClick={handleSubmit}
+        disabledState={loading}
       />
     </form>
   );

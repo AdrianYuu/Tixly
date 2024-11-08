@@ -1,6 +1,6 @@
 interface ITouristAttraction {
   id?: bigint;
-  price: number;
+  price: string;
   activityId?: bigint;
 }
 
