@@ -41,6 +41,7 @@ function MovieForm() {
   const [movieDirector, setMovieDirector] = useState<string | null>(null);
   const [ticketPrice, setTicketPrice] = useState<string | null>(null);
   const [actors, setActors] = useState<IActor[]>([{ name: '', role: '' }]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   function handleMovieDate(value: string | File) {
     if (typeof value === 'string') setMovieDate(value);
@@ -108,6 +109,7 @@ function MovieForm() {
   }
 
   async function handleSubmit() {
+    setLoading(true);
     if (!movieDate) {
       toast.error('Movie date is required!', { position: 'top-right' });
       return;
@@ -429,6 +431,7 @@ function MovieForm() {
         text="Create Activity"
         className="truncate py-3 w-full mt-16"
         onClick={handleSubmit}
+        disabledState={loading}
       />
     </form>
   );

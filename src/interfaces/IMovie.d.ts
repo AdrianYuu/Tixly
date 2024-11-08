@@ -11,7 +11,7 @@ interface IMovie {
   trailerUrl: string;
   duration: string;
   director: string;
-  price: number;
+  price: string;
 
   actors?: Actor[];
 
