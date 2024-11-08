@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
+
 const LoadingSpinner = () => {
   return (
     <motion.div
-      className="flex justify-center items-center mt-16"
+      className="flex justify-center items-center h-screen"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -11,4 +12,5 @@ const LoadingSpinner = () => {
     </motion.div>
   );
 };
+
 export default LoadingSpinner;
