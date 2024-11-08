@@ -12,7 +12,7 @@ import { backend_user } from '../../declarations/backend_user';
 import { toast } from 'react-toastify';
 
 function MyWallet() {
-  const { user } = useUserContext();
+  const { user, refetch } = useUserContext();
 
   const transactionList = TRANSACTION_LIST;
   const [balance, setBalance] = useState<number>(0);
@@ -24,6 +24,8 @@ function MyWallet() {
       user?.principalId!,
     );
 
+    await refetch();
+
     setBalance(response.ok[1].balance);
   }
 
@@ -32,8 +34,6 @@ function MyWallet() {
   }, []);
 
   const handleTopUp = async () => {
-    setTopUpAmount('');
-
     if (!topUpAmount || isNaN(Number(topUpAmount))) {
       toast.error('Top up amount is required and must be numeric!', {
         position: 'top-right',
@@ -50,7 +50,7 @@ function MyWallet() {
 
     await backend_user.updateUserBalance(
       user?.principalId!,
-      BigInt(balance + topUpAmount),
+      BigInt(BigInt(balance) + BigInt(topUpAmount)),
     );
 
     toast.success('User balance successfully updated!', {
@@ -58,6 +58,7 @@ function MyWallet() {
     });
 
     await fetchData();
+    setTopUpAmount('');
     setIsModalOpen(false);
   };
 
@@ -122,7 +123,10 @@ function MyWallet() {
               </div>
               <div className="flex flex-col w-full bg-customWhite bg-opacity-10 gap-4 p-4 rounded-2xl border border-customExpenseRed shadow-md shadow-customExpenseRed">
                 <p className="customLightPurple text-xl">Expenses This Month</p>
-                <p className="text-3xl font-bold text-customExpenseRed">
+                <p
+                  className="text
+                -3xl font-bold text-customExpenseRed"
+                >
                   {formatToRupiah(0)}
                 </p>
               </div>

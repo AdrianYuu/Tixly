@@ -4,10 +4,12 @@ import { AuthClient } from '@dfinity/auth-client';
 import { iiUrl } from '../configs/InternetIdentityConfig';
 import IUser from '../interfaces/IUser';
 import { backend_user } from '../declarations/backend_user';
+import { useNavigate } from 'react-router-dom';
 
 interface IUserContext {
   login: () => Promise<void>;
   logout: () => Promise<void>;
+  refetch: () => Promise<void>;
   user: IUser | null;
 }
 
@@ -59,7 +61,19 @@ export function UserProvider({ children }: IChildren) {
     localStorage.setItem('user', '');
   }
 
-  const data = { user, login, logout };
+  async function refetch() {
+    let response: any;
+    response = await backend_user.getUserByPrincipalId(user?.principalId!);
+    const userData: IUser = {
+      principalId: response.ok[1].principalId,
+      balance: Number(response.ok[1].balance),
+    };
+
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+  }
+
+  const data = { user, login, logout, refetch };
 
   return <UserContext.Provider value={data}>{children}</UserContext.Provider>;
 }

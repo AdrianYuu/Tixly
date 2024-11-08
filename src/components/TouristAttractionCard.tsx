@@ -10,16 +10,22 @@ import { useEffect, useState } from 'react';
 
 interface IProps {
   ticket: IActivity;
+  isTicketOwned?: boolean;
+  transaction?: any;
 }
 
-function TouristAttractionCard({ ticket }: IProps) {
+function TouristAttractionCard({ ticket, isTicketOwned, transaction }: IProps) {
   const navigate = useNavigate();
   const { user } = useUserContext();
   const [principalIds, setPrincipalIds] = useState<string[]>([]);
   const [isFavorited, setIsFavorited] = useState(false);
 
   function handleNavigate() {
-    navigate(`/ticket-detail/${ticket?.id}`);
+    if (isTicketOwned) {
+      navigate(`/my-ticket-detail/${ticket?.id}`, { state: { transaction } });
+    } else {
+      navigate(`/ticket-detail/${ticket?.id}`);
+    }
   }
 
   useEffect(() => {
@@ -35,6 +41,7 @@ function TouristAttractionCard({ ticket }: IProps) {
   }, [ticket.id]);
 
   useEffect(() => {
+    if (!user) return;
     if (principalIds.includes(user!.principalId)) {
       setIsFavorited(true);
     }
@@ -62,13 +69,13 @@ function TouristAttractionCard({ ticket }: IProps) {
 
   return (
     <div
-      className="bg-customDarkGrey rounded-3xl max-w-96 min-h-[30rem] z-0"
+      className="bg-customDarkGrey rounded-3xl max-w-96 z-0 h-[32rem]"
       onClick={handleNavigate}
     >
       <img
         src={changeBlobToUrl(ticket.image!)}
         alt=""
-        className="h-60 w-96 rounded-3xl"
+        className="h-60 w-96 object-cover rounded-3xl"
       />
       <div className="pb-20 p-5 flex justify-between">
         <div>

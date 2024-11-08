@@ -6,24 +6,85 @@ import { changeBlobToUrl, formatDate, formatToRupiah } from '../lib/utils';
 import { HeartIcon as SolidHeartIcon } from '@heroicons/react/24/solid';
 import { HeartIcon as OutlineHeartIcon } from '@heroicons/react/24/outline';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { backend_favorite } from '../declarations/backend_favorite';
+import { useUserContext } from '../contexts/UserContext';
 
 interface IProps {
   ticket?: IActivity;
   style?: string;
   isDummy?: boolean;
+  isTicketOwned?: boolean;
+  transaction?: any;
 }
 
-function ConcertCard({ ticket, style, isDummy = false }: IProps) {
+function ConcertCard({
+  ticket,
+  style,
+  isDummy = false,
+  isTicketOwned,
+  transaction,
+}: IProps) {
   const navigate = useNavigate();
+  const { user } = useUserContext();
+  const [principalIds, setPrincipalIds] = useState<string[]>([]);
+  const [isFavorited, setIsFavorited] = useState(false);
 
   function handleNavigate() {
-    navigate(`/ticket-detail/${ticket?.id}`);
+    if (isTicketOwned) {
+      navigate(`/my-ticket-detail/${ticket?.id}`, { state: { transaction } });
+    } else {
+      navigate(`/ticket-detail/${ticket?.id}`);
+    }
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      if (ticket) {
+        const response: any = await backend_favorite.getUserFavorites(
+          BigInt(ticket.id!),
+        );
+        if (response.ok) {
+          setPrincipalIds(response.ok[1]);
+        }
+      }
+    }
+    fetchData();
+  }, [ticket]);
+
+  useEffect(() => {
+    if (!user) return;
+    if (user && principalIds.includes(user.principalId)) {
+      setIsFavorited(true);
+    }
+  }, [principalIds, user]);
+
+  async function handleHeartClick(event: React.MouseEvent) {
+    event.stopPropagation();
+    if (!user || !ticket) return;
+
+    if (isFavorited) {
+      await backend_favorite.removeFavorite(
+        user.principalId,
+        BigInt(ticket.id!),
+      );
+      setIsFavorited(false);
+      setPrincipalIds(principalIds.filter((id) => id !== user.principalId));
+    } else {
+      await backend_favorite.createFavorite({
+        id: BigInt(0),
+        principalId: user.principalId,
+        activityId: BigInt(ticket.id!),
+      });
+      setIsFavorited(true);
+      setPrincipalIds([...principalIds, user.principalId]);
+    }
   }
 
   if (isDummy) {
     return (
       <div
-        className={`bg-customDarkGrey rounded-3xl max-w-96 ${style} min-h-[30rem]`}
+        className={`bg-customDarkGrey rounded-3xl max-w-96 ${style} h-[30rem]`}
       >
         <img src={FestivalImage} alt="" className="h-60 w-96 rounded-3xl" />
         <div className="pb-20 p-5 flex justify-between">
@@ -47,10 +108,7 @@ function ConcertCard({ ticket, style, isDummy = false }: IProps) {
               {formatToRupiah(100000)}
             </p>
           </div>
-          <div className="">
-            <SolidHeartIcon className="w-6 h-6 text-red-500" />
-            {/* <OutlineHeartIcon className='w-6 h-6 text-customLightGrey'/> */}
-          </div>
+          <SolidHeartIcon className="w-6 h-6 text-red-500" />
         </div>
       </div>
     );
@@ -58,13 +116,13 @@ function ConcertCard({ ticket, style, isDummy = false }: IProps) {
 
   return (
     <div
-      className={`bg-customDarkGrey rounded-3xl max-w-96 ${style} min-h-[30rem]`}
+      className={`bg-customDarkGrey rounded-3xl max-w-96 ${style} h-[32rem]`}
       onClick={handleNavigate}
     >
       <img
         src={changeBlobToUrl(ticket!.image!)}
         alt=""
-        className="h-60 w-96 rounded-3xl"
+        className="h-60 w-96 object-cover rounded-3xl"
       />
       <div className="pb-20 p-5 flex justify-between">
         <div>
@@ -87,9 +145,12 @@ function ConcertCard({ ticket, style, isDummy = false }: IProps) {
             {formatToRupiah(ticket!.concert.concertTicketTypes[0].price)}
           </p>
         </div>
-        <div className="">
-          <SolidHeartIcon className="w-6 h-6 text-red-500" />
-          {/* <OutlineHeartIcon className='w-6 h-6 text-customLightGrey'/> */}
+        <div onClick={handleHeartClick}>
+          {isFavorited ? (
+            <SolidHeartIcon className="w-6 h-6 text-red-500" />
+          ) : (
+            <OutlineHeartIcon className="w-6 h-6 text-customLightGrey" />
+          )}
         </div>
       </div>
     </div>

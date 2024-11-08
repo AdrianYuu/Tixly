@@ -7,19 +7,33 @@ import { useNavigate } from 'react-router-dom';
 
 interface IProps {
   ticket: IActivity;
+  isTicketOwned?: boolean;
+  transaction?: any;
 }
 
-function TicketCard({ ticket }: IProps) {
+function TicketCard({ ticket, isTicketOwned, transaction }: IProps) {
   return (
     <>
       {ticket.activityType === TicketEnum.CONCERT && (
-        <ConcertCard ticket={ticket} />
+        <ConcertCard
+          ticket={ticket}
+          isTicketOwned={isTicketOwned}
+          transaction={transaction}
+        />
       )}
       {ticket.activityType === TicketEnum.MOVIE && (
-        <MovieCard ticket={ticket} />
+        <MovieCard
+          ticket={ticket}
+          isTicketOwned={isTicketOwned}
+          transaction={transaction}
+        />
       )}
       {ticket.activityType === TicketEnum.TOURIST_ATTRACTION && (
-        <TouristAttractionCard ticket={ticket} />
+        <TouristAttractionCard
+          ticket={ticket}
+          isTicketOwned={isTicketOwned}
+          transaction={transaction}
+        />
       )}
     </>
   );
