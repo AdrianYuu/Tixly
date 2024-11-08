@@ -94,12 +94,10 @@ export const fetchActivityById = async (
   id: bigint,
 ): Promise<IActivity | null> => {
   try {
-    // Fetch the activity by ID
     const response: any = await backend_activity.getActivityById(id);
     if ('ok' in response) {
       const activity: IActivity = response.ok[1];
 
-      // Enrich activity data based on its type
       if (
         activity.activityType === ActivityEnum.TOURIST_ATTRACTION &&
         activity.id

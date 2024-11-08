@@ -3,6 +3,7 @@ import IChildren from '../interfaces/IChildren';
 import { AuthClient } from '@dfinity/auth-client';
 import { iiUrl } from '../configs/InternetIdentityConfig';
 import IUser from '../interfaces/IUser';
+import { backend_user } from '../declarations/backend_user';
 
 interface IUserContext {
   login: () => Promise<void>;
@@ -30,7 +31,22 @@ export function UserProvider({ children }: IChildren) {
       const identity = (await authClient).getIdentity();
       const principal = identity.getPrincipal().toString();
 
-      const userData: IUser = { principalId: principal };
+      let response: any;
+      response = await backend_user.getUserByPrincipalId(principal);
+      if ('err' in response) {
+        await backend_user.createUser({
+          id: BigInt(0),
+          principalId: principal,
+          balance: BigInt(0),
+        });
+        response = await backend_user.getUserByPrincipalId(principal);
+      }
+
+      const userData: IUser = {
+        principalId: response.ok[1].principalId,
+        balance: Number(response.ok[1].balance),
+      };
+
       setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
