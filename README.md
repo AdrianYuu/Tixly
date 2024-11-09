@@ -1,12 +1,31 @@
-# Vite + React + Motoko
+# Tixly - Revolutionizing Ticketing with Web3
+Welcome to the Tixly GitHub repository! Tixly is a decentralized ticketing platform leveraging Web3 technology to create a secure, transparent, and efficient system for purchasing and managing tickets.
 
-### Get started directly in your browser:
+## 🎬 Pitch Deck & Demo
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/rvanasa/vite-react-motoko)
+- **Pitch Deck**: Learn more about Tixly's vision, problem-solving approach, and future plans in our [Pitch Deck video](https://youtu.be/KHzkNaTU84E).
+- **Demo**: See Tixly in action with our [live demo](https://youtu.be/rZBbXBWNrRo), showcasing the core functionalities of the platform.
 
-This template gives you everything you need to build a full-stack Web3 application on the [Internet Computer](https://internetcomputer.org/).
+## 📄 Documentation
 
-For an example of a real-world dapp built using this starter project, check out the [source code](https://github.com/dfinity/feedback) for DFINITY's [Developer Experience Feedback Board](https://dx.internetcomputer.org/).
+For a comprehensive guide to Tixly’s features, architecture, and user guide, please refer to our [Notion Documentation](https://marioorlando.notion.site/Documentation-of-Tixly-13924ae3a37f80ab993be44ae53b403d).
+
+## 📌 Features
+
+- **Blockchain-backed Verification**: Guarantees ticket authenticity and transparency.
+- **Direct Sales and Minimal Fees**: Allows users to purchase tickets directly without middlemen.
+- **Transparent Ownership**: Every ticket is traceable on the blockchain.
+- **Revenue Model**:
+  - **Event Organizer Fees**: 1% fee on each ticket sold.
+  - **Sponsorships and Advertising**: Additional income from partnerships.
+  - **User Fees**: Flat 1,000 IDR for wallet top-ups and 5% tax for purchases via QRIS.
+
+## 📈 Future Plans
+
+- **Enhanced Wallet Features**: A more versatile wallet to manage tickets.
+- **Exclusive Partnerships with Event Organizers**: Direct, exclusive ticket sales through Tixly.
+- **User Recommendations and Organizer Insights**: Personalized recommendations and detailed event analytics.
+- **In-app Ticket Marketplace**: A secure marketplace for users to resell tickets they can’t use.
 
 ## 📦 Create a New Project
 
@@ -23,32 +42,3 @@ npm start # Start the development server
 ```
 
 When ready, run `dfx deploy --network ic` to deploy your application to the Internet Computer.
-
-## 🛠️ Technology Stack
-
-- [Vite](https://vitejs.dev/): high-performance tooling for front-end web development
-- [React](https://reactjs.org/): a component-based UI library
-- [TypeScript](https://www.typescriptlang.org/): JavaScript extended with syntax for types
-- [Sass](https://sass-lang.com/): an extended syntax for CSS stylesheets
-- [Prettier](https://prettier.io/): code formatting for a wide range of supported languages
-- [Motoko](https://github.com/dfinity/motoko#readme): a safe and simple programming language for the Internet Computer
-- [Mops](https://mops.one): an on-chain community package manager for Motoko
-- [mo-dev](https://github.com/dfinity/motoko-dev-server#readme): a live reload development server for Motoko
-- [@ic-reactor](https://github.com/B3Pay/ic-reactor): A suite of JavaScript libraries for seamless frontend development on the Internet Computer
-
-## 📚 Documentation
-
-- [Vite developer docs](https://vitejs.dev/guide/)
-- [React quick start guide](https://react.dev/learn)
-- [Internet Computer docs](https://internetcomputer.org/docs/current/developer-docs/ic-overview)
-- [`dfx.json` reference schema](https://internetcomputer.org/docs/current/references/dfx-json-reference/)
-- [Motoko developer docs](https://internetcomputer.org/docs/current/developer-docs/build/cdks/motoko-dfinity/motoko/)
-- [Mops usage instructions](https://j4mwm-bqaaa-aaaam-qajbq-cai.ic0.app/#/docs/install)
-- [@ic-reactor/react](https://b3pay.github.io/ic-reactor/modules/react.html)
-
-## 💡 Tips and Tricks
-
-- Customize your project's code style by editing the `.prettierrc` file and then running `npm run format`.
-- Reduce the latency of update calls by passing the `--emulator` flag to `dfx start`.
-- Install a Motoko package by running `npx ic-mops add <package-name>`. Here is a [list of available packages](https://mops.one/).
-- Split your frontend and backend console output by running `npm run frontend` and `npm run backend` in separate terminals.
