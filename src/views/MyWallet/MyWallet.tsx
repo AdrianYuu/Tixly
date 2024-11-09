@@ -30,6 +30,7 @@ function MyWallet() {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchData();
   }, []);
 
@@ -131,7 +132,7 @@ function MyWallet() {
                       Transfer Succeed This Month
                     </p>
                     <p className="text-3xl font-bold text-customGreen">
-                      {formatToRupiah(0)}
+                      {formatToRupiah(200000)}
                     </p>
                   </div>
                   <div className="flex flex-col w-full bg-customWhite bg-opacity-10 gap-4 p-4 rounded-2xl border border-customExpenseRed shadow-md shadow-customExpenseRed">
@@ -139,7 +140,7 @@ function MyWallet() {
                       Expenses This Month
                     </p>
                     <p className="text-3xl font-bold text-customExpenseRed">
-                      {formatToRupiah(0)}
+                      {formatToRupiah(35000)}
                     </p>
                   </div>
                 </div>

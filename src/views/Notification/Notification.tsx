@@ -5,9 +5,15 @@ import NotificationStatus from '../../enums/NotificationStatusEnum';
 import { motion } from 'framer-motion';
 import { useUserContext } from '../../contexts/UserContext';
 import Unauthorized from '../../components/Unauthorized';
+import { useEffect } from 'react';
 
 function Notification() {
   const { user } = useUserContext();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -15,7 +21,7 @@ function Notification() {
       </Helmet>
 
       <motion.section
-        className="flex flex-col gap-2  mt-12"
+        className="flex flex-col gap-2 mt-12"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import StarParticleImage from '../../assets/images/star-particle.png';
 import { Helmet } from 'react-helmet-async';
 import { ACTIVITY_TYPE_LIST } from '../../configs/ActivityTypeConfig';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ConcertForm from '../../components/forms/ConcertForm';
 import MovieForm from '../../components/forms/MovieForm';
 import AttractionForm from '../../components/forms/AttractionForm';
@@ -12,6 +12,10 @@ import Unauthorized from '../../components/Unauthorized';
 function CreateActivities() {
   const [chosenIndex, setChosenIndex] = useState<number | null>(-1);
   const { user } = useUserContext();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

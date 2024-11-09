@@ -24,6 +24,7 @@ function Wishlist() {
   const { user } = useUserContext();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     async function fetchFavorites() {
       const response: any = await backend_favorite.getFavoritesUser(
         user?.principalId!,

@@ -78,6 +78,7 @@ function MyTickets() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     async function fetchData() {
       const principalId = user?.principalId;
       const r = await fetchUserTransactions(principalId!);

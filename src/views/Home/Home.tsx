@@ -12,11 +12,16 @@ import Button from '../../components/Button';
 import { useUserContext } from '../../contexts/UserContext';
 import StarImage from '../../assets/images/star.png';
 import { Link, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function Home() {
   const navigate = useNavigate();
 
   const { user } = useUserContext();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   function onSubmit(query: string) {
     navigate(`/tickets?search=${query}`);
@@ -94,21 +99,19 @@ function Home() {
             </p>
             <div className="flex flex-col md:flex-row gap-3 items-center mt-5">
               <Link to={'/tickets'}>
-              <Button
-                text="Shop More Tickets"
-                className="truncate px-16 py-2"
-              />
+                <Button
+                  text="Shop More Tickets"
+                  className="truncate px-16 py-2"
+                />
               </Link>
 
               <Link to={'/my-tickets'}>
-              <Button
-                text="View My Tickets"
-                className="truncate px-16 py-2"
-                type="transparent"
-              />
+                <Button
+                  text="View My Tickets"
+                  className="truncate px-16 py-2"
+                  type="transparent"
+                />
               </Link>
-
-
             </div>
           </div>
 

@@ -16,6 +16,7 @@ import { backend_user } from '../../declarations/backend_user';
 import Unauthorized from '../../components/Unauthorized';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function Payment() {
   const todayDate = new Date().toISOString().split('T')[0];
@@ -25,6 +26,7 @@ function Payment() {
   const activityId = queryParams.get('activityId');
   const { user, refetch } = useUserContext();
   const userBalance = user?.balance!;
+  const navigate = useNavigate();
 
   const [selectedPayment, setSelectedPayment] =
     useState<PaymentTypeEnum | null>(null);
@@ -114,9 +116,12 @@ function Payment() {
     });
 
     setIsConfirmModalOpen(false);
+
+    navigate("/my-tickets");
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     async function fetchData() {
       const activity = await fetchActivityById(BigInt(activityId!));
 

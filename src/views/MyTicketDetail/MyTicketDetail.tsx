@@ -7,6 +7,7 @@ import ActivityEnum from '../../enums/ActivityEnum';
 import { changeBlobToUrl } from '../../lib/utils';
 import Unauthorized from '../../components/Unauthorized';
 import { useUserContext } from '../../contexts/UserContext';
+import { useEffect } from 'react';
 
 function MyTicketDetail() {
   const location = useLocation();
@@ -18,6 +19,10 @@ function MyTicketDetail() {
     ActivityEnum.TOURIST_ATTRACTION === transaction.activity.activityType;
 
   const { user } = useUserContext();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <>

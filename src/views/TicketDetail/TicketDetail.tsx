@@ -106,6 +106,13 @@ function TicketDetail() {
     }
   };
 
+  function getYouTubeVideoId(url: string): string {
+    const regex =
+      /(?:youtube\.com\/(?:[^/]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+    const match = url.match(regex);
+    return match ? match[1] : '';
+  }
+
   const Seat = ({ label, isSelected, onClick, isTaken }: ISeat) => (
     <button
       onClick={!isTaken ? onClick : undefined}
@@ -178,6 +185,35 @@ function TicketDetail() {
                     <div className="flex flex-col gap-12 pt-12">
                       {isInfoActive ? (
                         <>
+                          {activity!.activityType === TicketEnum.MOVIE &&
+                            activity!.movie?.trailerUrl! && (
+                              <div className="flex flex-col gap-6">
+                                <div className="flex justify-between items-center">
+                                  <div className="flex items-center gap-2">
+                                    <img
+                                      src={DocumentIconImage}
+                                      className="w-6 h-6"
+                                    />
+                                    <p className="text-xl font-semibold text-customWhite">
+                                      Movie Trailer
+                                    </p>
+                                  </div>
+                                </div>
+
+                                {/* Extract video ID and embed */}
+                                <div className="relative w-full aspect-w-16 aspect-h-9">
+                                  <iframe
+                                    className="w-full h-[40rem] rounded-xl"
+                                    src={`https://www.youtube.com/embed/${getYouTubeVideoId(
+                                      activity!.movie?.trailerUrl!,
+                                    )}`}
+                                    title="Movie Trailer"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                  />
+                                </div>
+                              </div>
+                            )}
                           {/* Description */}
                           <div className="flex flex-col gap-6">
                             <div className="flex justify-between items-center">
