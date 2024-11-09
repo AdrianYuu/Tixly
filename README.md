@@ -1,4 +1,5 @@
 # Tixly - Revolutionizing Ticketing with Web3
+![Group 3 (2)](https://github.com/user-attachments/assets/5305aaba-e5cb-41cf-93bd-2b3dfe1b1ea4)
 Welcome to the Tixly GitHub repository! Tixly is a decentralized ticketing platform leveraging Web3 technology to create a secure, transparent, and efficient system for purchasing and managing tickets.
 
 ## 🎬 Pitch Deck & Demo
