@@ -15,6 +15,10 @@ function MyWallet() {
   const [balance, setBalance] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [topUpAmount, setTopUpAmount] = useState<string>('');
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState<boolean>(false);
+  const [topUpAmountForConfirm, setTopUpAmountForConfirm] = useState<number>(0);
+  
+  const topUpAmountTax = 1000;
 
   async function fetchData() {
     const response: any = await backend_user.getUserByPrincipalId(
@@ -22,7 +26,6 @@ function MyWallet() {
     );
 
     await refetch();
-
     setBalance(response.ok[1].balance);
   }
 
@@ -45,9 +48,20 @@ function MyWallet() {
       return;
     }
 
+    // Set values for confirmation modal
+    setTopUpAmountForConfirm(Number(topUpAmount));
+    setIsConfirmModalOpen(true);
+    setIsModalOpen(false);
+  };
+
+  const handleConfirmTopUp = async () => {
     await backend_user.updateUserBalance(
       user?.principalId!,
-      BigInt(BigInt(balance) + BigInt(topUpAmount)),
+      BigInt(
+        BigInt(balance) +
+          BigInt(topUpAmountForConfirm) -
+          BigInt(topUpAmountTax),
+      ),
     );
 
     toast.success('User balance successfully updated!', {
@@ -56,7 +70,7 @@ function MyWallet() {
 
     await fetchData();
     setTopUpAmount('');
-    setIsModalOpen(false);
+    setIsConfirmModalOpen(false);
   };
 
   return (
@@ -75,7 +89,7 @@ function MyWallet() {
           <>
             <div className="flex flex-col w-full px-16 mt-8 text-white justify-center">
               <div className="flex flex-col gap-10">
-                <div className="flex  w-full bg-customWhite bg-opacity-10 p-6 rounded-2xl">
+                <div className="flex w-full bg-customWhite bg-opacity-10 p-6 rounded-2xl">
                   <div className="flex-col w-full">
                     <div className="flex justify-between">
                       <p className="customLightPurple text-xl font-medium text-customSoLightPurple">
@@ -124,10 +138,7 @@ function MyWallet() {
                     <p className="customLightPurple text-xl">
                       Expenses This Month
                     </p>
-                    <p
-                      className="text
-                -3xl font-bold text-customExpenseRed"
-                    >
+                    <p className="text-3xl font-bold text-customExpenseRed">
                       {formatToRupiah(0)}
                     </p>
                   </div>
@@ -157,6 +168,40 @@ function MyWallet() {
                     </button>
                     <button
                       onClick={() => setIsModalOpen(false)}
+                      className="bg-customWhite bg-opacity-10 text-customLightGrey py-1 px-4 rounded-md"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {isConfirmModalOpen && (
+              <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="bg-customDarkGrey p-6 rounded-lg shadow-lg w-96">
+                  <h2 className="text-lg font-semibold text-customWhite mb-4">
+                    Confirm Top Up
+                  </h2>
+                  <p className="text-white">
+                    <strong>Top Up Amount:</strong>{' '}
+                    {formatToRupiah(topUpAmountForConfirm)}
+                  </p>
+                  <p className="text-white">
+                    <strong>Tax:</strong> {formatToRupiah(topUpAmountTax)}
+                  </p>
+                  <p className="text-white mt-4">
+                    Are you sure you want to top up?
+                  </p>
+                  <div className="flex justify-end mt-4">
+                    <button
+                      onClick={handleConfirmTopUp}
+                      className="bg-customLightPurple text-white py-1 px-4 rounded-md mr-2"
+                    >
+                      Yes, Confirm
+                    </button>
+                    <button
+                      onClick={() => setIsConfirmModalOpen(false)}
                       className="bg-customWhite bg-opacity-10 text-customLightGrey py-1 px-4 rounded-md"
                     >
                       Cancel

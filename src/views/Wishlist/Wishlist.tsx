@@ -80,7 +80,7 @@ function Wishlist() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        {!user ? (
+        {user ? (
           <>
             <div className="px-4">
               <div className="min-h-screen bg-customBlack text-customWhite p-4">
