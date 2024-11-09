@@ -10,11 +10,25 @@ Welcome to the Tixly GitHub repository! Tixly is a decentralized ticketing platf
 
 For a comprehensive guide to Tixly’s features, architecture, and user guide, please refer to our [Notion Documentation](https://marioorlando.notion.site/Documentation-of-Tixly-13924ae3a37f80ab993be44ae53b403d).
 
+## 🚨 Problem
+
+The current ticketing system faces several challenges:
+- **Scalpers and Illegal Resellers**: Many fans miss out on tickets because scalpers buy in bulk and resell at inflated prices.
+- **Counterfeit Tickets**: Consumers are often tricked into buying fake tickets, leading to financial losses and missed events.
+- **Excessive Fees**: Traditional platforms often impose high fees, making tickets more expensive.
+- **Unfair Accessibility**: Many ticketing systems are vulnerable to bot attacks, giving bots an unfair advantage over genuine fans.
+
+## 💡 Our Solution
+
+Tixly tackles these issues by offering:
+- **Blockchain-backed Verification**: Every ticket is unique and traceable, ensuring authenticity and transparency.
+- **Direct Sales with Minimal Fees**: Users can buy tickets directly with reduced fees, keeping costs low.
+- **Transparency and Ownership**: Each ticket exists as a unique asset on the blockchain, providing clear ownership history.
+
 ## 📌 Features
 
-- **Blockchain-backed Verification**: Guarantees ticket authenticity and transparency.
-- **Direct Sales and Minimal Fees**: Allows users to purchase tickets directly without middlemen.
-- **Transparent Ownership**: Every ticket is traceable on the blockchain.
+- **Authenticity Guaranteed**: Blockchain verification ensures tickets are legitimate.
+- **Minimal Fees for Buyers**: Direct sales minimize fees and prevent scalpers from profiting.
 - **Revenue Model**:
   - **Event Organizer Fees**: 1% fee on each ticket sold.
   - **Sponsorships and Advertising**: Additional income from partnerships.
@@ -22,10 +36,10 @@ For a comprehensive guide to Tixly’s features, architecture, and user guide, p
 
 ## 📈 Future Plans
 
-- **Enhanced Wallet Features**: A more versatile wallet to manage tickets.
-- **Exclusive Partnerships with Event Organizers**: Direct, exclusive ticket sales through Tixly.
-- **User Recommendations and Organizer Insights**: Personalized recommendations and detailed event analytics.
-- **In-app Ticket Marketplace**: A secure marketplace for users to resell tickets they can’t use.
+- **Enhanced Wallet Features**: A versatile wallet to manage tickets.
+- **Exclusive Partnerships with Event Organizers**: Direct ticket sales through Tixly.
+- **User Recommendations and Organizer Insights**: Personalized event suggestions and analytics.
+- **In-app Ticket Marketplace**: A secure space for users to resell tickets if needed.
 
 ## 📦 Create a New Project
 
