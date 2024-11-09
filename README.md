@@ -9,7 +9,7 @@ Welcome to the Tixly GitHub repository! Tixly is a decentralized ticketing platf
 ## 📄 Documentation
 
 - For a comprehensive guide to Tixly’s features, architecture, and user guide, please refer to our [Notion Documentation](https://marioorlando.notion.site/Documentation-of-Tixly-13924ae3a37f80ab993be44ae53b403d).
-- Figma Design [Figma](https://www.figma.com/design/bGupI6MLo2pj4cWg3PxQUq/Tixly?node-id=50-2&node-type=canvas&t=bGSWxCGciFE8BkaZ-0)
+- Explore the complete [Figma](https://www.figma.com/design/bGupI6MLo2pj4cWg3PxQUq/Tixly?node-id=50-2&node-type=canvas&t=bGSWxCGciFE8BkaZ-0) design for an in-depth look at Tixly’s user interface.
 
 ## 🚨 Problem
 
